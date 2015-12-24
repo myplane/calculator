@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Calculator</string>
+
+    <string name="error_overflow">Overflow</string>
+    <string name="error_divBy0">Division by 0</string>
+    <string name="error_factorialNotInteger">Factorial only defined for integers</string>
+    <string name="error_nSmallerThanR">n must be ≥ r</string>
+    <string name="error_rSmallerThan0">r must be &gt; 0</string>
+    <string name="error_nOrRNotIntegers">n &amp; r must be integers</string>
+    <string name="error_minBiggerThanMax">Min must be &lt; max</string>
+    <string name="error_fatal">Fatal error</string>
+    <string name="error_negativeEvenRoot">Even root of negative number</string>
+    <string name="error_BinaryTooLong">Binary number too long</string>
+    <string name="error_HexTooLong">Hexadecimal number too long</string>
+    <string name="error_OctTooLong">Octal number too long</string>
 </resources>
