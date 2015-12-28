@@ -49,6 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="C"
+            android:textColor="@color/red"
             android:id="@+id/buttonClear"
             android:textSize="16dp" />
 
