@@ -10,13 +10,8 @@ import cz.pavelpilar.calculator.R;
 public class MainFragment extends android.support.v4.app.Fragment {
 
     @Override
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-    }
+    public void onCreate(Bundle bundle) { super.onCreate(bundle); }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        return inflater.inflate(R.layout.calculator_main, container, false);
-    }
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) { return inflater.inflate(R.layout.calculator_main, container, false); }
 }

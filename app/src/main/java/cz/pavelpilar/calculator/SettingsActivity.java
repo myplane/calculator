@@ -1,7 +1,5 @@
 package cz.pavelpilar.calculator;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -18,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         setSupportActionBar((Toolbar) findViewById(R.id.settings_toolbar));
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.settings_toolbarDark));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.settings_toolbarDark));
         getFragmentManager().beginTransaction()
                             .replace(R.id.settings_content, new SettingsFragment())
                             .commit();

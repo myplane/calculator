@@ -8,6 +8,7 @@
         android:id="@+id/calculator_display_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
         android:text="RAD" />
 
     <cz.pavelpilar.calculator.calculator.Display
