@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
 public class DisplayFragment extends Fragment {
@@ -28,7 +29,17 @@ public class DisplayFragment extends Fragment {
         mStatus = (TextView) v.findViewById(R.id.calculator_display_status);
         mResult = (TextView) v.findViewById(R.id.calculator_display_result);
 
+        mResult.setText(MainActivity.mPreferences.getString("calculator_result", ""));
+
         return v;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.mPreferences.edit()
+                                 .putString("calculator_result", mResult.getText().toString())
+                                 .apply();
     }
 
     public void show(String s) {

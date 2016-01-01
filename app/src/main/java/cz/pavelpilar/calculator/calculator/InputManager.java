@@ -20,6 +20,10 @@ public class InputManager {
         inputChanged();
     }
 
+    public static String getCurrent() {
+        return mInput.toString();
+    }
+
     public static void backspace() {
         if (mInput.length() > 1) {
             String s = mInput.toString();

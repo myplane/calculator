@@ -1,5 +1,6 @@
 package cz.pavelpilar.calculator.calculator;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -13,6 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cz.pavelpilar.calculator.Calculator;
+import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
 public class ButtonsFragment extends Fragment {
@@ -78,11 +80,29 @@ public class ButtonsFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        InputManager.initialize(this, "|");
         mMainFragment = (MainFragment) getParentFragment();
 
-        fractions = 0;
-        powers = 0;
+        InputManager.initialize(this, MainActivity.mPreferences.getString("calculator_input", "|"));
+        fractions = MainActivity.mPreferences.getInt("calculator_fractions", 0);
+        powers = MainActivity.mPreferences.getInt("calculator_powers", 0);
+        shift = MainActivity.mPreferences.getBoolean("calculator_shift", false);
+        shift2 = MainActivity.mPreferences.getBoolean("calculator_shift2", false);
+        hyp = MainActivity.mPreferences.getBoolean("calculator_hyp", false);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.mPreferences.edit()
+                                 .putString("calculator_input", InputManager.getCurrent())
+                                 .putInt("calculator_fractions", fractions)
+                                 .putInt("calculator_powers", powers)
+                                 .putBoolean("calculator_shift", shift)
+                                 .putBoolean("calculator_shift2", shift2)
+                                 .putBoolean("calculator_hyp", hyp)
+                                 .putInt("calculator_mode", mode)
+                                 .apply();
+        InputManager.clear();
     }
 
     @Override
@@ -91,6 +111,7 @@ public class ButtonsFragment extends Fragment {
 
         ButterKnife.bind(this, v);
         setLayoutText(v);
+        changeMode(MainActivity.mPreferences.getInt("calculator_mode", Mode.DECIMAL));
 
         return v;
     }
