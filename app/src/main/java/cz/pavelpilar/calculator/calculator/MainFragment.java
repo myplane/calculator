@@ -13,12 +13,13 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private DisplayFragment mDisplayFragment;
     private ButtonsFragment mButtonsFragment;
 
-    private double mMemory;
+    public double mMemory;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         mMemory = Double.longBitsToDouble(MainActivity.mPreferences.getLong("calculator_memory", 0));
+        Calculator.initialize(this);
     }
 
     @Override
@@ -41,6 +42,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     public void onResume() {    //Refresh status when leaving settings activity
         super.onResume();
         statusChanged();
+        Calculator.setDegrees(MainActivity.mPreferences.getString("pref_radDeg", "Radians").equals("Degrees"));
     }
 
     public void clearResult() {

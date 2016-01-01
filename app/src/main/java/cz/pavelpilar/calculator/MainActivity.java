@@ -14,7 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import cz.pavelpilar.calculator.calculator.MainFragment;
+import cz.pavelpilar.calculator.calculator.Calculator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,19 +34,19 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawer = (LinearLayout) findViewById(R.id.drawer);
 
-        Calculator.initialize();
-
-
         if(getResources().getBoolean(R.bool.portrait_only))
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Fragment fragment;
         switch (mPreferences.getString("lastFragment", "")){
             case "calculator": fragment = new cz.pavelpilar.calculator.calculator.MainFragment(); break;
-            default: fragment = new FirstStartFragment();
+            case "graphs": fragment = new cz.pavelpilar.calculator.graphs.MainFragment(); break;
+            default:
+                fragment = new FirstStartFragment();
+                mPreferences.edit().clear().apply();   //Remove preferences from last version, will be removed in next release.
         }
         getSupportFragmentManager().beginTransaction()
-                                   .replace(R.id.content_frame, fragment, "calculator")
+                                   .replace(R.id.content_frame, fragment)
                                    .commit();
     }
 
@@ -73,13 +73,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void drawerCalculator(View v) {
-        getSupportFragmentManager().beginTransaction()
-                                   .replace(R.id.content_frame, new MainFragment())
-                                   .commit();
-        mPreferences.edit()
-                    .putString("lastFragment", "calculator")
-                    .apply();
+        if(!mPreferences.getString("lastFragment", "").equals("calculator")) {
+            getSupportFragmentManager().beginTransaction()
+                                       .replace(R.id.content_frame, new cz.pavelpilar.calculator.calculator.MainFragment())
+                                       .commit();
+            mPreferences.edit()
+                        .putString("lastFragment", "calculator")
+                        .apply();
+        }
+        mDrawerLayout.closeDrawer(mDrawer);
+    }
 
+    public void drawerGraphs(View v) {
+        if(!mPreferences.getString("lastFragment", "").equals("graphs")) {
+            getSupportFragmentManager().beginTransaction()
+                                       .replace(R.id.content_frame, new cz.pavelpilar.calculator.graphs.MainFragment())
+                                       .commit();
+            mPreferences.edit()
+                        .putString("lastFragment", "graphs")
+                        .apply();
+        }
         mDrawerLayout.closeDrawer(mDrawer);
     }
 }

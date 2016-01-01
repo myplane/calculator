@@ -12,7 +12,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cz.pavelpilar.calculator.Calculator;
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 

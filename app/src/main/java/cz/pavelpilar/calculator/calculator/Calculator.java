@@ -1,8 +1,11 @@
-package cz.pavelpilar.calculator;
+package cz.pavelpilar.calculator.calculator;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Random;
+
+import cz.pavelpilar.calculator.MainActivity;
+import cz.pavelpilar.calculator.R;
 
 public class Calculator {
 
@@ -15,14 +18,16 @@ public class Calculator {
     private static token current;
 
     private static boolean DEG;
+    private static MainFragment mMainFragment;
 
-    public static void initialize() {
+    public static void initialize(MainFragment fragment) {
         words = new String[][] {{"e", "E", "M", "X"},
                 {"pi", "ln"},
                 {"hex", "oct", "bin", "log", "abs", "lgx", "sin", "cos", "tan", "snh", "csh", "tnh", "nCr", "nPr"},
                 {"rand", "rndr", "sqrt", "ntrt", "asin", "acos", "atan", "asnh", "acsh", "atnh"}};
         errorSet = false;
         DEG = false;
+        mMainFragment = fragment;
     }
 
     public static void setDegrees(boolean set) {
@@ -40,7 +45,7 @@ public class Calculator {
         }
     }
 
-    private static enum token{
+    private enum token{
         PLUS,   MINUS,  MUL,    DIV,
         LP,     RP,     POW,    MOD,
         FACT,   PERUP,  PERDOWN,
@@ -263,8 +268,7 @@ public class Calculator {
                             return Math.pow(10, prim(true));
                         case "M":
                             getToken();
-                            //return MainActivity.memory;
-                            return 0;
+                            return mMainFragment.mMemory;
                         case "pi":
                             getToken();
                             return Math.PI;

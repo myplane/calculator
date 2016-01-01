@@ -30,10 +30,20 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/name"
+            android:text="@string/menu_calculator"
             android:textSize="24dp"
             android:drawableLeft="@drawable/vector_calculator"
             android:onClick="drawerCalculator"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/menu_graphs"
+            android:textSize="24dp"
+            android:drawableLeft="@drawable/vector_graph"
+            android:onClick="drawerGraphs"
             style="?android:attr/buttonBarButtonStyle" />
 
         <android.widget.Space

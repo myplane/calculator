@@ -16,7 +16,8 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#CCCCCC" />
+        android:background="#CCCCCC"
+        android:elevation="16dp"/>
 
     <fragment
         android:id="@+id/calculator_buttons_fragment"
