@@ -71,7 +71,7 @@ public class ButtonsFragment extends Fragment {
     public int fractions;
     public int powers;
 
-    private DisplayFragment mDisplayFragment;
+    private MainFragment mMainFragment;
 
     int mode;
 
@@ -79,7 +79,7 @@ public class ButtonsFragment extends Fragment {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         InputManager.initialize(this, "|");
-        mDisplayFragment = (DisplayFragment) getParentFragment().getChildFragmentManager().findFragmentById(R.id.calculator_display_fragment);
+        mMainFragment = (MainFragment) getParentFragment();
 
         fractions = 0;
         powers = 0;
@@ -93,6 +93,18 @@ public class ButtonsFragment extends Fragment {
         setLayoutText(v);
 
         return v;
+    }
+
+    public int getStatus() {
+        if(hyp) {
+            if(shift2) return 13;
+            else if (shift) return 12;
+            else return 11;
+        } else {
+            if(shift2) return 3;
+            else if (shift) return 2;
+            else return 1;
+        }
     }
 
     @Override
@@ -118,7 +130,7 @@ public class ButtonsFragment extends Fragment {
         mButtonPower.setText(Html.fromHtml("x<small><sup>2</sup></small>"));
     }
 
-    @OnClick(R.id.buttonEquals) void buttonEquals() { mDisplayFragment.setResult(Calculator.calculate(InputManager.toCalc())); }
+    @OnClick(R.id.buttonEquals) void buttonEquals() { mMainFragment.setResult(Calculator.calculate(InputManager.toCalc())); }
     @OnClick(R.id.buttonDot) void buttonDot() { InputManager.add("."); }
     @OnClick(R.id.button0) void button0() { InputManager.add("0"); }
     @OnClick(R.id.button1) void button1() { InputManager.add("1"); }
@@ -214,7 +226,10 @@ public class ButtonsFragment extends Fragment {
         disableModifiers();
     }
 
-    @OnClick(R.id.buttonHyp) void buttonHyp() { hyp = !hyp; }
+    @OnClick(R.id.buttonHyp) void buttonHyp() {
+        hyp = !hyp;
+        mMainFragment.statusChanged();
+    }
     @OnClick(R.id.buttonSin) void buttonSin() {
         if(hyp){
             if(shift) InputManager.add("<ash>");
@@ -300,17 +315,19 @@ public class ButtonsFragment extends Fragment {
     @OnClick(R.id.buttonShift) void buttonShift() {
         if(shift2) shift2 = false;
         shift = !shift;
+        mMainFragment.statusChanged();
     }
     @OnClick(R.id.buttonShift2) void buttonShift2() {
         if(shift) shift = false;
         shift2 = !shift2;
+        mMainFragment.statusChanged();
     }
     @OnClick(R.id.buttonNavLeft) void ButtonNavLeft() { InputManager.navLeft(); }
     @OnClick(R.id.buttonNavRight) void buttonNavRight() { InputManager.navRight(); }
     @OnClick(R.id.buttonClear) void buttonClear() {
         InputManager.clear();
         changeMode(Mode.DECIMAL);
-        mDisplayFragment.clearResult();
+        mMainFragment.clearResult();
         fractions = 0;
         powers = 0;
         disableModifiers();
@@ -321,6 +338,7 @@ public class ButtonsFragment extends Fragment {
         shift = false;
         shift2 = false;
         hyp = false;
+        mMainFragment.statusChanged();
     }
 
     public void changeMode(int mode) {

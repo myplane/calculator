@@ -11,4 +11,18 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/preferences_calculator"
+        android:key="pref_calc">
+
+        <ListPreference
+            android:key="pref_radDeg"
+            android:title="@string/preferences_calculator_radians_degrees"
+            android:entries="@array/preferences_calculator_radians_degrees"
+            android:entryValues="@array/preferences_calculator_radians_degrees"
+            android:defaultValue="@string/preferences_calculator_radians"
+            android:summary="%s" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

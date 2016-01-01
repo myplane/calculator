@@ -31,7 +31,7 @@ public class DrawingManager {
     private static Vector<Integer> mParentheses;    //
 
     public static void initialize() {
-        mDisplayMetrics = MainActivity.getContext().getResources().getDisplayMetrics();
+        mDisplayMetrics = MainActivity.mContext.getResources().getDisplayMetrics();
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);

@@ -7,6 +7,10 @@
 
     <string name="preferences_general">General</string>
     <string name="preferences_general_clear_history">Clear History</string>
+    <string name="preferences_calculator">Calculator</string>
+    <string name="preferences_calculator_radians_degrees">Radians/Degrees</string>
+    <string name="preferences_calculator_radians">Radians</string>
+    <string name="preferences_calculator_degrees">Degrees</string>
 
     <string name="error_overflow">Overflow</string>
     <string name="error_divBy0">Division by 0</string>
@@ -20,4 +24,9 @@
     <string name="error_BinaryTooLong">Binary number too long</string>
     <string name="error_HexTooLong">Hexadecimal number too long</string>
     <string name="error_OctTooLong">Octal number too long</string>
+
+    <string-array name="preferences_calculator_radians_degrees">
+        <item>@string/preferences_calculator_radians</item>
+        <item>@string/preferences_calculator_degrees</item>
+    </string-array>
 </resources>

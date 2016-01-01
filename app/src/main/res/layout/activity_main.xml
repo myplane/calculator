@@ -33,6 +33,7 @@
             android:text="@string/name"
             android:textSize="24dp"
             android:drawableLeft="@drawable/vector_calculator"
+            android:onClick="drawerCalculator"
             style="?android:attr/buttonBarButtonStyle" />
 
         <android.widget.Space

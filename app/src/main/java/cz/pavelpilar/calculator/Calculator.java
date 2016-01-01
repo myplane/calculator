@@ -385,7 +385,7 @@ public class Calculator {
 
     private static void err(int resID)
     {
-        if(!errorSet) error = MainActivity.getContext().getResources().getString(resID);
+        if(!errorSet) error = MainActivity.mContext.getResources().getString(resID);
         errorSet = true;
     }
 
