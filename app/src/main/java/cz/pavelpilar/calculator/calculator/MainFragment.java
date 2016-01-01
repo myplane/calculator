@@ -13,8 +13,21 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private DisplayFragment mDisplayFragment;
     private ButtonsFragment mButtonsFragment;
 
+    private double mMemory;
+
     @Override
-    public void onCreate(Bundle bundle) { super.onCreate(bundle); }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        mMemory = Double.longBitsToDouble(MainActivity.mPreferences.getLong("calculator_memory", 0));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.mPreferences.edit()
+                                 .putLong("calculator_memory", Double.doubleToRawLongBits(mMemory))
+                                 .apply();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
@@ -32,6 +45,14 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
     public void clearResult() {
         mDisplayFragment.clearResult();
+    }
+
+    public void clearMemory() {
+        mMemory = 0;
+    }
+
+    public void addToMemory() {
+        mMemory = mMemory + Double.valueOf(mDisplayFragment.getResult());
     }
 
     public void setResult(String result) {
@@ -60,6 +81,25 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mDisplayFragment.setResult(result);
     }
 
+    public String formatMemory() {
+        String s = Double.toString(mMemory);
+        if(s.contains("E")){
+            if(s.indexOf("E") > 5 +2)
+                    if(!s.startsWith("-")) s = s.substring(0,5 +2) + s.substring(s.indexOf("E"), s.length());
+                    else s = s.substring(0, 5 +3) + s.substring(s.indexOf("E"), s.length());
+            String s1 = s.substring(0, s.indexOf("E"));
+            while(s1.endsWith("0")) s1 = s1.substring(0, s1.length()-1);
+            if(s1.endsWith(".")) s1 = s1.substring(0, s1.length()-1);
+            s = s1 + s.substring(s.indexOf("E"), s.length());
+        }
+        else if(s.contains(".")){
+            if(s.indexOf(".")+5 < s.length()) s = s.substring(0, s.indexOf(".")+5);
+            while(s.endsWith("0") && s.contains(".")) s = s.substring(0, s.length()-1);
+            if(s.endsWith(".")) s = s.substring(0, s.length()-1);
+        }
+        return s;
+    }
+
     public void statusChanged() {
         StringBuilder status = new StringBuilder();
 
@@ -74,6 +114,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
             case 12: status.append("2nd fn HYP "); break;
             case 13: status.append("3rd fn HYP "); break;
         }
+
+        if(mMemory != 0)
+            status.append("MEM: ").append(formatMemory());
 
         mDisplayFragment.setStatus(status.toString());
     }

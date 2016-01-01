@@ -50,6 +50,10 @@ public class DisplayFragment extends Fragment {
         mResult.setText(result);
     }
 
+    public String getResult() {
+        return mResult.getText().toString();
+    }
+
     public void clearResult() {
         mResult.setText("");
     }

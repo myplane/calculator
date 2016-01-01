@@ -1,6 +1,5 @@
 package cz.pavelpilar.calculator.calculator;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -282,8 +281,8 @@ public class ButtonsFragment extends Fragment {
         disableModifiers();
     }
     @OnClick(R.id.buttonMemory) void buttonMemory() {
-        if(shift2);
-        else if(shift);
+        if(shift2) mMainFragment.clearMemory();
+        else if(shift) mMainFragment.addToMemory();
         else InputManager.add("<mem>");
         disableModifiers();
     }
