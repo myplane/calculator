@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 
 import cz.pavelpilar.calculator.R;
 
-public class MainFragment extends Fragment {
+public class GraphFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        return inflater.inflate(R.layout.graphs_main, container, false);
+        return inflater.inflate(R.layout.graphs_graph, container, false);
     }
 
 }
