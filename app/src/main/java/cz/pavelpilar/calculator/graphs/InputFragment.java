@@ -13,11 +13,13 @@ import cz.pavelpilar.calculator.R;
 public class InputFragment extends Fragment {
 
     private Display mDisplay;
+    private MainFragment mMainFragment;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         InputManager.initialize(this, "|");
+        mMainFragment = (MainFragment) getParentFragment();
     }
 
     @Override
@@ -33,7 +35,7 @@ public class InputFragment extends Fragment {
     }
 
     @OnClick(R.id.buttonShow) public void buttonShow() {
-
+        mMainFragment.showGraph("");
     }
 
     @OnClick(R.id.buttonNavLeft) public void buttonNavLeft() { InputManager.navLeft(); }
