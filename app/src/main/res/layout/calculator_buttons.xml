@@ -68,25 +68,29 @@
         android:orientation="horizontal"
         android:padding="0dp"
         android:layout_margin="0dp">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_height="16dp"
-            android:id="@+id/textLog"
+            android:id="@+id/textLogx"
             android:textSize="12dp"
-            android:textColor="@color/shiftColor"
+            android:textColor="@color/shiftColor2"
             android:gravity="end|top"
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_height="16dp"
             android:id="@+id/textLn"
+            android:text="ln "
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
             android:gravity="end"
             android:textAlignment="gravity"/>
-
         <Space
             android:layout_width="0dp"
             android:layout_weight="6"
@@ -125,17 +129,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="0dp"
-            android:id="@+id/buttonLog"
-            android:text="log"
-            android:textSize="16dp" />
+            android:id="@+id/buttonConstants"
+            android:text="CNST"
+            android:textSize="12dp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="0dp"
-            android:id="@+id/buttonLn"
-            android:text="ln"
+            android:id="@+id/buttonLog"
+            android:text="log"
             android:textSize="16dp" />
 
         <Button

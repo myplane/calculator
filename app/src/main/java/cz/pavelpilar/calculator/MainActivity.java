@@ -14,8 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import cz.pavelpilar.calculator.calculator.Calculator;
-
 public class MainActivity extends AppCompatActivity {
 
     public static Context mContext;
@@ -34,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawer = (LinearLayout) findViewById(R.id.drawer);
 
-        if(getResources().getBoolean(R.bool.portrait_only))
+        if(!getResources().getBoolean(R.bool.tablet))
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Fragment fragment;

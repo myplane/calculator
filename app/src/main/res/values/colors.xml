@@ -4,8 +4,8 @@
     <color name="shiftColor2">#03A9F4</color>
     <color name="red">#E65100</color>
 
-    <color name="settings_toolbar">#37474F</color>
-    <color name="settings_toolbarDark">#263238</color>
+    <color name="toolbar">#37474F</color>
+    <color name="toolbarDark">#263238</color>
 
     <color name="drawer_color">#37474F</color>
 </resources>

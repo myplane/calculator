@@ -9,10 +9,10 @@
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        android:background="@color/settings_toolbar"
+        android:background="@color/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat"
         android:elevation="4dp"
-        android:id="@+id/settings_toolbar" />
+        android:id="@+id/toolbar" />
 
     <FrameLayout
         android:layout_width="fill_parent"

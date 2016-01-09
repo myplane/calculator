@@ -28,7 +28,7 @@ public class DrawingManager {
 
     private static Vector<Float[]> mFractions;
     private static Vector<Float[]> mRootsAndParentheses;
-    private static Vector<Integer> mParentheses;    //
+    private static Vector<Integer> mParentheses;
 
     public static void initialize() {
         mDisplayMetrics = MainActivity.mContext.getResources().getDisplayMetrics();

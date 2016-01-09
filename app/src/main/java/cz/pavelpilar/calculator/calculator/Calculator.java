@@ -188,13 +188,16 @@ public class Calculator {
     {
         double left = prim(get);
 
-        for (; ; )
+        for (;;)
             switch (current) {
                 case POW:
                     left = Math.pow(left, prim(true));
                     break;
                 case MOD:
-                    left = (left % prim(true));
+                    double x = prim(true);
+                    double result = (left % x);
+                    if(Math.abs(result - x) <= 0.000001) left = 0;  //Deals with floating point errors
+                    else left = result;
                     break;
                 case FACT:
                 {

@@ -1,8 +1,10 @@
 package cz.pavelpilar.calculator.calculator;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cz.pavelpilar.calculator.ConstantsFragment;
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
@@ -51,7 +54,6 @@ public class ButtonsFragment extends Fragment {
     @Bind(R.id.buttonRandom) Button mButtonRandom;
 
     @Bind(R.id.buttonLog) Button mButtonLog;
-    @Bind(R.id.buttonLn) Button mButtonLn;
     @Bind(R.id.buttonHex) Button mButtonHex;
     @Bind(R.id.buttonOct) Button mButtonOct;
     @Bind(R.id.buttonBin) Button mButtonBin;
@@ -143,8 +145,8 @@ public class ButtonsFragment extends Fragment {
         tv.setText(Html.fromHtml("cos<small><sup>-1 "));
         tv = (TextView) v.findViewById(R.id.textTan);
         tv.setText(Html.fromHtml("tan<small><sup>-1 "));
-        tv = (TextView) v.findViewById(R.id.textLog);
-        tv.setText(Html.fromHtml("log<small><small>x</small></small>y "));
+        tv = (TextView) v.findViewById(R.id.textLogx);
+        tv.setText(Html.fromHtml(" log<small><small>x</small></small>y"));
 
         mButtonPower.setText(Html.fromHtml("x<small><sup>2</sup></small>"));
     }
@@ -294,15 +296,21 @@ public class ButtonsFragment extends Fragment {
         disableModifiers();
     }
 
+    @OnClick(R.id.buttonConstants) void buttonConstants() {
+        DialogFragment fragment = new ConstantsFragment();
+        fragment.show(getActivity().getSupportFragmentManager().beginTransaction(), "constants");
+    }
+
     @OnClick(R.id.buttonLog) void buttonLog() {
         if(shift) {
+            InputManager.add("<lon>");
+        } else if(shift2) {
             InputManager.add("<lgx>|<lgn>");
             changeMode(Mode.DECIMAL_LOCKED);
         }
         else InputManager.add("<log>");
         disableModifiers();
     }
-    @OnClick(R.id.buttonLn) void buttonLn() { InputManager.add("<lon>"); }
     @OnClick(R.id.buttonHex) void buttonHex() {
         InputManager.add("<hex>|<hxn>");
         changeMode(Mode.HEXADECIMAL);
@@ -491,7 +499,6 @@ public class ButtonsFragment extends Fragment {
         mButtonMemory.setClickable(!lock);
         mButtonRandom.setClickable(!lock);
         mButtonLog.setClickable(!lock);
-        mButtonLn.setClickable(!lock);
         mButtonHex.setClickable(!lock);
         mButtonOct.setClickable(!lock);
         mButtonBin.setClickable(!lock);

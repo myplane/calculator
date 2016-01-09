@@ -1,5 +1,6 @@
 package cz.pavelpilar.calculator.graphs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,19 +11,23 @@ import cz.pavelpilar.calculator.R;
 
 public class MainFragment extends Fragment {
 
-    private GraphFragment mGraphFragment;
+    private DisplayFragment mDisplayFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        return inflater.inflate(R.layout.graphs_main, container, false);
+        View v = inflater.inflate(R.layout.graphs_main, container, false);
+        return v;
     }
 
-    public void showGraph(String s) {
-        if(mGraphFragment == null){
-            mGraphFragment = (GraphFragment) getChildFragmentManager().findFragmentById(R.id.graphs_graph_fragment);
-        }
-
-        mGraphFragment.show(s);
+    public void show(String[] strings, int currentDisplay) {
+        if(mDisplayFragment == null) mDisplayFragment = (DisplayFragment) getChildFragmentManager().findFragmentById(R.id.graphs_display_fragment);
+        mDisplayFragment.show(strings, currentDisplay);
     }
+
+    public void showGraph(String[] strings) {
+        startActivity(new Intent(getActivity(), GraphActivity.class).putExtra("DATA", strings));
+    }
+
+
 
 }

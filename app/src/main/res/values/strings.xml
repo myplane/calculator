@@ -1,6 +1,7 @@
 <resources>
     <string name="name">Calculator</string>
     <string name="settings">Settings</string>
+    <string name="graph">Graph</string>
 
     <string name="menu_calculator">Calculator</string>
     <string name="menu_graphs">Graphs</string>
@@ -28,6 +29,32 @@
     <string name="error_BinaryTooLong">Binary number too long</string>
     <string name="error_HexTooLong">Hexadecimal number too long</string>
     <string name="error_OctTooLong">Octal number too long</string>
+
+    <string name="constant_title">Constants</string>
+    <string name="constant_light">Speed of light</string>
+    <string name="constant_gravity">Constant of gravitation </string>
+    <string name="constant_planck">Planck constant</string>
+    <string name="constant_elementaryCharge">Elementary charge</string>
+    <string name="constant_permittivity">Vacuum permittivity</string>
+    <string name="constant_permeability">Vacuum permeability</string>
+    <string name="constant_gravityEarth">Gravity of Earth</string>
+    <string name="constant_avogadro">Avogadro constant</string>
+    <string name="constant_boltzmann">Boltzmann constant</string>
+    <string name="constant_faraday">Faraday constant</string>
+    <string name="constant_rydberg">Rydberg constant</string>
+    <string name="constant_stefanBoltzmann">Stefan-Boltzmann constant</string>
+    <string name="constant_electron">Electron mass</string>
+    <string name="constant_proton">Proton mass</string>
+    <string name="constant_neutron">Neutron mass</string>
+    <string name="constant_alpha">Alpha particle mass</string>
+    <string name="constant_deuteron">Deuteron mass</string>
+    <string name="constant_helion">Helion mass</string>
+    <string name="constant_muon">Muon mass</string>
+    <string name="constant_tau">Tau mass</string>
+    <string name="constant_triton">Triton mass</string>
+    <string name="constant_vonKlitzing">von Klitzing constant</string>
+    <string name="constant_bohrMagneton">Bohr magneton</string>
+    <string name="constant_fineStructure">Fine-structure constant</string>
 
     <string-array name="preferences_calculator_radians_degrees">
         <item>@string/preferences_calculator_radians</item>

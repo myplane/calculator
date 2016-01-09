@@ -12,32 +12,38 @@ import cz.pavelpilar.calculator.R;
 
 public class InputFragment extends Fragment {
 
-    private Display mDisplay;
     private MainFragment mMainFragment;
+    private boolean shift, hyp;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        InputManager.initialize(this, "|");
         mMainFragment = (MainFragment) getParentFragment();
+        InputManager.initialize(this, new String[] {"|", "|", "|"}, 0);
+        shift = hyp = false;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View v = inflater.inflate(R.layout.graphs_input, container, false);
-        mDisplay = (Display) v.findViewById(R.id.graphs_display);
         ButterKnife.bind(this, v);
         return v;
     }
 
-    public void show(String s) {
-        mDisplay.show(s);
-    }
+    public void show(String[] strings, int currentDisplay) { mMainFragment.show(strings, currentDisplay); }
 
+    @OnClick(R.id.buttonUp) public void buttonUp() {
+        InputManager.up();
+    }
+    @OnClick(R.id.buttonDown) public void buttonDown() {
+        InputManager.down();
+    }
     @OnClick(R.id.buttonShow) public void buttonShow() {
-        mMainFragment.showGraph("");
+        mMainFragment.showGraph(InputManager.toCalc());
     }
 
+    @OnClick(R.id.buttonHyp) public void buttonHyp() { hyp = !hyp; }
+    @OnClick(R.id.buttonShift) public void buttonShift() { shift = !shift; }
     @OnClick(R.id.buttonNavLeft) public void buttonNavLeft() { InputManager.navLeft(); }
     @OnClick(R.id.buttonNavRight) public void buttonNavRight() { InputManager.navRight(); }
     @OnClick(R.id.buttonClear) public void buttonClear() { InputManager.clear(); }
@@ -60,5 +66,47 @@ public class InputFragment extends Fragment {
     @OnClick(R.id.buttonDivide) public void buttonDivide() { InputManager.add("÷"); }
     @OnClick(R.id.buttonStartParentheses) public void buttonStartParentheses() { InputManager.add("("); }
     @OnClick(R.id.buttonEndParentheses) public void buttonEndParentheses() { InputManager.add(")"); }
+    @OnClick(R.id.buttonSin) public void buttonSin() {
+        if (hyp) {
+            if(shift) InputManager.add("<ash>|<end>");
+            else InputManager.add("<snh>|<end>");
+        } else {
+            if (shift) InputManager.add("<asn>|<end>");
+            else InputManager.add("<sin>|<end>");
+        }
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonCos) public void buttonCos() {
+        if (hyp) {
+            if (shift) InputManager.add("<ach>|<end>");
+            else InputManager.add("<csh>|<end>");
+        } else {
+            if (shift) InputManager.add("<acs>|<end>");
+            else InputManager.add("<cos>|<end>");
+        }
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonTan) public void buttonTan() {
+        if(hyp) {
+            if (shift) InputManager.add("<ath>|<end>");
+            else InputManager.add("<tnh>|<end>");
+        } else {
+            if (shift) InputManager.add("<atn>|<end>");
+            else InputManager.add("<tan>|<end>");
+        }
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonX) public void buttonX() { InputManager.add("<xxx>"); }
+    @OnClick(R.id.buttonLog) public void buttonLog() {
+        if(shift) InputManager.add("<lon>|<end>");
+        else InputManager.add("<log>|<end>");
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonPower) public void buttonPower() { InputManager.add("<pow>|<pwn>"); }
+    @OnClick(R.id.buttonRoot) public void buttonRoot() { InputManager.add("<srt>|<end>"); }
+
+    private void disableModifiers() {
+        shift = hyp = false;
+    }
 
 }

@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/graphs_graph_fragment"
+        android:id="@+id/graphs_display_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:name="cz.pavelpilar.calculator.graphs.GraphFragment" />
+        android:name="cz.pavelpilar.calculator.graphs.DisplayFragment" />
 
     <fragment
         android:id="@+id/graphs_input_fragment"

@@ -14,6 +14,7 @@ import cz.pavelpilar.calculator.MainActivity;
 public class Display extends View {
 
     private String mSource;
+    private boolean mFocus;
     private Paint mPaint;
     private DisplayMetrics mDisplayMetrics;
 
@@ -28,15 +29,20 @@ public class Display extends View {
         mPaint.setAntiAlias(true);
     }
 
-    public void show(String s) {
+    public void show(String s, boolean inFocus) {
         mSource = s;
+        mFocus = inFocus;
         invalidate();
     }
 
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.BLACK);
+        if(mFocus) canvas.drawColor(Color.DKGRAY);
+        else {
+            canvas.drawColor(Color.BLACK);
+            mSource = mSource.replace("|", "");
+        }
         if(mSource != null) {
             int positionX = 10;
             int positionY = canvas.getHeight()/2 + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, mDisplayMetrics);
@@ -66,6 +72,85 @@ public class Display extends View {
                             positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 9, mDisplayMetrics);
                     }
                     pos++;
+                } else {
+                    String tag = mSource.substring(pos + 1, pos + 4);
+                    switch (tag){
+                        case "xxx":
+                            canvas.drawText("x", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, mDisplayMetrics);
+                            break;
+                        case "sin":
+                            canvas.drawText("sin(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, mDisplayMetrics);
+                            break;
+                        case "cos":
+                            canvas.drawText("cos(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36, mDisplayMetrics);
+                            break;
+                        case "tan":
+                            canvas.drawText("tan(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, mDisplayMetrics);
+                            break;
+                        case "asn":
+                            canvas.drawText("sin-1(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, mDisplayMetrics);
+                            break;
+                        case "acs":
+                            canvas.drawText("cos-1(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, mDisplayMetrics);
+                            break;
+                        case "atn":
+                            canvas.drawText("tan-1(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 47, mDisplayMetrics);
+                            break;
+                        case "snh":
+                            canvas.drawText("sinh(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 41, mDisplayMetrics);
+                            break;
+                        case "csh":
+                            canvas.drawText("cosh(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 46, mDisplayMetrics);
+                            break;
+                        case "tnh":
+                            canvas.drawText("tanh(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 43, mDisplayMetrics);
+                            break;
+                        case "ash":
+                            canvas.drawText("sinh-1(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, mDisplayMetrics);
+                            break;
+                        case "ach":
+                            canvas.drawText("cosh-1(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 61, mDisplayMetrics);
+                            break;
+                        case "ath":
+                            canvas.drawText("tanh-1(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 58, mDisplayMetrics);
+                            break;
+                        case "log":
+                            canvas.drawText("log(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, mDisplayMetrics);
+                            break;
+                        case "lon":
+                            canvas.drawText("ln(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, mDisplayMetrics);
+                            break;
+                        case "srt":
+                            canvas.drawText("√(", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, mDisplayMetrics);
+                            break;
+                        case "end":
+                            canvas.drawText(")", positionX, positionY, mPaint);
+                            positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, mDisplayMetrics);
+                            break;
+                        case "pow":
+                            positionY = positionY - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, mDisplayMetrics);
+                            break;
+                        case "pwn":
+                            positionY = positionY + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, mDisplayMetrics);
+                            break;
+                    }
+                    pos = pos + 5;
                 }
             }
         }

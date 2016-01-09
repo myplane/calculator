@@ -360,58 +360,50 @@ public class InputManager {
         s = s.replace("<par>", "(").replace("<prn>", ")")
              .replace("<pow>", "^(").replace("<pwn>", ")")
              .replace("<abs>", "abs(").replace("<abn>", ")")
-             .replace("<log>", "log").replace("<lon>", "ln");
+             .replace("<log>", "log").replace("<lon>", "ln")
+             .replace("<lgx>", "lgx(").replace("<lgn>", ")X")
+             .replace("<hex>", "(hex(").replace("<hxn>", "))")
+             .replace("<oct>", "(oct(").replace("<ocn>", "))")
+             .replace("<bin>", "(bin(").replace("<bnn>", "))")
 
-        s = s.replace("<lgx>", "lgx(");
-        s = s.replace("<lgn>", ")X");
+        .replace("<sin>", "sin")  .replace("<asn>", "asin")
+        .replace("<cos>", "cos")  .replace("<acs>", "acos")
+        .replace("<tan>", "tan")  .replace("<atn>", "atan")
 
-        s = s.replace("<hex>", "(hex(");
-        s = s.replace("<hxn>", "))");
+        .replace("<snh>", "snh") .replace("<ash>", "asnh")
+        .replace("<csh>", "csh") .replace("<ach>", "acsh")
+        .replace("<tnh>", "tnh") .replace("<ath>", "atnh")
 
-        s = s.replace("<oct>", "(oct(");
-        s = s.replace("<ocn>", "))");
+        .replace("<fra>", "((")
+        .replace("<frx>", ")÷(")
+        .replace("<frn>", "))")
 
-        s = s.replace("<bin>", "(bin(");
-        s = s.replace("<bnn>", "))");
+        .replace("<pcp>", "↑")
+        .replace("<pcm>", "↓")
+        .replace("<prc>", "")
 
-        s = s.replace("<sin>", "sin");  s = s.replace("<asn>", "asin");
-        s = s.replace("<cos>", "cos");  s = s.replace("<acs>", "acos");
-        s = s.replace("<tan>", "tan");  s = s.replace("<atn>", "atan");
+        .replace("<rdr>", "rndr(")
+        .replace("<rdx>", ")X(")
+        .replace("<rdn>", ")")
 
-        s = s.replace("<snh>", "snh"); s = s.replace("<ash>", "asnh");
-        s = s.replace("<csh>", "csh"); s = s.replace("<ach>", "acsh");
-        s = s.replace("<tnh>", "tnh"); s = s.replace("<ath>", "atnh");
+        .replace("<srt>", "sqrt(")
+        .replace("<srn>", ")")
 
-        s = s.replace("<fra>", "((");
-        s = s.replace("<frx>", ")÷(");
-        s = s.replace("<frn>", "))");
+        .replace("<nrt>", "ntrt(")
+        .replace("<rtx>", ")X(")
+        .replace("<rtn>", ")")
 
-        s = s.replace("<pcp>", "↑");
-        s = s.replace("<pcm>", "↓");
-        s = s.replace("<prc>", "");
+        .replace("<ncr>", "nCr")  .replace("<npr>", "nPr")
+        .replace("<ncx>", "X")    .replace("<npx>", "X")
+        .replace("<ncn>", "")     .replace("<npn>", "")
 
-        s = s.replace("<rdr>", "rndr(");
-        s = s.replace("<rdx>", ")X(");
-        s = s.replace("<rdn>", ")");
-
-        s = s.replace("<srt>", "sqrt(");
-        s = s.replace("<srn>", ")");
-
-        s = s.replace("<nrt>", "ntrt(");
-        s = s.replace("<rtx>", ")X(");
-        s = s.replace("<rtn>", ")");
-
-        s = s.replace("<ncr>", "nCr");  s = s.replace("<npr>", "nPr");
-        s = s.replace("<ncx>", "X");    s = s.replace("<npx>", "X");
-        s = s.replace("<ncn>", "");     s = s.replace("<npn>", "");
-
-        s = s.replace("<exp>", "E");
-        s = s.replace("<rnd>", "rand");
-        s = s.replace("<ans>", "ans");
-        s = s.replace("|", "");
-        s = s.replace("<mod>", "%");
-        s = s.replace("π", "(pi)");
-        s = s.replace("<mem>", "M");
+        .replace("<exp>", "E")
+        .replace("<rnd>", "rand")
+        .replace("<ans>", "ans")
+        .replace("|", "")
+        .replace("<mod>", "%")
+        .replace("π", "(pi)")
+        .replace("<mem>", "M");
 
         return s;
     }

@@ -19,6 +19,9 @@
             android:name=".SettingsActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/settings" />
+        <activity android:name=".graphs.GraphActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:label="@string/graph" />
     </application>
 
 </manifest>
