@@ -415,12 +415,12 @@ public class Calculator {
                 String s1 = bin.substring(0, bin.indexOf("."));
                 String s2 = bin.substring(bin.indexOf(".") + 1, bin.length());
 
-                double x = Integer.parseInt(s1, 2);
+                double x = Long.parseLong(s1, 2);
                 for (int i = 0; i < s2.length(); i++) {
                     x += ((s2.charAt(i) - 48) * Math.pow(2, -i - 1));
                 }
                 return x;
-            } else return Integer.parseInt(bin, 2);
+            } else return Long.parseLong(bin, 2);
         }
         catch(NumberFormatException e){
             err(R.string.error_BinaryTooLong);
@@ -457,11 +457,11 @@ public class Calculator {
         try {
             if (oct.contains(".")) {
                 String s2 = oct.substring(oct.indexOf(".") + 1, oct.length());
-                double x = Integer.parseInt(oct.substring(0, oct.indexOf(".")), 8);
+                double x = Long.parseLong(oct.substring(0, oct.indexOf(".")), 8);
                 for (int i = 0; i < s2.length(); i++)
                     x += ((int) s2.charAt(i) - 48) * Math.pow(8, -i - 1);
                 return x;
-            } else return Integer.parseInt(oct, 8);
+            } else return Long.parseLong(oct, 8);
         }
         catch (NumberFormatException e) {
             err(R.string.error_OctTooLong);
