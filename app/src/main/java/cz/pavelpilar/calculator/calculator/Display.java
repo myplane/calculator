@@ -29,7 +29,6 @@ public class Display extends View {
 
     private void draw() {
         if(mSource != null) {
-            Log.d("DRAW", mSource);
             int pos = 0;
             while (pos != mSource.length()) {
                 if(mSource.charAt(pos) != '<'){
@@ -144,7 +143,7 @@ public class Display extends View {
                         case "par": DrawingManager.parenthesesStart(); break;
                         case "prn": DrawingManager.parenthesesEnd(); break;
                         case "fra":
-                            DrawingManager.fractionStart(pos);
+                            DrawingManager.fractionStart(getFraction(pos));
                             DrawingManager.functionStart();
                             break;
                         case "frx":
@@ -187,4 +186,41 @@ public class Display extends View {
         }
     }
 
+    private String[] getFraction(int index) {
+        String numerator, denominator;
+        int frxPos;
+        if (!mSource.substring(index + 5, mSource.substring(index).indexOf("<frx>") + index).contains("<fra>")) {
+            numerator = mSource.substring(index + 5, mSource.substring(index).indexOf("<frx>") + index);
+            frxPos = mSource.substring(index).indexOf("<frx>") + index + 5;
+        } else {
+            int tempPos = index + 5;
+            int hi = 1;
+            while (hi != 0) {
+                if (mSource.charAt(tempPos) == '<') {
+                    String tag = mSource.substring(tempPos+1, tempPos+4);
+                    if (tag.equals("fra")) hi++;
+                    else if (tag.equals("frx")) --hi;
+                    tempPos = tempPos + 5;
+                } else tempPos++;
+            }
+            numerator = mSource.substring(index + 5, tempPos - 5);
+            frxPos = tempPos;
+        }
+        if (!mSource.substring(frxPos, mSource.substring(frxPos).indexOf("<frn>") + frxPos).contains("<fra>")) {
+            denominator = mSource.substring(frxPos, mSource.substring(frxPos).indexOf("<frn>") + frxPos);
+        } else {
+            int tempPos = frxPos;
+            int hi = 1;
+            while (hi != 0) {
+                if(mSource.charAt(tempPos) == '<') {
+                    String tag = mSource.substring(tempPos+1, tempPos+4);
+                    if (tag.equals("fra")) ++hi;
+                    else if (tag.equals("frn"))--hi;
+                    tempPos = tempPos + 5;
+                }else tempPos++;
+            }
+            denominator = mSource.substring(frxPos, tempPos - 5);
+        }
+        return new String[] {numerator, denominator};
+    }
 }

@@ -47,7 +47,7 @@ public class DrawingManager {
         mCanvas = canvas;
 
         mPositionX = 5;
-        mPositionY = 80;
+        mPositionY = (canvas.getHeight()/2)/mDisplayMetrics.density + 9;
         mTextHeight = 18;
 
         mRootsAndParentheses = new Vector<>();
@@ -86,6 +86,7 @@ public class DrawingManager {
             case 'E':
             case 'F':
             case 'π': mPositionX = mPositionX + 14*multiplier; break;
+            case '=':
             case 'A':
             case 'B':
             case 'C':
@@ -97,7 +98,6 @@ public class DrawingManager {
                                      new Float[] {mRootsAndParentheses.lastElement()[0],
                                                   Math.min(mRootsAndParentheses.lastElement()[1], mPositionY - mTextHeight),
                                                   Math.max(mRootsAndParentheses.lastElement()[2], mPositionY)} );
-
     }
 
     public static void drawText(String s) {
@@ -178,13 +178,13 @@ public class DrawingManager {
     public static void superscriptStart() {
         multiplier = multiplier - 0.25f;
         mPositionY = mPositionY - 13*multiplier;
-        mTextHeight = 18*multiplier;
+        mTextHeight = mTextHeight*multiplier;
         mPaint.setTextSize(mPaint.getTextSize() - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, mDisplayMetrics));
     }
 
     public static void superscriptEnd() {
         mPaint.setTextSize(mPaint.getTextSize() + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, mDisplayMetrics));
-        mTextHeight = 18*(1/multiplier);
+        mTextHeight = mTextHeight*(1/multiplier);
         mPositionY = mPositionY + 13*multiplier;
         multiplier = multiplier + 0.25f;
     }
@@ -246,9 +246,9 @@ public class DrawingManager {
         mPositionX = mPositionX + 8*multiplier;
     }
 
-    public static void fractionStart(int index) {
+    public static void fractionStart(String[] fraction) {
         mPositionX = mPositionX + 12*multiplier;
-        mFractions.add(mockDraw(InputManager.getFraction(index), mPositionX));
+        mFractions.add(mockDraw(fraction, mPositionX));
         if(mFractions.lastElement()[1] < mFractions.lastElement()[3]) mPositionX = mPositionX + ((mFractions.lastElement()[3] - mFractions.lastElement()[1]) / 2);
         mPositionY = mPositionY - 14*multiplier - mFractions.lastElement()[2];
     }
