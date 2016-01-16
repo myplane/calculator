@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + Columns.TABLE_NAME + " (" +
                               Columns._ID + " INTEGER PRIMARY KEY," +
                               Columns.COLUMN_INPUT + " TEXT," +
-                              Columns.COLUMN_RESULT + "TEXT )";
+                              Columns.COLUMN_RESULT + " TEXT )";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Columns.TABLE_NAME;
 

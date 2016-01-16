@@ -1,12 +1,17 @@
 package cz.pavelpilar.calculator.calculator;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
+import cz.pavelpilar.calculator.calculator.history.DatabaseHelper;
 
 public class MainFragment extends android.support.v4.app.Fragment {
 
@@ -57,9 +62,11 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mMemory = mMemory + Double.valueOf(mDisplayFragment.getResult());
     }
 
-    public void setResult(String result) {
+    public void setResult(String result, String input) {
         int eNotationDigits = 5;
         int decimalPlaces = 4;
+
+        boolean saveToHistory = true;
         if(result.contains("E")){
             if(result.indexOf("E") > eNotationDigits +2)
                 if(eNotationDigits != 0)
@@ -79,8 +86,24 @@ public class MainFragment extends android.support.v4.app.Fragment {
             if(result.indexOf(".")+decimalPlaces+1 < result.length()) result = result.substring(0, result.indexOf(".")+decimalPlaces+1);
             while(result.endsWith("0") && result.contains(".")) result = result.substring(0, result.length()-1);
             if(result.endsWith(".")) result = result.substring(0, result.length()-1);
+        } else if(result.length() > 2) {
+            char c = result.charAt(0);
+            if(c >= 'A' && c <= 'z') saveToHistory = false;
         }
         mDisplayFragment.setResult(result);
+
+        if(input.equals("|")) saveToHistory = false;
+
+        if(saveToHistory) {
+            DatabaseHelper helper = new DatabaseHelper(getActivity());
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(DatabaseHelper.Columns.COLUMN_INPUT, input.replace("|", ""));
+            values.put(DatabaseHelper.Columns.COLUMN_RESULT, result);
+
+            db.insert(DatabaseHelper.Columns.TABLE_NAME, "null", values);
+        }
     }
 
     public String formatMemory() {

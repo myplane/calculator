@@ -151,7 +151,7 @@ public class ButtonsFragment extends Fragment {
         mButtonPower.setText(Html.fromHtml("x<small><sup>2</sup></small>"));
     }
 
-    @OnClick(R.id.buttonEquals) void buttonEquals() { mMainFragment.setResult(Calculator.calculate(InputManager.toCalc())); }
+    @OnClick(R.id.buttonEquals) void buttonEquals() { mMainFragment.setResult(Calculator.calculate(InputManager.toCalc()), InputManager.getCurrent()); }
     @OnClick(R.id.buttonDot) void buttonDot() { InputManager.add("."); }
     @OnClick(R.id.button0) void button0() { InputManager.add("0"); }
     @OnClick(R.id.button1) void button1() { InputManager.add("1"); }

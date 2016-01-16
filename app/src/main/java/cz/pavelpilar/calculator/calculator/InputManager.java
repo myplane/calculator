@@ -315,45 +315,6 @@ public class InputManager {
         mDisplayFragment.show(mInput.toString());
     }
 
-    public static String[] getFraction(int index) {
-        String s = mInput.toString();
-        String numerator, denominator;
-        int frxPos;
-        if (!s.substring(index + 5, s.substring(index).indexOf("<frx>") + index).contains("<fra>")) {
-            numerator = s.substring(index + 5, s.substring(index).indexOf("<frx>") + index);
-            frxPos = s.substring(index).indexOf("<frx>") + index + 5;
-        } else {
-            int tempPos = index + 5;
-            int hi = 1;
-            while (hi != 0) {
-                if (s.charAt(tempPos) == '<') {
-                    String tag = s.substring(tempPos+1, tempPos+4);
-                    if (tag.equals("fra")) hi++;
-                    else if (tag.equals("frx")) --hi;
-                    tempPos = tempPos + 5;
-                } else tempPos++;
-            }
-            numerator = s.substring(index + 5, tempPos - 5);
-            frxPos = tempPos;
-        }
-        if (!s.substring(frxPos, s.substring(frxPos).indexOf("<frn>") + frxPos).contains("<fra>")) {
-                denominator = s.substring(frxPos, s.substring(frxPos).indexOf("<frn>") + frxPos);
-        } else {
-            int tempPos = frxPos;
-            int hi = 1;
-            while (hi != 0) {
-                if(s.charAt(tempPos) == '<') {
-                    String tag = s.substring(tempPos+1, tempPos+4);
-                    if (tag.equals("fra")) ++hi;
-                    else if (tag.equals("frn"))--hi;
-                    tempPos = tempPos + 5;
-                }else tempPos++;
-            }
-            denominator = s.substring(frxPos, tempPos - 5);
-        }
-        return new String[] {numerator, denominator};
-    }
-
     public static String toCalc() {
         String s = mInput.toString();
 

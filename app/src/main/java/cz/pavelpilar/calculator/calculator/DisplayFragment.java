@@ -51,7 +51,7 @@ public class DisplayFragment extends Fragment {
 
     public void setResult(String result) {
         mResult.setText(result);
-        if(result.length() > 15) mResult.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        if(result.length() > 18) mResult.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
         else mResult.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 32);
     }
 

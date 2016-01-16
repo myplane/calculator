@@ -94,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
             mButtonCalculator.setText(getString(R.string.menu_history));
             mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
         } else {
+            new Handler().postDelayed(new Runnable() {  //Avoids lag
+                @Override
+                public void run() {
+                    mDrawerLayout.closeDrawer(mDrawer);
+                }
+            }, 300);
             startActivity(new Intent(this, HistoryActivity.class));
         }
         mDrawerLayout.closeDrawer(mDrawer);
