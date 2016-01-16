@@ -1,6 +1,7 @@
 package cz.pavelpilar.calculator.calculator;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -94,12 +95,25 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         if(input.equals("|")) saveToHistory = false;
 
+        DatabaseHelper helper = new DatabaseHelper(getActivity());
+        if(saveToHistory) {     //Check 10 last items and don't add if exists
+            SQLiteDatabase db = helper.getReadableDatabase();
+
+            Cursor c = db.query(DatabaseHelper.Columns.TABLE_NAME,
+                    new String[] {DatabaseHelper.Columns.COLUMN_INPUT},
+                    null, null, null, null, DatabaseHelper.Columns._ID + " DESC", "10");
+            if (c.moveToFirst()){
+                do if(input.equals(c.getString(0))) saveToHistory = false;
+                while(c.moveToNext());
+            }
+            c.close();
+        }
+
         if(saveToHistory) {
-            DatabaseHelper helper = new DatabaseHelper(getActivity());
             SQLiteDatabase db = helper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(DatabaseHelper.Columns.COLUMN_INPUT, input.replace("|", ""));
+            values.put(DatabaseHelper.Columns.COLUMN_INPUT, input);
             values.put(DatabaseHelper.Columns.COLUMN_RESULT, result);
 
             db.insert(DatabaseHelper.Columns.TABLE_NAME, "null", values);
