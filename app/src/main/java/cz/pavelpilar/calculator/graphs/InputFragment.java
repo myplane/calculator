@@ -2,9 +2,12 @@ package cz.pavelpilar.calculator.graphs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,7 +22,7 @@ public class InputFragment extends Fragment {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         mMainFragment = (MainFragment) getParentFragment();
-        InputManager.initialize(this, new String[] {"|", "|", "|"}, 0);
+        InputManager.initialize(this, new String[] {"|", "|", "|", "|"}, 0);
         shift = hyp = false;
     }
 
@@ -27,7 +30,13 @@ public class InputFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View v = inflater.inflate(R.layout.graphs_input, container, false);
         ButterKnife.bind(this, v);
+        setText(v);
         return v;
+    }
+
+    private void setText(View v) {
+        Button b = (Button) v.findViewById(R.id.buttonPower);
+        b.setText(Html.fromHtml("a<sup><small>b</small></sup>"));
     }
 
     public void show(String[] strings, int currentDisplay) { mMainFragment.show(strings, currentDisplay); }
@@ -96,14 +105,21 @@ public class InputFragment extends Fragment {
         }
         disableModifiers();
     }
-    @OnClick(R.id.buttonX) public void buttonX() { InputManager.add("<xxx>"); }
-    @OnClick(R.id.buttonLog) public void buttonLog() {
-        if(shift) InputManager.add("<lon>|<end>");
-        else InputManager.add("<log>|<end>");
+    @OnClick(R.id.buttonX) public void buttonX() {
+        if(shift) InputManager.add("π");
+        else InputManager.add("<xxx>");
         disableModifiers();
     }
-    @OnClick(R.id.buttonPower) public void buttonPower() { InputManager.add("<pow>|<pwn>"); }
-    @OnClick(R.id.buttonRoot) public void buttonRoot() { InputManager.add("<srt>|<end>"); }
+    @OnClick(R.id.buttonLn) public void buttonLn() { InputManager.add("<lon>|<end>"); }
+    @OnClick(R.id.buttonLog) public void buttonLog() { InputManager.add("<log>|<end>"); }
+    @OnClick(R.id.buttonFraction) public void buttonFraction() { InputManager.add("<fra>|<frx><frn>"); }
+    @OnClick(R.id.buttonAbs) public void buttonAbs() { InputManager.add("<abs>|<abn>"); }
+    @OnClick(R.id.buttonPower) public void buttonPower() { InputManager.addPow(); }
+    @OnClick(R.id.buttonRoot) public void buttonRoot() {
+        if(shift) InputManager.add("<crt>|<end>");
+        else InputManager.add("<srt>|<end>");
+        disableModifiers();
+    }
 
     private void disableModifiers() {
         shift = hyp = false;

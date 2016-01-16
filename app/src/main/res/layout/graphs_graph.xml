@@ -5,6 +5,12 @@
     android:paddingBottom="4dp"
     android:paddingRight="4dp">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="fill_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar"
+        android:id="@+id/toolbar"/>
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/graphs_graph"
         android:layout_width="fill_parent"

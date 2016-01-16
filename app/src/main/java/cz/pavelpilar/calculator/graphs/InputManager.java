@@ -5,16 +5,19 @@ public class InputManager {
     private static String[] mInput;
     private static InputFragment mFragment;
     private static int mCurrent;
+    private static boolean[] mPowers;
 
     public static void initialize(InputFragment fragment, String[] input, int current) {
         mFragment = fragment;
         mInput = input;
         mCurrent = current;
+        mPowers = new boolean[] {false, false, false , false};
         inputChanged();
     }
 
     public static void clear() {
-        mInput = new String[] {"|", "|", "|"};
+        mInput = new String[] {"|", "|", "|", "|"};
+        mPowers = new boolean[] {false, false, false , false};
         inputChanged();
     }
 
@@ -24,13 +27,13 @@ public class InputManager {
     }
 
     public static void up(){
-        if(mCurrent == 0) mCurrent = 2;
+        if(mCurrent == 0) mCurrent = 3;
         else --mCurrent;
         inputChanged();
     }
 
     public static void down() {
-        if(mCurrent == 2) mCurrent = 0;
+        if(mCurrent == 3) mCurrent = 0;
         else mCurrent++;
         inputChanged();
     }
@@ -52,6 +55,23 @@ public class InputManager {
             }
         }
         inputChanged();
+    }
+
+    public static void addPow() {
+        if(!mPowers[mCurrent]) {
+            mPowers[mCurrent] = true;
+
+            int index = mInput[mCurrent].indexOf('|');
+            if (index != mInput[mCurrent].length() - 1) {
+                String s1 = mInput[mCurrent].substring(0, index);
+                String s2 = mInput[mCurrent].substring(index+1, mInput[mCurrent].length());
+                s1 = s1 + "<pow>|<pwn>";
+                mInput[mCurrent] = s1 + s2;
+            } else {
+                mInput[mCurrent] = mInput[mCurrent].replace("|", "") + "<pow>|<pwn>";
+            }
+            inputChanged();
+        }
     }
 
     public static void backspace() {
@@ -76,6 +96,9 @@ public class InputManager {
                     case "ach":
                     case "ath":
                     case "log":
+                    case "lon":
+                    case "srt":
+                    case "crt":
                         for (int number = 1; number != 0; index++) {
                             switch (String.valueOf(mInput[mCurrent].charAt(index + 2)) + mInput[mCurrent].charAt(index + 3) + mInput[mCurrent].charAt(index + 4)) {
                                 case "sin":
@@ -90,7 +113,10 @@ public class InputManager {
                                 case "ash":
                                 case "ach":
                                 case "ath":
-                                case "log": number++; break;
+                                case "log":
+                                case "lon":
+                                case "srt":
+                                case "crt": number++; break;
 
                                 case "end": --number;
                             }
@@ -99,10 +125,13 @@ public class InputManager {
                         break;
                     case "pow":
                         mInput[mCurrent] = mInput[mCurrent].substring(0, index - 5) + "|" + mInput[mCurrent].substring(mInput[mCurrent].substring(index).indexOf("<pwn>") + index + 5);
+                        mPowers[mCurrent] = false;
                         break;
                     case "xxx":
                         mInput[mCurrent] = mInput[mCurrent].substring(0, index - 5) + mInput[mCurrent].substring(index);
                         break;
+                    case "fra":
+                        mInput[mCurrent] = mInput[mCurrent].substring(0, index - 5) + "|" + mInput[mCurrent].substring(mInput[mCurrent].substring(index).indexOf("<frn>") + index + 5);
                     default:
                         navLeft();
                 }
@@ -120,6 +149,9 @@ public class InputManager {
                 String s2 = mInput[mCurrent].substring(index - 1, mInput[mCurrent].length());
                 mInput[mCurrent] = s1 + "|" + s2;
             } else {
+                if(mInput[mCurrent].substring(index - 4, index - 1).equals("pow")) mPowers[mCurrent] = false;
+                if(mInput[mCurrent].substring(index - 4, index - 1).equals("pwn")) mPowers[mCurrent] = true;
+
                 mInput[mCurrent] = mInput[mCurrent].replace("|", "");
                 String s1 = mInput[mCurrent].substring(0, index - 5);
                 String s2 = mInput[mCurrent].substring(index - 5, mInput[mCurrent].length());
@@ -140,6 +172,9 @@ public class InputManager {
                 s2 = "|" + s2;
                 mInput[mCurrent] = s1 + s2;
             } else {
+                if(mInput[mCurrent].substring(index + 2, index + 5).equals("pow")) mPowers[mCurrent] = true;
+                if(mInput[mCurrent].substring(index + 2, index + 5).equals("pwn")) mPowers[mCurrent] = false;
+
                 mInput[mCurrent] = mInput[mCurrent].replace("|", "");
                 String s1 = mInput[mCurrent].substring(0, index + 5);
                 String s2 = mInput[mCurrent].substring(index + 5, mInput[mCurrent].length());
@@ -157,15 +192,17 @@ public class InputManager {
     public static String[] getInput() { return mInput; }
 
     public static String[] toCalc() {
-        String[] strings = mInput;
-        for (int i = 0; i < 3; i++) {
+        String[] strings = new String[] {mInput[0], mInput[1], mInput[2], mInput[3]};
+        for (int i = 0; i < strings.length; i++) {
             strings[i] = strings[i].replace("<sin>", "sin(").replace("<cos>", "cos(").replace("<tan>","tan(").replace("<end>", ")")
                                    .replace("<asn>", "asin(").replace("<acs>", "acos(").replace("<atn>", "atan(")
                                    .replace("<snh>", "snh(").replace("<csh>", "csh(").replace("<tnh>", "tnh(")
-                                   .replace("<ash>", "asnh").replace("<ach>", "acsh(").replace("<ath>", "atnh(")
+                                   .replace("<ash>", "asnh(").replace("<ach>", "acsh(").replace("<ath>", "atnh(")
                                    .replace("<pow>", "^(").replace("<pwn>", ")")
                                    .replace("<log>", "log(").replace("<lon>", "ln(")
-                                   .replace("<srt>", "sqrt(")
+                                   .replace("<srt>", "sqrt(").replace("<crt>", "cbrt(")
+                                   .replace("<abs>", "abs(").replace("<abn>", ")")
+                                   .replace("<fra>", "((").replace("<frx>", ")÷(").replace("<frn>", "))")
                                    .replace("|", "");
         }
         return strings;

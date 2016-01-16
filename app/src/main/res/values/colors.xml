@@ -8,4 +8,9 @@
     <color name="toolbarDark">#263238</color>
 
     <color name="drawer_color">#37474F</color>
+
+    <color name="graph_color0">#00B0FF</color>  <!-- Light Blue A400 -->
+    <color name="graph_color1">#76FF03</color>  <!-- Light Green A400 -->
+    <color name="graph_color2">#FF9100</color>  <!-- Orange A400 -->
+    <color name="graph_color3">#1DE9B6</color>  <!-- Teal A400 -->
 </resources>

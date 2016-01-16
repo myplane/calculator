@@ -2,6 +2,7 @@ package cz.pavelpilar.calculator;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -31,6 +32,12 @@ public class ConstantsFragment extends DialogFragment {
         mDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.constant_title)
                 .setView(v)
+                .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mDialog.dismiss();
+                    }
+                })
                 .create();
         return mDialog;
     }
@@ -261,7 +268,7 @@ public class ConstantsFragment extends DialogFragment {
             case "graphs":
                 cz.pavelpilar.calculator.graphs.InputManager.add(constant);
         }
-        if(mDialog != null) mDialog.hide();
+        if(mDialog != null) mDialog.dismiss();
     }
 
 }

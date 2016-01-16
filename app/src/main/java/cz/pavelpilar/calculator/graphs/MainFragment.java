@@ -27,7 +27,4 @@ public class MainFragment extends Fragment {
     public void showGraph(String[] strings) {
         startActivity(new Intent(getActivity(), GraphActivity.class).putExtra("DATA", strings));
     }
-
-
-
 }

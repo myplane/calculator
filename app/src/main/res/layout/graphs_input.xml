@@ -4,21 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC" />
 
-    <cz.pavelpilar.calculator.graphs.Display
-        android:id="@+id/graphs_display"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC"
-        android:elevation="16dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -32,6 +18,13 @@
             android:textColor="@color/shiftColor"
             android:text="2nd fn"
             android:textSize="12dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/buttonHyp"
+            android:text="hyp" />
 
         <Button
             android:layout_width="0dp"
@@ -65,6 +58,171 @@
             android:layout_weight="1"
             android:id="@+id/buttonBackspace"
             android:src="@mipmap/backspace" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:layout_margin="0dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textSin"
+            android:text="asin "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textCos"
+            android:text="acos "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textTan"
+            android:text="atan "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/buttonSin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="sin"/>
+        <Button
+            android:id="@id/buttonCos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="cos"/>
+        <Button
+            android:id="@+id/buttonTan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="tan"/>
+        <Button
+            android:id="@+id/buttonLn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ln"/>
+        <Button
+            android:id="@+id/buttonLog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="log"/>
+        <Button
+            android:id="@+id/buttonUp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="up" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:layout_margin="0dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textPi"
+            android:text="π "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textRoot"
+            android:text="∛ "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonX"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="X"/>
+        <Button
+            android:id="@+id/buttonFraction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="a/b" />
+        <Button
+            android:id="@+id/buttonAbs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="|a|"/>
+        <Button
+            android:id="@+id/buttonRoot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="√a"/>
+        <Button
+            android:id="@+id/buttonPower"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="pow"/>
+        <Button
+            android:id="@+id/buttonDown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="down"/>
 
     </LinearLayout>
 

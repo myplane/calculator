@@ -19,10 +19,10 @@ public class Calculator {
     private static String word;
 
     public static String calculate(String input) {
-        if(words == null) words = new String[][] {{"e", "E", "X"},
-                                                  {"pi", "ln"},
+        if(words == null) words = new String[][] {{"e", "E", "X", "π"},
+                                                  {"ln"},
                                                   {"log", "abs", "lgx", "sin", "cos", "tan", "snh", "csh", "tnh"},
-                                                  {"sqrt", "ntrt", "asin", "acos", "atan", "asnh", "acsh", "atnh"}};
+                                                  {"sqrt", "cbrt", "asin", "acos", "atan", "asnh", "acsh", "atnh"}};
         errorSet = false;
         mExpression = new StringReader(input);
         float result = expr(true);
@@ -198,14 +198,14 @@ public class Calculator {
             }
             case WORD:
                     switch (word) {
+                        case "π":
+                            getToken();
+                            return (float) Math.PI;
                         case "e":
                             getToken();
                             return (float) Math.E;
                         case "E":
                             return (float) Math.pow(10, prim(true));
-                        case "pi":
-                            getToken();
-                            return (float) Math.PI;
                         case "log":
                             return (float) Math.log10(prim(true));
                         case "ln":
@@ -216,10 +216,8 @@ public class Calculator {
                         }
                         case "sqrt":
                             return (float) Math.sqrt(prim(true));
-                        case "ntrt": {
-                            double n = prim(true);
-                            return (float) Math.pow(prim(true), 1 / n);
-                        }
+                        case "cbrt":
+                            return (float) Math.cbrt(prim(true));
                         case "abs":
                             return Math.abs(prim(true));
                         case "sin":

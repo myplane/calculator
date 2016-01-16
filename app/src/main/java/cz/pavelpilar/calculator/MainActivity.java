@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,24 +22,32 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private LinearLayout mDrawer;
 
+    private Button mButtonCalculator;
+
     public static SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mContext = this;
+
+        setContentView(R.layout.activity_main);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawer = (LinearLayout) findViewById(R.id.drawer);
+        mButtonCalculator = (Button) findViewById(R.id.drawer_calculator);
 
         if(!getResources().getBoolean(R.bool.tablet))
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Fragment fragment;
         switch (mPreferences.getString("lastFragment", "")){
-            case "calculator": fragment = new cz.pavelpilar.calculator.calculator.MainFragment(); break;
+            case "calculator":
+                fragment = new cz.pavelpilar.calculator.calculator.MainFragment();
+                mButtonCalculator.setText(getString(R.string.menu_history));
+                mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
+                break;
             case "graphs": fragment = new cz.pavelpilar.calculator.graphs.MainFragment(); break;
             default:
                 fragment = new FirstStartFragment();
@@ -78,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
             mPreferences.edit()
                         .putString("lastFragment", "calculator")
                         .apply();
+
+            mButtonCalculator.setText(getString(R.string.menu_history));
+            mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
+        } else {
+            //History callback
         }
         mDrawerLayout.closeDrawer(mDrawer);
     }
@@ -90,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
             mPreferences.edit()
                         .putString("lastFragment", "graphs")
                         .apply();
+
+            mButtonCalculator.setText(getString(R.string.menu_calculator));
+            mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_calculator, 0, 0, 0);
         }
         mDrawerLayout.closeDrawer(mDrawer);
     }

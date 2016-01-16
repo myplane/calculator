@@ -2,6 +2,7 @@ package cz.pavelpilar.calculator.graphs;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 
+import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
 public class GraphActivity extends AppCompatActivity {
@@ -30,7 +32,8 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_graph);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.toolbarDark));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.toolbarDark));
         mChart = (LineChart) findViewById(R.id.graphs_graph);
         mData = getIntent().getStringArrayExtra("DATA");
 
@@ -45,17 +48,39 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     private void setupGraph() {
+        ArrayList<Integer> colors = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>();
+
+        if(!mData[0].equals("")) {
+            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color0));
+            strings.add(mData[0].replace("<xxx>", "x"));
+        }
+        if(!mData[1].equals("")) {
+            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color1));
+            strings.add(mData[1].replace("<xxx>", "x"));
+        }
+        if(!mData[2].equals("")) {
+            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color2));
+            strings.add(mData[2].replace("<xxx>", "x"));
+        }
+        if(!mData[3].equals("")) {
+            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color3));
+            strings.add(mData[3].replace("<xxx>", "x"));
+        }
+
+        mChart.getLegend().setCustom(colors, strings);
+        mChart.getLegend().setTextColor(Color.WHITE);
         mChart.getXAxis().setLabelsToSkip(63);
+        mChart.getXAxis().setTextColor(Color.WHITE);
         mChart.getXAxis().setAvoidFirstLastClipping(false);
         mChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         mChart.getAxisRight().setEnabled(false);
         mChart.getAxisLeft().setSpaceBottom(20);
         mChart.getAxisLeft().setSpaceTop(20);
         mChart.getAxisLeft().setLabelCount(11, false);
-        mChart.getLegend().setEnabled(false);
+        mChart.getAxisLeft().setTextColor(Color.WHITE);
         mChart.setDescription("");
         mChart.setGridBackgroundColor(Color.parseColor("#546e7a"));
-        //mChart.setScaleYEnabled(false);
         mChart.setDoubleTapToZoomEnabled(false);
         mChart.setHighlightPerDragEnabled(false);
         mChart.setHighlightPerTapEnabled(false);
@@ -70,28 +95,46 @@ public class GraphActivity extends AppCompatActivity {
 
         protected LineData doInBackground(Void ... voids) {
             LineData data = new LineData();
-            for(int i = 0; i < 3; i++){
-                if(mData[i].equals("")) continue;
-                Log.d("GRAPHING", mData[i]);
+            for(int i = 0; i < 4; i++){
+                if(mData[i].equals("")) {
+                    if(i == 0) for(float xPos = -5; xPos <= 5; xPos= xPos + 0.015625f) data.addXValue(Float.toString(xPos));
+                    continue;
+                }
                 ArrayList<Entry> yVals = new ArrayList<>();
                 float xPos = -5;
                 int index = 0;
                 while (xPos <= 5) {
                     String yVal = Calculator.calculate(mData[i].replace("<xxx>", "(" + String.valueOf(xPos) + ")"));
                     float yValFloat = (yVal.startsWith("ERR")) ? 0 : Float.parseFloat(yVal);
-                    yVals.add(new Entry(yValFloat, index));
+                    if(yVal.startsWith("ERR") || yVal.contains("NaN") ||yVal.contains("Infinity")) {
+                        if(yVals.size() > 0) {
+                            LineDataSet set = new LineDataSet(yVals, "");
+                            set.setDrawCircles(false);
+                            set.setDrawValues(false);
+                            set.setAxisDependency(YAxis.AxisDependency.LEFT);
+                            switch (i) {
+                                case 0: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color0)); break;
+                                case 1: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color1)); break;
+                                case 2: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color2)); break;
+                                case 3: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color3)); break;
+                            }
+                            data.addDataSet(set);
+                            yVals = new ArrayList<>();
+                        }
+                    } else yVals.add(new Entry(yValFloat, index));
                     index++;
                     if(i == 0) data.addXValue(Float.toString(xPos));
                     xPos = xPos + 0.015625f;
                 }
-                LineDataSet set = new LineDataSet(yVals, String.valueOf(i));
+                LineDataSet set = new LineDataSet(yVals, "");
                 set.setDrawCircles(false);
                 set.setDrawValues(false);
                 set.setAxisDependency(YAxis.AxisDependency.LEFT);
                 switch (i) {
-                    case 0: set.setColor(Color.BLUE); break;
-                    case 1: set.setColor(Color.YELLOW); break;
-                    case 2: set.setColor(Color.RED); break;
+                    case 0: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color0)); break;
+                    case 1: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color1)); break;
+                    case 2: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color2)); break;
+                    case 3: set.setColor(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color3)); break;
                 }
                 data.addDataSet(set);
             }
@@ -103,8 +146,8 @@ public class GraphActivity extends AppCompatActivity {
                 mChart.setNoDataText("No data to display");
             } else {
                 mChart.setData(data);
-                mChart.invalidate();
             }
+            mChart.invalidate();
         }
 
     }
