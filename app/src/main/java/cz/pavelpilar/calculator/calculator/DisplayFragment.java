@@ -2,10 +2,13 @@ package cz.pavelpilar.calculator.calculator;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.lang.reflect.Type;
 
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
@@ -48,6 +51,8 @@ public class DisplayFragment extends Fragment {
 
     public void setResult(String result) {
         mResult.setText(result);
+        if(result.length() > 15) mResult.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        else mResult.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 32);
     }
 
     public String getResult() {
