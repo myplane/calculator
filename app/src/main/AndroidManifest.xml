@@ -22,6 +22,9 @@
         <activity android:name=".graphs.GraphActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/graph" />
+        <activity android:name=".calculator.history.HistoryActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:label="@string/menu_history" />
     </application>
 
 </manifest>

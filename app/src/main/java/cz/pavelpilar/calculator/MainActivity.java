@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import cz.pavelpilar.calculator.calculator.history.HistoryActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     public static Context mContext;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             mButtonCalculator.setText(getString(R.string.menu_history));
             mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
         } else {
-            //History callback
+            startActivity(new Intent(this, HistoryActivity.class));
         }
         mDrawerLayout.closeDrawer(mDrawer);
     }
