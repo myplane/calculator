@@ -62,6 +62,8 @@
     <string name="constant_bohrMagneton">Bohr magneton</string>
     <string name="constant_fineStructure">Fine-structure constant</string>
 
+    <string name="first_start">Begin by swiping from the left or pressing the menu button</string>
+
     <string-array name="preferences_calculator_radians_degrees">
         <item>@string/preferences_calculator_radians</item>
         <item>@string/preferences_calculator_degrees</item>

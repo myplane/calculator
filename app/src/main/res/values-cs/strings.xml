@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="constant_electron">Hmotnost elektronu</string>
     <string name="constant_elementaryCharge">Elementární náboj</string>
     <string name="constant_gravity">Gravitační konstanta</string>
@@ -57,4 +56,5 @@
     <string name="preferences_graphs_precision_high">Vysoká</string>
     <string name="preferences_graphs_precision_low">Nízka</string>
     <string name="settings">Nastavení</string>
+    <string name="first_start">Začněte tažením od levého okraje nebo stisknutím tlačítka menu</string>
 </resources>
