@@ -25,6 +25,10 @@
         <activity android:name=".calculator.history.HistoryActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/menu_history" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="${crashlyticsApiKey}" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -17,6 +16,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import cz.pavelpilar.calculator.calculator.history.HistoryActivity;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(BuildConfig.DEBUG) Fabric.with(this, new Crashlytics());
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mContext = this;
 
