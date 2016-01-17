@@ -183,6 +183,12 @@ public class Display extends View {
                             DrawingManager.functionEnd();
                             DrawingManager.subscriptEnd();
                             break;
+                        case "abs":
+                        case "abn":
+                            DrawingManager.drawChar('|');
+                            break;
+                        default:
+                            Log.d("ERROR", "Unhandled tag " + tag);
                     }
                     pos = pos + 5;
                 }

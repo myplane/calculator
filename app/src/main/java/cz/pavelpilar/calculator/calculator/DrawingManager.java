@@ -81,8 +81,7 @@ public class DrawingManager {
             case '7':
             case '8':
             case '9':
-            case '÷':
-            case '%': mPositionX = mPositionX + 13*multiplier; break;
+            case '÷': mPositionX = mPositionX + 13*multiplier; break;
             case 'E':
             case 'F':
             case 'π': mPositionX = mPositionX + 14*multiplier; break;
@@ -91,6 +90,7 @@ public class DrawingManager {
             case 'B':
             case 'C':
             case 'D': mPositionX = mPositionX + 15*multiplier; break;
+            case '%': mPositionX = mPositionX + 17*multiplier; break;
             case 'M': mPositionX = mPositionX + 19*multiplier; break;
         }
         if(mRootsAndParentheses.size() > 0)
@@ -291,6 +291,7 @@ public class DrawingManager {
         Float limits[] = {mPositionX, null, null, null, null};    //Fraction start, numerator length, numerator max Y, denominator length, denominator min Y
         for(int i = 0; i < 2; i++){
             int pos = 0;
+            int rootNumber = 0;
             float positionX = startPos, positionY = mPositionY, minY = positionY - mTextHeight, maxY = positionY;
             while(pos != strings[i].length()){
                 if(strings[i].charAt(pos) != '<'){
@@ -315,8 +316,7 @@ public class DrawingManager {
                         case '7':
                         case '8':
                         case '9':
-                        case '÷':
-                        case '%': positionX = positionX + 13*multiplier; break;
+                        case '÷': positionX = positionX + 13*multiplier; break;
                         case 'E':
                         case 'F':
                         case 'π': positionX = positionX + 14*multiplier; break;
@@ -324,6 +324,7 @@ public class DrawingManager {
                         case 'B':
                         case 'C':
                         case 'D': positionX = positionX + 15*multiplier; break;
+                        case '%': positionX = positionX + 17*multiplier; break;
                         case 'M': positionX = positionX + 19*multiplier; break;
                     }
                     minY = Math.min(minY, positionY - mTextHeight);
@@ -354,13 +355,15 @@ public class DrawingManager {
                         case "prn": positionX = positionX + 8*multiplier; break;
                         case "rtx": minY = Math.min(minY, positionY - mTextHeight); break;
                         case "srt":
+                            rootNumber++;
+                            minY = Math.min(minY, positionY - mTextHeight - 6*rootNumber);
                             positionX = positionX + 12*multiplier;
-                            positionY = positionY - 4;
+                            positionY = positionY + 2*multiplier;
+                            maxY = Math.max(maxY, positionY);
                             break;
                         case "rtn":
-                            minY = Math.min(minY, positionY - mTextHeight);
-                            positionY = positionY + 4;
                             positionX = positionX + 4;
+                            --rootNumber;
                             break;
                         case "lgx":
                             positionX = positionX + 32*multiplier;
