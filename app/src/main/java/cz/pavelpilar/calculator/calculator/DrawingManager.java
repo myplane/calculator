@@ -29,6 +29,7 @@ public class DrawingManager {
     private static Vector<Float[]> mFractions;
     private static Vector<Float[]> mRootsAndParentheses;
     private static Vector<Integer> mParentheses;
+    private static int mParenthesesCount;
 
     public static void initialize() {
         mDisplayMetrics = MainActivity.mContext.getResources().getDisplayMetrics();
@@ -53,6 +54,7 @@ public class DrawingManager {
         mRootsAndParentheses = new Vector<>();
         mParentheses = new Vector<>();
         mParentheses.add(0);
+        mParenthesesCount = -1;
     }
 
     public static void drawChar(char c) {
@@ -166,6 +168,13 @@ public class DrawingManager {
     }
 
     private static void drawParentheses(float startX, float minY, float maxY, boolean end) {
+        switch(mParenthesesCount) {
+            case 0: break;
+            case 1: mPaint.setColor(Color.parseColor("#FF9800")); break;
+            case 2: mPaint.setColor(Color.parseColor("#03A9F4")); break;
+            case 3: mPaint.setColor(Color.parseColor("#00BFA5")); break;
+            default: mPaint.setColor(Color.parseColor("#9E9E9E"));
+        }
         RectF rect = new RectF(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, startX, mDisplayMetrics),
                                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, minY, mDisplayMetrics),
                                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, startX + 8, mDisplayMetrics),
@@ -174,6 +183,7 @@ public class DrawingManager {
         if(end) mCanvas.drawArc(rect, 270, 180, false, mPaint);
         else mCanvas.drawArc(rect, 90, 180, false, mPaint);
         mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(Color.WHITE);
     }
     public static void superscriptStart() {
         multiplier = multiplier - 0.25f;
@@ -202,6 +212,7 @@ public class DrawingManager {
     }
 
     public static void parenthesesStart() {
+        mParenthesesCount++;
         mRootsAndParentheses.add(new Float[]{mPositionX + 4, mPositionY - mTextHeight, mPositionY});
         mParentheses.set(mParentheses.size() - 1, mParentheses.lastElement() + 1);
         RectF rect = new RectF(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX + 4, mDisplayMetrics),
@@ -232,6 +243,7 @@ public class DrawingManager {
                                              mRootsAndParentheses.elementAt(mRootsAndParentheses.size() - 1)[2])});
             mRootsAndParentheses.removeElementAt(mRootsAndParentheses.size() - 1);
             mParentheses.set(mParentheses.size() - 1, mParentheses.lastElement() - 1);
+            --mParenthesesCount;
         }else{
             RectF rect = new RectF(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
                     TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY - mTextHeight - 2 * multiplier, mDisplayMetrics),
