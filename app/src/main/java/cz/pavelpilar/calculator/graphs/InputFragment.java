@@ -3,14 +3,23 @@ package cz.pavelpilar.calculator.graphs;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.ArraySet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+
+import java.util.AbstractSet;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
 public class InputFragment extends Fragment {
@@ -22,7 +31,11 @@ public class InputFragment extends Fragment {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         mMainFragment = (MainFragment) getParentFragment();
-        InputManager.initialize(this, new String[] {"|", "|", "|", "|"}, 0);
+        InputManager.initialize(this, new String[] {MainActivity.mPreferences.getString("preferences_graphs_input0", "|"),
+                                                    MainActivity.mPreferences.getString("preferences_graphs_input1", "|"),
+                                                    MainActivity.mPreferences.getString("preferences_graphs_input2", "|"),
+                                                    MainActivity.mPreferences.getString("preferences_graphs_input3", "|")
+                                                    }, 0);
         shift = hyp = false;
     }
 
@@ -32,6 +45,17 @@ public class InputFragment extends Fragment {
         ButterKnife.bind(this, v);
         setText(v);
         return v;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        String[] inputs = InputManager.getInput();
+        MainActivity.mPreferences.edit().putString("preferences_graphs_input0", inputs[0])
+                                        .putString("preferences_graphs_input1", inputs[1])
+                                        .putString("preferences_graphs_input2", inputs[2])
+                                        .putString("preferences_graphs_input3", inputs[3])
+                                        .commit();
     }
 
     private void setText(View v) {

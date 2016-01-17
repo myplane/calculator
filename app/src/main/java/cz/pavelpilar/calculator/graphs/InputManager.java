@@ -1,5 +1,9 @@
 package cz.pavelpilar.calculator.graphs;
 
+import android.util.Log;
+
+import java.util.Set;
+
 public class InputManager {
 
     private static String[] mInput;
@@ -189,7 +193,13 @@ public class InputManager {
         mFragment.show(mInput, mCurrent);
     }
 
-    public static String[] getInput() { return mInput; }
+    public static String[] getInput() {
+        String[] input = mInput.clone();
+        Log.d("getInput", String.valueOf(input.length));
+        for(int i = 0; i < input.length; i++)
+            input[i] = input[i].replace("|", "") + "|";
+        return input;
+    }
 
     public static String[] toCalc() {
         String[] strings = new String[] {mInput[0], mInput[1], mInput[2], mInput[3]};
