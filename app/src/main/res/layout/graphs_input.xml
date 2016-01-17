@@ -137,12 +137,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="log"/>
-        <Button
+        <ImageButton
             android:id="@+id/buttonUp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="up" />
+            android:src="@drawable/vector_arrow_up" />
 
     </LinearLayout>
 
@@ -217,12 +217,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="pow"/>
-        <Button
+        <ImageButton
             android:id="@+id/buttonDown"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="down"/>
+            android:src="@drawable/vector_arrow_down"/>
 
     </LinearLayout>
 
