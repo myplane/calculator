@@ -1,27 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory
-        android:title="@string/preferences_general"
-        android:key="pref_general">
-
-    </PreferenceCategory>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:title="@string/preferences_calculator"
         android:key="pref_calc">
 
         <ListPreference
-            android:key="pref_radDeg"
+            android:key="preferences_radDeg"
             android:title="@string/preferences_calculator_radians_degrees"
             android:entries="@array/preferences_calculator_radians_degrees"
             android:entryValues="@array/preferences_calculator_radians_degrees"
             android:defaultValue="@string/preferences_calculator_radians"
             android:summary="%s" />
 
+        <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
+            android:defaultValue="5"
+            android:key="preferences_decimal_places"
+            android:title="@string/preferences_calculator_decimal"
+            app:vnt_maxValue="9"
+            app:vnt_minValue="0"
+            app:vnt_setWrapSelectorWheel="true" />
+
+        <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
+            android:defaultValue="4"
+            android:key="preferences_scientific_places"
+            android:title="@string/preferences_calculator_scientific"
+            app:vnt_maxValue="9"
+            app:vnt_minValue="0"
+            app:vnt_setWrapSelectorWheel="true" />
+
         <Preference
-            android:key="pref_clear_history"
-            android:title="@string/preferences_general_clear_history" />
+            android:key="preferences_clear_history"
+            android:title="@string/preferences_calculator_clear_history" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preferences_graphs"
+        android:key="preferences_graph">
+
+        <ListPreference
+            android:key="preferences_graphs_precision"
+            android:title="@string/preferences_graphs_precision"
+            android:entries="@array/preferences_graphs_precision"
+            android:entryValues="@array/preferences_graphs_precision"
+            android:defaultValue="@string/preferences_graphs_precision_high"
+            android:summary="%s" />
+
+        <CheckBoxPreference
+            android:key="preferences_graphs_legend"
+            android:title="@string/preferences_graphs_legend"
+            android:defaultValue="true" />
 
     </PreferenceCategory>
 

@@ -48,7 +48,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     public void onResume() {    //Refresh status when leaving settings activity
         super.onResume();
         statusChanged();
-        Calculator.setDegrees(MainActivity.mPreferences.getString("pref_radDeg", "Radians").equals("Degrees"));
+        Calculator.setDegrees(MainActivity.mPreferences.getString("preferences_radDeg", "Radians").equals("Degrees"));
     }
 
     public void clearResult() {
@@ -60,12 +60,13 @@ public class MainFragment extends android.support.v4.app.Fragment {
     }
 
     public void addToMemory() {
-        mMemory = mMemory + Double.valueOf(mDisplayFragment.getResult());
+        try {mMemory = mMemory + Double.valueOf(mDisplayFragment.getResult()); }
+        catch (NumberFormatException ignored) {}
     }
 
     public void setResult(String result, String input) {
-        int eNotationDigits = 5;
-        int decimalPlaces = 4;
+        int eNotationDigits = MainActivity.mPreferences.getInt("preferences_scientific_places", 4);
+        int decimalPlaces = MainActivity.mPreferences.getInt("preferences_decimal_places", 5);
 
         boolean saveToHistory = true;
         if(result.contains("E")){

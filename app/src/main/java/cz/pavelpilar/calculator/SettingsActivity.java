@@ -1,5 +1,6 @@
 package cz.pavelpilar.calculator;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -7,6 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import cz.pavelpilar.calculator.calculator.history.DatabaseHelper;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -16,7 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.toolbarDark));
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.toolbarDark));
         getFragmentManager().beginTransaction()
                             .replace(R.id.settings_content, new SettingsFragment())
                             .commit();
@@ -29,10 +32,10 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
 
-            findPreference("pref_clear_history").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            findPreference("preferences_clear_history").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    //TODO: clear history
+                    MainActivity.mContext.deleteDatabase(DatabaseHelper.DATABASE_NAME);
                     return false;
                 }
             });

@@ -11,12 +11,19 @@
 
     <string name="graphs_show_graph">Show graph</string>
 
-    <string name="preferences_general">General</string>
-    <string name="preferences_general_clear_history">Clear History</string>
     <string name="preferences_calculator">Calculator</string>
+    <string name="preferences_calculator_clear_history">Clear History</string>
     <string name="preferences_calculator_radians_degrees">Radians/Degrees</string>
     <string name="preferences_calculator_radians">Radians</string>
     <string name="preferences_calculator_degrees">Degrees</string>
+    <string name="preferences_calculator_decimal">Decimal places</string>
+    <string name="preferences_calculator_scientific">Scientific notation decimal places</string>
+
+    <string name="preferences_graphs">Graphs</string>
+    <string name="preferences_graphs_precision">Graph precision</string>
+    <string name="preferences_graphs_precision_high">High</string>
+    <string name="preferences_graphs_precision_low">Low</string>
+    <string name="preferences_graphs_legend">Show legend</string>
 
     <string name="error_overflow">Overflow</string>
     <string name="error_divBy0">Division by 0</string>
@@ -60,5 +67,10 @@
     <string-array name="preferences_calculator_radians_degrees">
         <item>@string/preferences_calculator_radians</item>
         <item>@string/preferences_calculator_degrees</item>
+    </string-array>
+
+    <string-array name="preferences_graphs_precision">
+        <item>@string/preferences_graphs_precision_high</item>
+        <item>@string/preferences_graphs_precision_low</item>
     </string-array>
 </resources>

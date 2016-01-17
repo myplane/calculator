@@ -26,6 +26,7 @@ public class GraphActivity extends AppCompatActivity {
 
     private LineChart mChart;
     private String[] mData;
+    private String mPrecision;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class GraphActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.toolbarDark));
         mChart = (LineChart) findViewById(R.id.graphs_graph);
         mData = getIntent().getStringArrayExtra("DATA");
+        mPrecision = MainActivity.mPreferences.getString("preferences_graphs_precision", "High");
 
         setupGraph();
         getGraph();
@@ -48,37 +50,46 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     private void setupGraph() {
-        ArrayList<Integer> colors = new ArrayList<>();
-        ArrayList<String> strings = new ArrayList<>();
+        if(MainActivity.mPreferences.getBoolean("preferences_graphs_legend", true)) {
+            ArrayList<Integer> colors = new ArrayList<>();
+            ArrayList<String> strings = new ArrayList<>();
 
-        if(!mData[0].equals("")) {
-            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color0));
-            strings.add(mData[0].replace("<xxx>", "x"));
-        }
-        if(!mData[1].equals("")) {
-            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color1));
-            strings.add(mData[1].replace("<xxx>", "x"));
-        }
-        if(!mData[2].equals("")) {
-            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color2));
-            strings.add(mData[2].replace("<xxx>", "x"));
-        }
-        if(!mData[3].equals("")) {
-            colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color3));
-            strings.add(mData[3].replace("<xxx>", "x"));
-        }
+            if (!mData[0].equals("")) {
+                colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color0));
+                strings.add(mData[0].replace("<xxx>", "x"));
+            }
+            if (!mData[1].equals("")) {
+                colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color1));
+                strings.add(mData[1].replace("<xxx>", "x"));
+            }
+            if (!mData[2].equals("")) {
+                colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color2));
+                strings.add(mData[2].replace("<xxx>", "x"));
+            }
+            if (!mData[3].equals("")) {
+                colors.add(ContextCompat.getColor(MainActivity.mContext, R.color.graph_color3));
+                strings.add(mData[3].replace("<xxx>", "x"));
+            }
 
-        mChart.getLegend().setCustom(colors, strings);
-        mChart.getLegend().setTextColor(Color.WHITE);
-        mChart.getXAxis().setLabelsToSkip(63);
-        mChart.getXAxis().setTextColor(Color.WHITE);
-        mChart.getXAxis().setAvoidFirstLastClipping(false);
-        mChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+            mChart.getLegend().setCustom(colors, strings);
+            mChart.getLegend().setTextColor(Color.WHITE);
+        } else mChart.getLegend().setEnabled(false);
+
+        XAxis xAxis = mChart.getXAxis();
+        if(mPrecision.equals("High")) xAxis.setLabelsToSkip(63);
+        else xAxis.setLabelsToSkip(31);
+        xAxis.setTextColor(Color.WHITE);
+        xAxis.setAvoidFirstLastClipping(false);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
         mChart.getAxisRight().setEnabled(false);
-        mChart.getAxisLeft().setSpaceBottom(20);
-        mChart.getAxisLeft().setSpaceTop(20);
-        mChart.getAxisLeft().setLabelCount(11, false);
-        mChart.getAxisLeft().setTextColor(Color.WHITE);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setSpaceBottom(20);
+        leftAxis.setSpaceTop(20);
+        leftAxis.setLabelCount(11, false);
+        leftAxis.setTextColor(Color.WHITE);
+
         mChart.setDescription("");
         mChart.setGridBackgroundColor(Color.parseColor("#546e7a"));
         mChart.setDoubleTapToZoomEnabled(false);
@@ -95,9 +106,15 @@ public class GraphActivity extends AppCompatActivity {
 
         protected LineData doInBackground(Void ... voids) {
             LineData data = new LineData();
+
+            float precision;
+            if(mPrecision.equals("High")) precision = 0.015625f;
+            else precision = 0.03125f;
+
+
             for(int i = 0; i < 4; i++){
                 if(mData[i].equals("")) {
-                    if(i == 0) for(float xPos = -5; xPos <= 5; xPos= xPos + 0.015625f) data.addXValue(Float.toString(xPos));
+                    if(i == 0) for(float xPos = -5; xPos <= 5; xPos= xPos + precision) data.addXValue(Float.toString(xPos));
                     continue;
                 }
                 ArrayList<Entry> yVals = new ArrayList<>();
@@ -124,7 +141,7 @@ public class GraphActivity extends AppCompatActivity {
                     } else yVals.add(new Entry(yValFloat, index));
                     index++;
                     if(i == 0) data.addXValue(Float.toString(xPos));
-                    xPos = xPos + 0.015625f;
+                    xPos = xPos + precision;
                 }
                 LineDataSet set = new LineDataSet(yVals, "");
                 set.setDrawCircles(false);
