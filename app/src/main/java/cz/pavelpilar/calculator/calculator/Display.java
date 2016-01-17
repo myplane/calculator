@@ -20,6 +20,10 @@ public class Display extends View {
         invalidate();
     }
 
+    public String getSource() {
+        return mSource;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

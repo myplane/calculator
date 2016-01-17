@@ -24,6 +24,11 @@ public class InputManager {
         return mInput.toString();
     }
 
+    public static void setCurrent(String s) {
+        mInput = new StringBuilder(s);
+        inputChanged();
+    }
+
     public static void backspace() {
         if (mInput.length() > 1) {
             String s = mInput.toString();

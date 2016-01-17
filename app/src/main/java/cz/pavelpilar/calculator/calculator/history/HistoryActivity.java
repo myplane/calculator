@@ -32,7 +32,7 @@ public class HistoryActivity extends AppCompatActivity {
         mRecycler.setHasFixedSize(true);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecycler.setAdapter(new HistoryAdapter(getHistory()));
+        mRecycler.setAdapter(new HistoryAdapter(getHistory(), this));
     }
 
     @Override
