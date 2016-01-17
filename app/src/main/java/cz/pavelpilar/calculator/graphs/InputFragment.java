@@ -3,19 +3,10 @@ package cz.pavelpilar.calculator.graphs;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.ArraySet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import java.util.AbstractSet;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

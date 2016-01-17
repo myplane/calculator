@@ -10,8 +10,8 @@
             android:key="preferences_radDeg"
             android:title="@string/preferences_calculator_radians_degrees"
             android:entries="@array/preferences_calculator_radians_degrees"
-            android:entryValues="@array/preferences_calculator_radians_degrees"
-            android:defaultValue="@string/preferences_calculator_radians"
+            android:entryValues="@array/preferences_calculator_radians_degrees_constant"
+            android:defaultValue="Radians"
             android:summary="%s" />
 
         <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
@@ -44,8 +44,8 @@
             android:key="preferences_graphs_precision"
             android:title="@string/preferences_graphs_precision"
             android:entries="@array/preferences_graphs_precision"
-            android:entryValues="@array/preferences_graphs_precision"
-            android:defaultValue="@string/preferences_graphs_precision_high"
+            android:entryValues="@array/preferences_graphs_precision_constant"
+            android:defaultValue="High"
             android:summary="%s" />
 
         <CheckBoxPreference

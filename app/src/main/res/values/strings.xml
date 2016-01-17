@@ -7,7 +7,6 @@
     <string name="menu_calculator">Calculator</string>
     <string name="menu_graphs">Graphs</string>
     <string name="menu_history">History</string>
-    <string name="menu_constants">Constants</string>
 
     <string name="graphs_show_graph">Show graph</string>
 
@@ -35,7 +34,6 @@
     <string name="error_fatal">Fatal error</string>
     <string name="error_negativeEvenRoot">Even root of negative number</string>
     <string name="error_BinaryTooLong">Binary number too long</string>
-    <string name="error_HexTooLong">Hexadecimal number too long</string>
     <string name="error_OctTooLong">Octal number too long</string>
 
     <string name="constant_title">Constants</string>
@@ -68,9 +66,17 @@
         <item>@string/preferences_calculator_radians</item>
         <item>@string/preferences_calculator_degrees</item>
     </string-array>
+    <string-array name="preferences_calculator_radians_degrees_constant">
+        <item>Radians</item>
+        <item>Degrees</item>
+    </string-array>
 
     <string-array name="preferences_graphs_precision">
         <item>@string/preferences_graphs_precision_high</item>
         <item>@string/preferences_graphs_precision_low</item>
+    </string-array>
+    <string-array name="preferences_graphs_precision_constant">
+        <item>High</item>
+        <item>Low</item>
     </string-array>
 </resources>

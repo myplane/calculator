@@ -195,7 +195,6 @@ public class InputManager {
 
     public static String[] getInput() {
         String[] input = mInput.clone();
-        Log.d("getInput", String.valueOf(input.length));
         for(int i = 0; i < input.length; i++)
             input[i] = input[i].replace("|", "") + "|";
         return input;
