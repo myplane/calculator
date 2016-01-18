@@ -59,6 +59,8 @@ public class HistoryActivity extends AppCompatActivity {
             while(c.moveToNext());
         }
         c.close();
+        db.close();
+        helper.close();
 
         return history;
     }
