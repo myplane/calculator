@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.RequiresPermission;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 import cz.pavelpilar.calculator.calculator.history.DatabaseHelper;
+import cz.pavelpilar.calculator.calculator.history.WriteToDBTask;
 
 public class MainFragment extends android.support.v4.app.Fragment {
 
@@ -22,7 +24,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        mMemory = Double.longBitsToDouble(MainActivity.mPreferences.getLong("calculator_memory", 0));
+        if(MainActivity.mPreferences != null) mMemory = Double.longBitsToDouble(MainActivity.mPreferences.getLong("calculator_memory", 0));
         Calculator.initialize(this);
     }
 
@@ -94,29 +96,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         if(input.equals("|")) saveToHistory = false;
 
-        DatabaseHelper helper = new DatabaseHelper(getActivity());
-        if(saveToHistory) {     //Check 10 last items and don't add if exists
-            SQLiteDatabase db = helper.getReadableDatabase();
-
-            Cursor c = db.query(DatabaseHelper.Columns.TABLE_NAME,
-                    new String[] {DatabaseHelper.Columns.COLUMN_INPUT},
-                    null, null, null, null, DatabaseHelper.Columns._ID + " DESC", "10");
-            if (c.moveToFirst()){
-                do if(input.equals(c.getString(0))) saveToHistory = false;
-                while(c.moveToNext());
-            }
-            c.close();
-        }
-
-        if(saveToHistory) {
-            SQLiteDatabase db = helper.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-            values.put(DatabaseHelper.Columns.COLUMN_INPUT, input);
-            values.put(DatabaseHelper.Columns.COLUMN_RESULT, result);
-
-            db.insert(DatabaseHelper.Columns.TABLE_NAME, "null", values);
-        }
+        if(saveToHistory) new WriteToDBTask().execute(input, result);
     }
 
     public String formatMemory() {
