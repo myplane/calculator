@@ -47,7 +47,7 @@ public class Display extends View {
                 mSource = mSource.replace("|", "");
             }
             int positionX = 10;
-            int positionY = canvas.getHeight()/2 + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, mDisplayMetrics);
+            int positionY = this.getHeight()/2;
             canvas.drawText("y = ", positionX, positionY, mPaint);
             positionX = positionX + (int)  TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 28, mDisplayMetrics);
             int[]fraction = new int[3];
@@ -167,7 +167,7 @@ public class Display extends View {
                         case "fra":
                             positionY = positionY - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, mDisplayMetrics);
                             int[] lengths = fractionLengths(pos);
-                            fraction = new int[] {positionX, lengths[0], lengths[1]};
+                            fraction = new int[] {positionX, lengths[0], lengths[1], lengths[2]};
                             if(fraction[1] < fraction[2]) positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, mDisplayMetrics) + (fraction[2] - fraction[1])/2;
                             else positionX = positionX + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, mDisplayMetrics);
                             break;
@@ -175,10 +175,12 @@ public class Display extends View {
                             positionY = positionY + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, mDisplayMetrics);
                             if(fraction[1] > fraction[2]) positionX = fraction[0] + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, mDisplayMetrics) + (fraction[1] - fraction[2])/2;
                             else positionX = fraction[0] + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, mDisplayMetrics);
+                            if(fraction[3] == 1) positionY = positionY + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, mDisplayMetrics);
                             break;
                         case "frn":
                             positionY = positionY - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, mDisplayMetrics);
                             positionX = fraction[0] + Math.max(fraction[1], fraction[2]) + (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, mDisplayMetrics);
+                            if(fraction[3] == 1) positionY = positionY - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, mDisplayMetrics);
                             canvas.drawLine(fraction[0],
                                             positionY - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5.5f, mDisplayMetrics),
                                             positionX,
@@ -194,7 +196,8 @@ public class Display extends View {
     private int[] fractionLengths(int startPos) {
         String numerator = mSource.substring(startPos+5).substring(0, mSource.substring(startPos+5).indexOf("<frx>"));
         String denominator = mSource.substring(startPos).substring(mSource.substring(startPos).indexOf("<frx>")+5, mSource.substring(startPos).indexOf("<frn>"));
-        return new int[] {getLength(numerator), getLength(denominator)};
+        int denominatorPower = (denominator.contains("<pow>")) ? 1 : 0;
+        return new int[] {getLength(numerator), getLength(denominator), denominatorPower};
     }
 
     private int getLength(String s) {
