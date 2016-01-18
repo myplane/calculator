@@ -2,6 +2,7 @@ package cz.pavelpilar.calculator.calculator.history;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
         mRecycler.setHasFixedSize(true);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecycler.setAdapter(new HistoryAdapter(getHistory(), this));
+        new ReadDBTask().execute(this);
     }
 
     @Override
@@ -41,28 +43,37 @@ public class HistoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(menuItem);
     }
 
-    private List<String> getHistory() {
-        ArrayList<String> history = new ArrayList<>();
+    private class ReadDBTask extends AsyncTask<AppCompatActivity, Void, HistoryAdapter> {
 
-        DatabaseHelper helper = new DatabaseHelper(this);
-        SQLiteDatabase db = helper.getReadableDatabase();
+        @Override
+        protected HistoryAdapter doInBackground(AppCompatActivity ... activity) {
+            ArrayList<String> history = new ArrayList<>();
 
-        Cursor c = db.query(
-                DatabaseHelper.Columns.TABLE_NAME,
-                new String[] {DatabaseHelper.Columns.COLUMN_INPUT, DatabaseHelper.Columns.COLUMN_RESULT},
-                null, null, null, null,
-                DatabaseHelper.Columns._ID + " DESC"
-        );
+            DatabaseHelper helper = new DatabaseHelper(MainActivity.mContext);
+            SQLiteDatabase db = helper.getReadableDatabase();
 
-        if (c.moveToFirst()){
-            do history.add(c.getString(0)  + " = " + c.getString(1));
-            while(c.moveToNext());
+            Cursor c = db.query(
+                    DatabaseHelper.Columns.TABLE_NAME,
+                    new String[] {DatabaseHelper.Columns.COLUMN_INPUT, DatabaseHelper.Columns.COLUMN_RESULT},
+                    null, null, null, null,
+                    DatabaseHelper.Columns._ID + " DESC"
+            );
+
+            if (c.moveToFirst()){
+                do history.add(c.getString(0)  + " = " + c.getString(1));
+                while(c.moveToNext());
+            }
+            c.close();
+            db.close();
+            helper.close();
+
+            return new HistoryAdapter(history, activity[0]);
         }
-        c.close();
-        db.close();
-        helper.close();
 
-        return history;
+        protected void onPostExecute(HistoryAdapter adapter) {
+            mRecycler.setAdapter(adapter);
+        }
+
     }
 
 }
