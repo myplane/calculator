@@ -131,6 +131,9 @@ public class InputManager {
                         mInput[mCurrent] = mInput[mCurrent].substring(0, index - 5) + "|" + mInput[mCurrent].substring(mInput[mCurrent].substring(index).indexOf("<pwn>") + index + 5);
                         mPowers[mCurrent] = false;
                         break;
+                    case "abs":
+                        mInput[mCurrent] = mInput[mCurrent].substring(0, index - 5) + "|" + mInput[mCurrent].substring(mInput[mCurrent].substring(index).indexOf("<abn>") + index + 5);
+                        break;
                     case "xxx":
                         mInput[mCurrent] = mInput[mCurrent].substring(0, index - 5) + mInput[mCurrent].substring(index);
                         break;
