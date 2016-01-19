@@ -159,7 +159,7 @@ public class GraphActivity extends AppCompatActivity {
 
         protected void onPostExecute(LineData data) {
             if(data.getDataSetCount() == 0) {
-                mChart.setNoDataText("No data to display");
+                mChart.setNoDataText(getString(R.string.error_noData));
             } else {
                 mChart.setData(data);
             }

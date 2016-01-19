@@ -57,4 +57,5 @@
     <string name="preferences_graphs_precision_low">Nízka</string>
     <string name="settings">Nastavení</string>
     <string name="first_start">Začněte tažením od levého okraje nebo stisknutím tlačítka menu</string>
+    <string name="error_noData">Žádná data</string>
 </resources>

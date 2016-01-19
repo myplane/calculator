@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.RequiresPermission;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +122,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     public void statusChanged() {
         StringBuilder status = new StringBuilder();
 
-        if(MainActivity.mPreferences.getString("pref_radDeg", "Radians").equals("Degrees")) status.append("DEG ");
+        if(MainActivity.mPreferences.getString("preferences_radDeg", "Radians").equals("Degrees")) status.append("DEG ");
         else status.append("RAD ");
 
         switch(mButtonsFragment.getStatus()) {
