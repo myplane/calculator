@@ -14,9 +14,10 @@
         android:elevation="4dp"
         android:id="@+id/toolbar" />
 
-    <android.support.v7.widget.RecyclerView
+    <fragment
+        android:id="@+id/history_fragment"
+        android:name="cz.pavelpilar.calculator.calculator.history.HistoryFragment"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/history_recycler" />
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

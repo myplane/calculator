@@ -47,7 +47,7 @@ public class Display extends View {
                 mSource = mSource.replace("|", "");
             }
             int positionX = 10;
-            int positionY = this.getHeight()/2;
+            int positionY = this.getHeight()/2 + (int)  TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 9, mDisplayMetrics);
             canvas.drawText("y = ", positionX, positionY, mPaint);
             positionX = positionX + (int)  TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 28, mDisplayMetrics);
             int[]fraction = new int[3];

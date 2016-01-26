@@ -1,9 +1,0 @@
-<resources>
-
-    <bool name="tablet">true</bool>
-
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:textAllCaps">false</item>
-    </style>
-
-</resources>

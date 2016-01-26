@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mButtonCalculator;
 
+    public static boolean isTablet;
+
     public static SharedPreferences mPreferences;
 
     @Override
@@ -39,24 +41,30 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawer = (LinearLayout) findViewById(R.id.drawer);
-        mButtonCalculator = (Button) findViewById(R.id.drawer_calculator);
 
-        if(!getResources().getBoolean(R.bool.tablet))
+        mButtonCalculator = (Button) findViewById(R.id.drawer_calculator);
+        isTablet = getResources().getBoolean(R.bool.tablet);
+        if(!isTablet) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawer = (LinearLayout) findViewById(R.id.drawer);
+        }
 
         Fragment fragment;
         switch (mPreferences.getString("lastFragment", "")){
             case "calculator":
                 fragment = new cz.pavelpilar.calculator.calculator.MainFragment();
-                mButtonCalculator.setText(getString(R.string.menu_history));
-                mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
+                if(!isTablet) {
+                    mButtonCalculator.setText(getString(R.string.menu_history));
+                    mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
+                }
                 break;
             case "graphs": fragment = new cz.pavelpilar.calculator.graphs.MainFragment(); break;
             default:
-                fragment = new FirstStartFragment();
-                mPreferences.edit().clear().apply();   //Remove preferences from last version, will be removed in next release.
+                if(isTablet) {
+                    fragment = new cz.pavelpilar.calculator.calculator.MainFragment();
+                } else
+                    fragment = new FirstStartFragment();
         }
         getSupportFragmentManager().beginTransaction()
                                    .replace(R.id.content_frame, fragment)
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent e) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
+        if (keyCode == KeyEvent.KEYCODE_MENU && !isTablet) {
             if (!mDrawerLayout.isDrawerOpen(mDrawer))
                 mDrawerLayout.openDrawer(mDrawer);
             else
@@ -76,12 +84,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void settings(View v) {
-        new Handler().postDelayed(new Runnable() {  //Avoids lag
-            @Override
-            public void run() {
-                mDrawerLayout.closeDrawer(mDrawer);
-            }
-        }, 300);
+        if(!isTablet)
+            new Handler().postDelayed(new Runnable() {  //Avoids lag
+                @Override
+                public void run() {
+                    mDrawerLayout.closeDrawer(mDrawer);
+                }
+            }, 300);
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
@@ -94,18 +103,20 @@ public class MainActivity extends AppCompatActivity {
                         .putString("lastFragment", "calculator")
                         .apply();
 
-            mButtonCalculator.setText(getString(R.string.menu_history));
-            mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
-        } else {
+            if(!isTablet) {
+                mButtonCalculator.setText(getString(R.string.menu_history));
+                mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_history, 0, 0, 0);
+            }
+        } else if(!isTablet) {
             new Handler().postDelayed(new Runnable() {  //Avoids lag
-                @Override
-                public void run() {
+                 @Override
+                 public void run() {
                     mDrawerLayout.closeDrawer(mDrawer);
-                }
+                 }
             }, 300);
             startActivity(new Intent(this, HistoryActivity.class));
         }
-        mDrawerLayout.closeDrawer(mDrawer);
+        if(!isTablet) mDrawerLayout.closeDrawer(mDrawer);
     }
 
     public void drawerGraphs(View v) {
@@ -120,6 +131,6 @@ public class MainActivity extends AppCompatActivity {
             mButtonCalculator.setText(getString(R.string.menu_calculator));
             mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_calculator, 0, 0, 0);
         }
-        mDrawerLayout.closeDrawer(mDrawer);
+        if(!isTablet) mDrawerLayout.closeDrawer(mDrawer);
     }
 }

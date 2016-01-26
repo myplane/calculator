@@ -1,6 +1,7 @@
 package cz.pavelpilar.calculator.calculator;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -52,6 +53,7 @@ public class ButtonsFragment extends Fragment {
     @Bind(R.id.buttonMemory) Button mButtonMemory;
     @Bind(R.id.buttonRandom) Button mButtonRandom;
 
+    @Nullable @Bind(R.id.buttonLn) Button mButtonLn;
     @Bind(R.id.buttonLog) Button mButtonLog;
     @Bind(R.id.buttonHex) Button mButtonHex;
     @Bind(R.id.buttonOct) Button mButtonOct;
@@ -295,21 +297,31 @@ public class ButtonsFragment extends Fragment {
         disableModifiers();
     }
 
-    @OnClick(R.id.buttonConstants) void buttonConstants() {
+    @Nullable @OnClick(R.id.buttonConstants) void buttonConstants() {
         DialogFragment fragment = new ConstantsFragment();
         fragment.show(getActivity().getSupportFragmentManager().beginTransaction(), "constants");
     }
 
     @OnClick(R.id.buttonLog) void buttonLog() {
-        if(shift) {
-            InputManager.add("<lon>");
-        } else if(shift2) {
-            InputManager.add("<lgx>|<lgn>");
-            changeMode(Mode.DECIMAL_LOCKED);
+        if(!MainActivity.isTablet) {
+            if (shift) {
+                InputManager.add("<lon>");
+            } else if (shift2) {
+                InputManager.add("<lgx>|<lgn>");
+                changeMode(Mode.DECIMAL_LOCKED);
+            } else InputManager.add("<log>");
+            disableModifiers();
+        } else {
+            if(shift) {
+                InputManager.add("<lgx>|<lgn>");
+                changeMode(Mode.DECIMAL_LOCKED);
+            } else {
+                InputManager.add("<log>");
+            }
+            disableModifiers();
         }
-        else InputManager.add("<log>");
-        disableModifiers();
     }
+    @Nullable @OnClick(R.id.buttonLn) void buttonLn() { InputManager.add("<lon>"); }
     @OnClick(R.id.buttonHex) void buttonHex() {
         InputManager.add("<hex>|<hxn>");
         changeMode(Mode.HEXADECIMAL);
@@ -498,6 +510,7 @@ public class ButtonsFragment extends Fragment {
         mButtonMemory.setClickable(!lock);
         mButtonRandom.setClickable(!lock);
         mButtonLog.setClickable(!lock);
+        if(mButtonLn != null) mButtonLn.setClickable(!lock);
         mButtonHex.setClickable(!lock);
         mButtonOct.setClickable(!lock);
         mButtonBin.setClickable(!lock);

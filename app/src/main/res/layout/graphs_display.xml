@@ -21,7 +21,7 @@
         <cz.pavelpilar.calculator.graphs.Display
             android:id="@+id/graphs_display0"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="fill_parent" />
     </LinearLayout>
 
     <View
@@ -41,7 +41,7 @@
         <cz.pavelpilar.calculator.graphs.Display
             android:id="@+id/graphs_display1"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="fill_parent" />
     </LinearLayout>
 
     <View
@@ -61,7 +61,7 @@
         <cz.pavelpilar.calculator.graphs.Display
             android:id="@+id/graphs_display2"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="fill_parent" />
     </LinearLayout>
 
     <View
@@ -81,7 +81,7 @@
         <cz.pavelpilar.calculator.graphs.Display
             android:id="@+id/graphs_display3"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="fill_parent" />
     </LinearLayout>
 
     <View

@@ -27,22 +27,24 @@
             android:text="3rd fn"
             android:textSize="12dp" />
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="←"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
             android:id="@+id/buttonNavLeft"
-            android:textSize="16dp" />
+            android:src="@drawable/vector_arrow_nav_left" />
 
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="→"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
             android:id="@+id/buttonNavRight"
-            android:textSize="16dp" />
+            android:src="@drawable/vector_arrow_nav_right" />
 
         <Button
             android:layout_width="0dp"

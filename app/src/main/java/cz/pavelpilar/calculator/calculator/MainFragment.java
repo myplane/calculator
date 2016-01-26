@@ -1,18 +1,13 @@
 package cz.pavelpilar.calculator.calculator;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.RequiresPermission;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
-import cz.pavelpilar.calculator.calculator.history.DatabaseHelper;
+import cz.pavelpilar.calculator.calculator.history.HistoryFragment;
 import cz.pavelpilar.calculator.calculator.history.WriteToDBTask;
 
 public class MainFragment extends android.support.v4.app.Fragment {
@@ -95,9 +90,15 @@ public class MainFragment extends android.support.v4.app.Fragment {
         }
         mDisplayFragment.setResult(result);
 
-        if(input.equals("|")) saveToHistory = false;
+        if(input.equals("")) saveToHistory = false;
 
-        if(saveToHistory) new WriteToDBTask().execute(input, result);
+        if(saveToHistory) {
+            new WriteToDBTask().execute(input, result);
+            if(MainActivity.isTablet) {
+                HistoryFragment fragment = (HistoryFragment) getChildFragmentManager().findFragmentById(R.id.calculator_history_fragment);
+                fragment.addItem(input + " = " + result);
+            }
+        }
     }
 
     public String formatMemory() {

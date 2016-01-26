@@ -72,6 +72,7 @@ public class GraphActivity extends AppCompatActivity {
 
             mChart.getLegend().setCustom(colors, strings);
             mChart.getLegend().setTextColor(Color.WHITE);
+            if(MainActivity.isTablet) mChart.getLegend().setTextSize(16);
         } else mChart.getLegend().setEnabled(false);
 
         XAxis xAxis = mChart.getXAxis();
@@ -89,12 +90,17 @@ public class GraphActivity extends AppCompatActivity {
         leftAxis.setLabelCount(11, false);
         leftAxis.setTextColor(Color.WHITE);
 
+        if(MainActivity.isTablet) {
+            xAxis.setTextSize(14);
+            leftAxis.setTextSize(14);
+        }
+
         mChart.setDescription("");
         mChart.setGridBackgroundColor(Color.parseColor("#546e7a"));
         mChart.setDoubleTapToZoomEnabled(false);
         mChart.setHighlightPerDragEnabled(false);
         mChart.setHighlightPerTapEnabled(false);
-        mChart.setNoDataText("Calculating values, please wait");
+        mChart.setNoDataText(getResources().getString(R.string.graphs_calculating));
     }
 
     private void getGraph() {
