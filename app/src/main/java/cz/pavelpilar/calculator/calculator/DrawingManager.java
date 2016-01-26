@@ -365,7 +365,7 @@ public class DrawingManager {
                         case "mem": positionX = positionX + 19*multiplier; break;
                         case "par":
                         case "prn": positionX = positionX + 8*multiplier; break;
-                        case "rtx": minY = Math.min(minY, positionY - mTextHeight); break;
+                        case "nrt":
                         case "srt":
                             rootNumber++;
                             minY = Math.min(minY, positionY - mTextHeight - 6*rootNumber);

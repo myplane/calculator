@@ -54,6 +54,7 @@ public class ButtonsFragment extends Fragment {
     @Bind(R.id.buttonRandom) Button mButtonRandom;
 
     @Nullable @Bind(R.id.buttonLn) Button mButtonLn;
+    @Nullable @Bind(R.id.buttonConstants) Button mButtonConstants;
     @Bind(R.id.buttonLog) Button mButtonLog;
     @Bind(R.id.buttonHex) Button mButtonHex;
     @Bind(R.id.buttonOct) Button mButtonOct;
@@ -511,10 +512,12 @@ public class ButtonsFragment extends Fragment {
         mButtonRandom.setClickable(!lock);
         mButtonLog.setClickable(!lock);
         if(mButtonLn != null) mButtonLn.setClickable(!lock);
+        if(mButtonConstants != null) mButtonConstants.setClickable(!lock);
         mButtonHex.setClickable(!lock);
         mButtonOct.setClickable(!lock);
         mButtonBin.setClickable(!lock);
         mButtonE.setClickable(!lock);
+
         mButtonShift.setClickable(!lock);
         mButtonShift2.setClickable(!lock);
     }

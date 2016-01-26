@@ -23,8 +23,8 @@ android {
         applicationId "cz.pavelpilar.calculator"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 8
-        versionName "2.0.0a"
+        versionCode 9
+        versionName "2.1.0"
 
         manifestPlaceholders = [crashlyticsApiKey: System.getenv("CRASHLYTICS_API")]
     }

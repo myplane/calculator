@@ -9,6 +9,7 @@
     <string name="menu_history">History</string>
 
     <string name="graphs_show_graph">Show graph</string>
+    <string name="graphs_calculating">Calculating values, please wait</string>
 
     <string name="preferences_calculator">Calculator</string>
     <string name="preferences_calculator_clear_history">Clear History</string>

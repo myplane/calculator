@@ -1,5 +1,7 @@
 package cz.pavelpilar.calculator.calculator;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Random;
@@ -38,7 +40,9 @@ public class Calculator {
     {
         cin = new StringReader(input);
         double result = expr(true);
-        if(!errorSet) return String.valueOf(result);
+        String resultString = String.valueOf(result);
+        if(!errorSet && resultString.contains(".9999999999999")) return String.valueOf(Math.round(result));
+        else if (!errorSet) return resultString;
         else {
             errorSet = false;
             return error;
@@ -300,15 +304,30 @@ public class Calculator {
                         }
                         case "abs":
                             return Math.abs(prim(true));
-                        case "sin":
-                            if (DEG) return Math.sin(prim(true) * (Math.PI / 180));
-                            else return Math.sin(prim(true));
-                        case "cos":
-                            if (DEG) return Math.cos(prim(true) * (Math.PI / 180));
-                            else return Math.cos(prim(true));
-                        case "tan":
-                            if (DEG) return Math.tan(prim(true) * (Math.PI / 180));
-                            else return Math.tan(prim(true));
+                        case "sin": {
+                            double x = prim(true);
+                            if (DEG) return Math.sin(x * (Math.PI / 180));
+                            else {
+                                if (x % Math.PI == 0) return Math.round(Math.sin(x));
+                                else return Math.sin(x);
+                            }
+                        }
+                        case "cos": {
+                            double x = prim(true);
+                            if (DEG) return Math.cos(x * (Math.PI / 180));
+                            else {
+                                if(x % (Math.PI*1.5f) == 0) return 0;
+                                else return Math.cos(x);
+                            }
+                        }
+                        case "tan": {
+                            double x = prim(true);
+                            if (DEG) return Math.tan(x * (Math.PI / 180));
+                            else {
+                                if(x % Math.PI == 0 && x != 0) return 0;
+                                else return Math.tan(x);
+                            }
+                        }
                         case "asin":
                             if (DEG) return Math.asin(prim(true)) * (180 / Math.PI);
                             else return Math.asin(prim(true));

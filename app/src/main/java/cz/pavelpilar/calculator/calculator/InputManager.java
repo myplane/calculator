@@ -55,6 +55,19 @@ public class InputManager {
                             --mButtonsFragment.powers;
                             break;
                         }
+                        case "abs":
+                        {
+                            String s1 = s.substring(0, index - 5) + "|";
+                            for (int abs = 1; abs != 0; index++) {
+                                if (s.charAt(index + 2) == 'a' && s.charAt(index + 3) == 'b' && s.charAt(index + 4) == 'n')
+                                    --abs;
+                                else if (s.charAt(index + 2) == 'a' && s.charAt(index + 3) == 'b' && s.charAt(index + 4) == 's')
+                                    abs++;
+                            }
+                            String s2 = s.substring(index + 5, s.length());
+                            mInput = new StringBuilder(s1 + s2);
+                            break;
+                        }
                         case "lgx":
                         {
                             String s2 = s.substring(index, s.length());
