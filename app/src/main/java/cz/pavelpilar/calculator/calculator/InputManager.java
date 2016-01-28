@@ -311,6 +311,16 @@ public class InputManager {
         }
     }
 
+    public static void navHome() {
+        mInput = new StringBuilder("|" + mInput.toString().replace("|", ""));
+        inputChanged();
+    }
+
+    public static void navEnd() {
+        mInput = new StringBuilder(mInput.toString().replace("|", "") + "|");
+        inputChanged();
+    }
+
     public static void add(String s) {
         String original = mInput.toString();
         int index = original.indexOf('|');

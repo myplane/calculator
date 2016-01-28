@@ -72,6 +72,7 @@ public class DrawingManager {
             case '(':
             case '-': mPositionX = mPositionX + 9*multiplier; break;
             case '1': mPositionX = mPositionX + 11*multiplier; break;
+            case 'e':
             case '+':
             case '×':
             case '0':
@@ -91,7 +92,8 @@ public class DrawingManager {
             case 'A':
             case 'B':
             case 'C':
-            case 'D': mPositionX = mPositionX + 15*multiplier; break;
+            case 'D':
+            case 'P': mPositionX = mPositionX + 15*multiplier; break;
             case '%': mPositionX = mPositionX + 17*multiplier; break;
             case 'M': mPositionX = mPositionX + 19*multiplier; break;
         }
@@ -317,6 +319,7 @@ public class DrawingManager {
                         case '(':
                         case '-': positionX = positionX + 9*multiplier; break;
                         case '1': positionX = positionX + 11*multiplier; break;
+                        case 'e':
                         case '+':
                         case '×':
                         case '0':
@@ -335,7 +338,8 @@ public class DrawingManager {
                         case 'A':
                         case 'B':
                         case 'C':
-                        case 'D': positionX = positionX + 15*multiplier; break;
+                        case 'D':
+                        case 'P': positionX = positionX + 15*multiplier; break;
                         case '%': positionX = positionX + 17*multiplier; break;
                         case 'M': positionX = positionX + 19*multiplier; break;
                     }

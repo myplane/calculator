@@ -14,6 +14,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import cz.pavelpilar.calculator.ConstantsFragment;
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
@@ -141,6 +142,8 @@ public class ButtonsFragment extends Fragment {
         tv.setText(Html.fromHtml("<small><sup>x</sup></small>√ "));
         tv = (TextView) v.findViewById(R.id.textPower);
         tv.setText(Html.fromHtml("x<small><sup>y "));
+        tv = (TextView) v.findViewById(R.id.textPower10);
+        tv.setText(Html.fromHtml("&nbsp;x×10<sup><small>y"));
         tv = (TextView) v.findViewById(R.id.textSin);
         tv.setText(Html.fromHtml("sin<small><sup>-1 "));
         tv = (TextView) v.findViewById(R.id.textCos);
@@ -148,7 +151,7 @@ public class ButtonsFragment extends Fragment {
         tv = (TextView) v.findViewById(R.id.textTan);
         tv.setText(Html.fromHtml("tan<small><sup>-1 "));
         tv = (TextView) v.findViewById(R.id.textLogx);
-        tv.setText(Html.fromHtml(" log<small><small>x</small></small>y"));
+        tv.setText(Html.fromHtml("log<small><small>x</small></small>y"));
 
         mButtonPower.setText(Html.fromHtml("x<small><sup>2</sup></small>"));
     }
@@ -220,7 +223,8 @@ public class ButtonsFragment extends Fragment {
         disableModifiers();
     }
     @OnClick(R.id.buttonModulo) void buttonModulo() {
-        if(shift) InputManager.add("π");
+        if(shift2) InputManager.add("e");
+        else if(shift) InputManager.add("π");
         else InputManager.add("<mod>");
         disableModifiers();
     }
@@ -234,7 +238,10 @@ public class ButtonsFragment extends Fragment {
     }
     @OnClick(R.id.buttonPower) void buttonPower() {
         if(powers < 2) {
-            if (shift) {
+            if (shift2) {
+                InputManager.add("×10<pow>|<pwn>");
+                powers++;
+            } else if (shift) {
                 InputManager.add("<pow>|<pwn>");
                 powers++;
             }
@@ -362,7 +369,21 @@ public class ButtonsFragment extends Fragment {
         mMainFragment.statusChanged();
     }
     @OnClick(R.id.buttonNavLeft) void ButtonNavLeft() { InputManager.navLeft(); }
+    @OnLongClick(R.id.buttonNavLeft) boolean buttonNavLeftLong() {
+        InputManager.navHome();
+        changeMode(Mode.DECIMAL);
+        fractions = 0;
+        powers = 0;
+        return true;
+    }
     @OnClick(R.id.buttonNavRight) void buttonNavRight() { InputManager.navRight(); }
+    @OnLongClick(R.id.buttonNavRight) boolean buttonNavRightLong() {
+        InputManager.navEnd();
+        changeMode(Mode.DECIMAL);
+        fractions = 0;
+        powers = 0;
+        return true;
+    }
     @OnClick(R.id.buttonClear) void buttonClear() {
         InputManager.clear();
         changeMode(Mode.DECIMAL);

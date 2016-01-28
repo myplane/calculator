@@ -187,6 +187,20 @@ public class Display extends View {
                         case "abn":
                             DrawingManager.drawChar('|');
                             break;
+                        case "npr":
+                        case "ncr":
+                            DrawingManager.parenthesesStart();
+                            break;
+                        case "npx":
+                            DrawingManager.drawChar('P');
+                            break;
+                        case "ncx":
+                            DrawingManager.drawChar('C');
+                            break;
+                        case "npn":
+                        case "ncn":
+                            DrawingManager.parenthesesEnd();
+                            break;
                         default:
                             Log.d("ERROR", "Unhandled tag " + tag);
                     }
