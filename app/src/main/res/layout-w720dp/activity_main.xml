@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/drawer"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="@color/drawer_color"
+        style="?android:attr/buttonBarStyle">
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/icon"/>
+
+        <Button
+            android:id="@+id/drawer_calculator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/menu_calculator"
+            android:textSize="24dp"
+            android:drawableLeft="@drawable/vector_calculator"
+            android:onClick="drawerCalculator"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/menu_graphs"
+            android:textSize="24dp"
+            android:drawableLeft="@drawable/vector_graph"
+            android:onClick="drawerGraphs"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <android.widget.Space
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/settings"
+            android:textSize="24dp"
+            android:drawableLeft="@drawable/vector_settings"
+            android:onClick="settings"
+            style="?android:attr/buttonBarButtonStyle" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

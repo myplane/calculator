@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/calculator_display_fragment"
+        android:name="cz.pavelpilar.calculator.calculator.DisplayFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        tools:layout="@layout/calculator_display"
+        android:layout_weight="2" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#546E7A"
+        android:elevation="4dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="410dp">
+
+        <fragment
+            android:id="@+id/calculator_history_fragment"
+            android:name="cz.pavelpilar.calculator.calculator.history.HistoryFragment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#546E7A" />
+
+        <fragment
+            android:id="@+id/calculator_constants_fragment"
+            android:name="cz.pavelpilar.calculator.ConstantsFragment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/constants" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#546E7A" />
+
+        <fragment
+            android:id="@+id/calculator_buttons_fragment"
+            android:name="cz.pavelpilar.calculator.calculator.ButtonsFragment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/calculator_buttons" />
+
+    </LinearLayout>
+</LinearLayout>
