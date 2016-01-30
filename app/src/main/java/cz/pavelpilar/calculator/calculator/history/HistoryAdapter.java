@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -44,7 +45,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.display.show(history.get(i));
+        String s = history.get(i);
+        viewHolder.display.show(s.split(" = ")[0]);
+        viewHolder.result.setText(s.split(" = ")[1]);
     }
 
     @Override
@@ -54,10 +57,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Display display;
+        TextView result;
 
         ViewHolder(View data) {
             super(data);
             display = (Display) data.findViewById(R.id.history_display);
+            result = (TextView) data.findViewById(R.id.history_result);
         }
     }
 

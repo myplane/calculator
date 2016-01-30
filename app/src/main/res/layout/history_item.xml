@@ -7,6 +7,12 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:id="@+id/history_display"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="28dp"
+        android:id="@+id/history_result"/>
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
