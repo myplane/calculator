@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:padding="6dp">
+
+    <Button
+        android:id="@+id/conversions_length"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_length"
+        style="?android:attr/buttonBarButtonStyle"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+    <Button
+        android:id="@+id/conversions_speed"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_speed"
+        style="?android:attr/buttonBarButtonStyle"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+    <Button
+        android:id="@+id/conversions_area"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_area"
+        style="?android:attr/buttonBarButtonStyle"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+    <Button
+        android:id="@+id/conversions_volume"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_volume"
+        style="?android:attr/buttonBarButtonStyle"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+    <Button
+        android:id="@+id/conversions_weight"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_weight"
+        style="?android:attr/buttonBarButtonStyle"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+    <Button
+        android:id="@+id/conversions_pressure"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_pressure"
+        style="?android:attr/buttonBarButtonStyle"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+    <Button
+        android:id="@+id/conversions_temperature"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/conversions_temperature"
+        style="?android:attr/buttonBarButtonStyle"/>
+
+
+</LinearLayout>

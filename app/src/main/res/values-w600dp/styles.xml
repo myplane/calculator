@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="tablet">true</bool>
+    <bool name="tablet">false</bool>
     <bool name="smallTablet">true</bool>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">

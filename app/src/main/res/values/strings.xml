@@ -7,9 +7,18 @@
     <string name="menu_calculator">Calculator</string>
     <string name="menu_graphs">Graphs</string>
     <string name="menu_history">History</string>
+    <string name="menu_conversions">Conversions</string>
 
     <string name="graphs_show_graph">Show graph</string>
     <string name="graphs_calculating">Calculating values, please wait</string>
+
+    <string name="conversions_length">Length</string>
+    <string name="conversions_area">Area</string>
+    <string name="conversions_volume">Volume</string>
+    <string name="conversions_weight">Weight</string>
+    <string name="conversions_pressure">Pressure</string>
+    <string name="conversions_temperature">Temperature</string>
+    <string name="conversions_speed">Speed</string>
 
     <string name="preferences_calculator">Calculator</string>
     <string name="preferences_calculator_clear_history">Clear History</string>

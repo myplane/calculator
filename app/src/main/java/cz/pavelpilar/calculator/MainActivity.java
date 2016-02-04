@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +17,7 @@ import android.widget.LinearLayout;
 
 import cz.pavelpilar.calculator.calculator.history.HistoryActivity;
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case "graphs": fragment = new cz.pavelpilar.calculator.graphs.MainFragment(); break;
+            case "conversions": fragment = new cz.pavelpilar.calculator.conversions.MainFragment(); break;
             default:
                 if(isTablet) {
                     fragment = new cz.pavelpilar.calculator.calculator.MainFragment();
@@ -128,8 +129,27 @@ public class MainActivity extends AppCompatActivity {
                         .putString("lastFragment", "graphs")
                         .apply();
 
-            mButtonCalculator.setText(getString(R.string.menu_calculator));
-            mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_calculator, 0, 0, 0);
+            if(!isTablet) {
+                mButtonCalculator.setText(getString(R.string.menu_calculator));
+                mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_calculator, 0, 0, 0);
+            }
+        }
+        if(!isTablet) mDrawerLayout.closeDrawer(mDrawer);
+    }
+
+    public void drawerConversions(View v) {
+        if(!mPreferences.getString("lastFragment", "").equals("conversions")) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, new cz.pavelpilar.calculator.conversions.MainFragment())
+                    .commit();
+            mPreferences.edit()
+                    .putString("lastFragment", "conversions")
+                    .apply();
+
+            if(!isTablet) {
+                mButtonCalculator.setText(getString(R.string.menu_calculator));
+                mButtonCalculator.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_calculator, 0, 0, 0);
+            }
         }
         if(!isTablet) mDrawerLayout.closeDrawer(mDrawer);
     }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="conversions_length">
+        <item>mm</item>
+        <item>cm</item>
+        <item>dm</item>
+        <item>m</item>
+        <item>km</item>
+        <item>in</item>
+        <item>ft</item>
+        <item>yd</item>
+        <item>mi</item>
+    </string-array>
+
+    <string-array name="conversions_area">
+        <item>mm²</item>
+        <item>cm²</item>
+        <item>dm²</item>
+        <item>m²</item>
+        <item>km²</item>
+        <item>in²</item>
+        <item>ft²</item>
+        <item>yd²</item>
+        <item>mi²</item>
+    </string-array>
+
+    <string-array name="conversions_volume">
+        <item>mm³</item>
+        <item>cm³</item>
+        <item>dm³</item>
+        <item>m³</item>
+        <item>km³</item>
+        <item>in³</item>
+        <item>ft³</item>
+        <item>yd³</item>
+        <item>mi³</item>
+    </string-array>
+
+    <string-array name="conversions_weight">
+        <item>g</item>
+        <item>kg</item>
+        <item>t</item>
+        <item>oz</item>
+        <item>lb</item>
+    </string-array>
+
+    <string-array name="conversions_pressure">
+        <item>Pa</item>
+        <item>psi</item>
+        <item>bar</item>
+        <item>atm</item>
+    </string-array>
+
+    <string-array name="conversions_temperature">
+        <item>°C</item>
+        <item>°F</item>
+        <item>K</item>
+    </string-array>
+
+    <string-array name="conversions_speed">
+        <item>m/s</item>
+        <item>km/h</item>
+        <item>mi/h</item>
+        <item>knots</item>
+        <item>ft/s</item>
+        <item>Mach</item>
+    </string-array>
+
+</resources>
