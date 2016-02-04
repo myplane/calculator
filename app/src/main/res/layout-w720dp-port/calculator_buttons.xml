@@ -297,11 +297,11 @@
 
         <Space
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="30"
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:layout_height="20dp"
             android:id="@+id/textFactorial"
             android:text="|x| "
@@ -312,38 +312,67 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:layout_height="20dp"
-            android:id="@+id/textModulo"
+            android:text=" e"
+            android:textSize="16dp"
+            android:textColor="@color/shiftColor2"
+            android:gravity="left"
+            android:textAlignment="gravity"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="20dp"
             android:text="π "
             android:textSize="16dp"
             android:textColor="@color/shiftColor"
             android:gravity="end"
             android:textAlignment="gravity"/>
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10" />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:layout_height="20dp"
             android:id="@+id/textRoot"
             android:textSize="16dp"
             android:textColor="@color/shiftColor"
-            android:gravity="end"
+            android:gravity="right"
             android:textAlignment="gravity"/>
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="15"
+            android:layout_height="20dp"
+            android:id="@+id/textPower10"
+            android:textSize="16dp"
+            android:textColor="@color/shiftColor2"
+            android:gravity="left"
+            android:textAlignment="gravity"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="5"
             android:layout_height="20dp"
             android:id="@+id/textPower"
             android:textSize="16dp"
             android:textColor="@color/shiftColor"
-            android:gravity="end"
+            android:gravity="right"
             android:textAlignment="gravity"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:layout_height="20dp"
             android:id="@+id/textPerc"
             android:textSize="16dp"

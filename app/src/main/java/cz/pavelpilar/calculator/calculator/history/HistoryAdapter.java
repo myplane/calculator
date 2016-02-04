@@ -36,7 +36,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             public void onClick(View v) {
                 Display display = (Display) v.findViewById(R.id.history_display);
                 String source = display.getSource();
-                InputManager.setCurrent(source.substring(0, source.indexOf(' ')) + "|");
+                InputManager.setCurrent(source + "|");
                 if(mActivity != null) mActivity.finish();
             }
         });
