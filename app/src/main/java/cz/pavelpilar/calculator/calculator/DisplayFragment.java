@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.lang.reflect.Type;
-
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 
@@ -22,6 +20,12 @@ public class DisplayFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DrawingManager.setTextSize(MainActivity.mPreferences.getString("preferences_size", "24"));
     }
 
     @Override

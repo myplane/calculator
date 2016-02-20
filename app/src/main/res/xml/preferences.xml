@@ -14,6 +14,14 @@
             android:defaultValue="Radians"
             android:summary="%s" />
 
+        <ListPreference
+            android:key="preferences_size"
+            android:title="@string/preferences_calculator_size"
+            android:entries="@array/preferences_calculator_size"
+            android:entryValues="@array/preferences_calculator_sizes"
+            android:defaultValue="24"
+            android:summary="%s " />
+
         <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
             android:defaultValue="5"
             android:key="preferences_decimal_places"

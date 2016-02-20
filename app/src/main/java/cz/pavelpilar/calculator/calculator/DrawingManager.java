@@ -39,9 +39,23 @@ public class DrawingManager {
         mPaint.setColor(Color.WHITE);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, mDisplayMetrics));
-        mPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, mDisplayMetrics));
+        mTextHeight = 18;
 
         mFractions = new Vector<>();
+    }
+
+    public static void setTextSize(String size) {
+        switch (size) {
+            case "32":
+                mPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, mDisplayMetrics));
+                multiplier = 1.3333333333f;
+                mTextHeight = 18*multiplier;
+                break;
+            case "24":
+                mPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, mDisplayMetrics));
+                multiplier = 1;
+                mTextHeight = 18*multiplier;
+        }
     }
 
     public static void drawTo(Canvas canvas) {
@@ -49,7 +63,6 @@ public class DrawingManager {
 
         mPositionX = 5;
         mPositionY = (canvas.getHeight()/2)/mDisplayMetrics.density + 9;
-        mTextHeight = 18;
 
         mRootsAndParentheses = new Vector<>();
         mParentheses = new Vector<>();
@@ -123,6 +136,11 @@ public class DrawingManager {
             case "RAND": mPositionX = mPositionX + 64*multiplier; break;
             case "RAND[": mPositionX = mPositionX + 70*multiplier; break;
         }
+        if(mRootsAndParentheses.size() > 0)
+            mRootsAndParentheses.set(mRootsAndParentheses.size() - 1,
+                                     new Float[] {mRootsAndParentheses.lastElement()[0],
+                                                  Math.min(mRootsAndParentheses.lastElement()[1], mPositionY - mTextHeight),
+                                                  Math.max(mRootsAndParentheses.lastElement()[2], mPositionY)} );
     }
 
     public static void functionStart() {
@@ -162,7 +180,7 @@ public class DrawingManager {
     private static void drawRect(float startX, float minY, float maxY) {
         RectF rect = new RectF(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, startX - 1, mDisplayMetrics),
                                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, minY - 1, mDisplayMetrics),
-                               TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, startX + 5, mDisplayMetrics),
+                               TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, startX + 3, mDisplayMetrics),
                                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, maxY + 1, mDisplayMetrics));
         mPaint.setColor(Color.parseColor("#263238"));   //Match background color
         mCanvas.drawRect(rect, mPaint);
@@ -187,16 +205,17 @@ public class DrawingManager {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.WHITE);
     }
+
     public static void superscriptStart() {
         multiplier = multiplier - 0.25f;
         mPositionY = mPositionY - 13*multiplier;
-        mTextHeight = mTextHeight*multiplier;
-        mPaint.setTextSize(mPaint.getTextSize() - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, mDisplayMetrics));
+        mTextHeight = mTextHeight - 4.5f*multiplier;
+        mPaint.setTextSize(mPaint.getTextSize() - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6*multiplier, mDisplayMetrics));
     }
 
     public static void superscriptEnd() {
-        mPaint.setTextSize(mPaint.getTextSize() + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, mDisplayMetrics));
-        mTextHeight = mTextHeight*(1/multiplier);
+        mPaint.setTextSize(mPaint.getTextSize() + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6*multiplier, mDisplayMetrics));
+        mTextHeight = mTextHeight + 4.5f*multiplier;
         mPositionY = mPositionY + 13*multiplier;
         multiplier = multiplier + 0.25f;
     }
@@ -305,8 +324,7 @@ public class DrawingManager {
         Float limits[] = {mPositionX, null, null, null, null};    //Fraction start, numerator length, numerator max Y, denominator length, denominator min Y
         for(int i = 0; i < 2; i++){
             int pos = 0;
-            int rootNumber = 0;
-            float positionX = startPos, positionY = mPositionY, minY = positionY - mTextHeight, maxY = positionY;
+            float positionX = startPos, positionY = mPositionY, minY = positionY - mTextHeight*multiplier, maxY = positionY;
             while(pos != strings[i].length()){
                 if(strings[i].charAt(pos) != '<'){
                     switch (strings[i].charAt(pos)){
@@ -371,15 +389,12 @@ public class DrawingManager {
                         case "prn": positionX = positionX + 8*multiplier; break;
                         case "nrt":
                         case "srt":
-                            rootNumber++;
-                            minY = Math.min(minY, positionY - mTextHeight - 6*rootNumber);
                             positionX = positionX + 12*multiplier;
-                            positionY = positionY + 2*multiplier;
                             maxY = Math.max(maxY, positionY);
                             break;
                         case "rtn":
+                            minY = minY - 4*multiplier;
                             positionX = positionX + 4;
-                            --rootNumber;
                             break;
                         case "lgx":
                             positionX = positionX + 32*multiplier;
@@ -401,36 +416,48 @@ public class DrawingManager {
                             break;
                         case "asn":
                             positionX = positionX + 47*multiplier;
-                            minY = Math.min(minY, positionY - mTextHeight*(multiplier - 0.5f) - 13*multiplier);
+                            positionY = positionY - 13*multiplier;
+                            minY = Math.min(minY, positionY - (mTextHeight - 4.5f*multiplier));
+                            positionY = positionY + 13*multiplier;
                             break;
                         case "acs":
                             positionX = positionX + 53*multiplier;
-                            minY = Math.min(minY, positionY - mTextHeight*(multiplier - 0.5f) - 13*multiplier);
+                            positionY = positionY - 13*multiplier;
+                            minY = Math.min(minY, positionY - (mTextHeight - 4.5f*multiplier));
+                            positionY = positionY + 13*multiplier;
                             break;
                         case "atn":
                             positionX = positionX + 50*multiplier;
-                            minY = Math.min(minY, positionY - mTextHeight*(multiplier - 0.5f) - 13*multiplier);
+                            positionY = positionY - 13*multiplier;
+                            minY = Math.min(minY, positionY - (mTextHeight - 4.5f*multiplier));
+                            positionY = positionY + 13*multiplier;
                             break;
                         case "ash":
                             positionX = positionX + 60*multiplier;
-                            minY = Math.min(minY, positionY - mTextHeight*(multiplier - 0.5f) - 13*multiplier);
+                            positionY = positionY - 13*multiplier;
+                            minY = Math.min(minY, positionY - (mTextHeight - 4.5f*multiplier));
+                            positionY = positionY + 13*multiplier;
                             break;
                         case "ach":
                             positionX = positionX + 67*multiplier;
-                            minY = Math.min(minY, positionY - mTextHeight*(multiplier - 0.5f) - 13*multiplier);
+                            positionY = positionY - 13*multiplier;
+                            minY = Math.min(minY, positionY - (mTextHeight - 4.5f*multiplier));
+                            positionY = positionY + 13*multiplier;
                             break;
                         case "ath":
                             positionX = positionX + 62*multiplier;
-                            minY = Math.min(minY, positionY - mTextHeight*(multiplier - 0.5f) - 13*multiplier);
+                            positionY = positionY - 13*multiplier;
+                            minY = Math.min(minY, positionY - (mTextHeight - 4.5f*multiplier));
+                            positionY = positionY + 13*multiplier;
                             break;
                         case "pow":
                             multiplier = multiplier - 0.25f;
                             positionY = positionY - 13*multiplier;
-                            mTextHeight = mTextHeight*multiplier;
+                            mTextHeight = mTextHeight - 4.5f*multiplier;
                             minY = Math.min(minY, positionY - mTextHeight);
                             break;
                         case "pwn":
-                            mTextHeight = mTextHeight*(1/multiplier);
+                            mTextHeight = mTextHeight + 4.5f*multiplier;
                             positionY = positionY + 13*multiplier;
                             multiplier = multiplier + 0.25f;
                             break;
