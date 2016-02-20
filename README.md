@@ -1,6 +1,5 @@
-# calculator
-I am currently rewriting this app:
-  https://play.google.com/store/apps/details?id=cz.pavelpilar.calculator
+#Scientific Calculator & Graphs
+![alt-tag](https://lh3.googleusercontent.com/rVPqUwDE-beMdqRnQ2gVVCeQ7IJY3CCzrXYApwU5uU74i9MBrEnkTDb-I-RxZ1V3nEY=h900)
 
 License
 =======
