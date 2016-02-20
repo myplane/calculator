@@ -32,16 +32,18 @@ public class DrawingManager {
     private static int mParenthesesCount;
 
     public static void initialize() {
-        mDisplayMetrics = MainActivity.mContext.getResources().getDisplayMetrics();
+        if(mFractions == null) {    //Only initialize once
+            mDisplayMetrics = MainActivity.mContext.getResources().getDisplayMetrics();
 
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.WHITE);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, mDisplayMetrics));
-        mTextHeight = 18;
+            mPaint = new Paint();
+            mPaint.setAntiAlias(true);
+            mPaint.setColor(Color.WHITE);
+            mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, mDisplayMetrics));
+            mTextHeight = 18;
 
-        mFractions = new Vector<>();
+            mFractions = new Vector<>();
+        }
     }
 
     public static void setTextSize(String size) {
@@ -222,7 +224,7 @@ public class DrawingManager {
 
     public static void subscriptStart() {
         multiplier = multiplier - 0.5f;
-        mPositionY = mPositionY + 13*multiplier;
+        mPositionY = mPositionY + 15*multiplier;
         mPaint.setTextSize(mPaint.getTextSize() - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, mDisplayMetrics));
     }
 
@@ -324,7 +326,7 @@ public class DrawingManager {
         Float limits[] = {mPositionX, null, null, null, null};    //Fraction start, numerator length, numerator max Y, denominator length, denominator min Y
         for(int i = 0; i < 2; i++){
             int pos = 0;
-            float positionX = startPos, positionY = mPositionY, minY = positionY - mTextHeight*multiplier, maxY = positionY;
+            float positionX = startPos, positionY = mPositionY, minY = positionY - mTextHeight, maxY = positionY;
             while(pos != strings[i].length()){
                 if(strings[i].charAt(pos) != '<'){
                     switch (strings[i].charAt(pos)){
