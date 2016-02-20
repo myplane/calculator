@@ -59,4 +59,17 @@
     <string name="first_start">Začněte tažením od levého okraje nebo stisknutím tlačítka menu</string>
     <string name="error_noData">Žádná data</string>
     <string name="graphs_calculating">Vypočítávání hodnot, čekejte prosím</string>
+    <string name="conversions_area">Obsah</string>
+    <string name="conversions_knots">uzly</string>
+    <string name="conversions_length">Délka</string>
+    <string name="conversions_pressure">Tlak</string>
+    <string name="conversions_speed">Rychlost</string>
+    <string name="conversions_temperature">Teplota</string>
+    <string name="conversions_volume">Objem</string>
+    <string name="conversions_weight">Hmotnost</string>
+    <string name="preferences_calculator_size">Velikost textu</string>
+    <string name="preferences_calculator_size_large">Velká</string>
+    <string name="preferences_calculator_size_normal">Střední</string>
+    <string name="preferences_calculator_size_small">Malá</string>
+    <string name="menu_conversions">Převody</string>
 </resources>

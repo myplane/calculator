@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,64 +113,74 @@ public class ConversionFragment extends DialogFragment {
         String s = mInput.getText().toString();
         if(!s.equals("")) {
             BigDecimal input = new BigDecimal(s);
-            input = input.setScale(20, BigDecimal.ROUND_HALF_UP);
-            switch (mInputSpinner.getSelectedItem().toString()) {
+            input = input.setScale(20, BigDecimal.ROUND_HALF_EVEN);
+
+            String inputType = mInputSpinner.getSelectedItem().toString();
+            String outputType = mOutputSpinner.getSelectedItem().toString();
+            if(inputType.equals(outputType)) {
+                mOutput.setText(s);
+                return;
+            }
+
+            if(inputType.equals(getString(R.string.conversions_knots))) inputType = "knots";
+            switch (inputType) {
 
                 //Length, converts to meters
-                case "mm": input = input.divide(Conversions.MM, BigDecimal.ROUND_HALF_UP); break;
-                case "cm": input = input.divide(Conversions.CM, BigDecimal.ROUND_HALF_UP); break;
-                case "dm": input = input.divide(Conversions.DM, BigDecimal.ROUND_HALF_UP); break;
-                case "km": input = input.divide(Conversions.KM, BigDecimal.ROUND_HALF_UP); break;
-                case "in": input = input.divide(Conversions.IN, BigDecimal.ROUND_HALF_UP); break;
-                case "ft": input = input.divide(Conversions.FT, BigDecimal.ROUND_HALF_UP); break;
-                case "yd": input = input.divide(Conversions.YD, BigDecimal.ROUND_HALF_UP); break;
-                case "mi": input = input.divide(Conversions.MI, BigDecimal.ROUND_HALF_UP); break;
+                case "mm": input = input.divide(Conversions.MM, BigDecimal.ROUND_HALF_EVEN); break;
+                case "cm": input = input.divide(Conversions.CM, BigDecimal.ROUND_HALF_EVEN); break;
+                case "dm": input = input.divide(Conversions.DM, BigDecimal.ROUND_HALF_EVEN); break;
+                case "km": input = input.divide(Conversions.KM, BigDecimal.ROUND_HALF_EVEN); break;
+                case "in": input = input.divide(Conversions.IN, BigDecimal.ROUND_HALF_EVEN); break;
+                case "ft": input = input.divide(Conversions.FT, BigDecimal.ROUND_HALF_EVEN); break;
+                case "yd": input = input.divide(Conversions.YD, BigDecimal.ROUND_HALF_EVEN); break;
+                case "mi": input = input.divide(Conversions.MI, BigDecimal.ROUND_HALF_EVEN); break;
 
                 //Area, converts to meters²
-                case "mm²": input = input.divide(Conversions.MM2, BigDecimal.ROUND_HALF_UP); break;
-                case "cm²": input = input.divide(Conversions.CM2, BigDecimal.ROUND_HALF_UP); break;
-                case "dm²": input = input.divide(Conversions.DM2, BigDecimal.ROUND_HALF_UP); break;
-                case "km²": input = input.divide(Conversions.KM2, BigDecimal.ROUND_HALF_UP); break;
-                case "in²": input = input.divide(Conversions.IN2, BigDecimal.ROUND_HALF_UP); break;
-                case "ft²": input = input.divide(Conversions.FT2, BigDecimal.ROUND_HALF_UP); break;
-                case "yd²": input = input.divide(Conversions.YD2, BigDecimal.ROUND_HALF_UP); break;
-                case "mi²": input = input.divide(Conversions.MI2, BigDecimal.ROUND_HALF_UP); break;
+                case "mm²": input = input.divide(Conversions.MM2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "cm²": input = input.divide(Conversions.CM2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "dm²": input = input.divide(Conversions.DM2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "km²": input = input.divide(Conversions.KM2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "in²": input = input.divide(Conversions.IN2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "ft²": input = input.divide(Conversions.FT2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "yd²": input = input.divide(Conversions.YD2, BigDecimal.ROUND_HALF_EVEN); break;
+                case "mi²": input = input.divide(Conversions.MI2, BigDecimal.ROUND_HALF_EVEN); break;
 
                 //Volume, converts to meters³
-                case "mm³": input = input.divide(Conversions.MM3, BigDecimal.ROUND_HALF_UP); break;
-                case "cm³": input = input.divide(Conversions.CM3, BigDecimal.ROUND_HALF_UP); break;
-                case "dm³": input = input.divide(Conversions.DM3, BigDecimal.ROUND_HALF_UP); break;
-                case "km³": input = input.divide(Conversions.KM3, BigDecimal.ROUND_HALF_UP); break;
-                case "in³": input = input.divide(Conversions.IN3, BigDecimal.ROUND_HALF_UP); break;
-                case "ft³": input = input.divide(Conversions.FT3, BigDecimal.ROUND_HALF_UP); break;
-                case "yd³": input = input.divide(Conversions.YD3, BigDecimal.ROUND_HALF_UP); break;
-                case "mi³": input = input.divide(Conversions.MI3, BigDecimal.ROUND_HALF_UP); break;
+                case "mm³": input = input.divide(Conversions.MM3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "cm³": input = input.divide(Conversions.CM3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "dm³": input = input.divide(Conversions.DM3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "km³": input = input.divide(Conversions.KM3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "in³": input = input.divide(Conversions.IN3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "ft³": input = input.divide(Conversions.FT3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "yd³": input = input.divide(Conversions.YD3, BigDecimal.ROUND_HALF_EVEN); break;
+                case "mi³": input = input.divide(Conversions.MI3, BigDecimal.ROUND_HALF_EVEN); break;
 
                 //Weight, converts to kg
-                case "g": input = input.divide(Conversions.G, BigDecimal.ROUND_HALF_UP); break;
-                case "t": input = input.divide(Conversions.T, BigDecimal.ROUND_HALF_UP); break;
-                case "oz": input = input.divide(Conversions.OZ, BigDecimal.ROUND_HALF_UP); break;
-                case "lb": input = input.divide(Conversions.LB, BigDecimal.ROUND_HALF_UP); break;
+                case "g": input = input.divide(Conversions.G, BigDecimal.ROUND_HALF_EVEN); break;
+                case "t": input = input.divide(Conversions.T, BigDecimal.ROUND_HALF_EVEN); break;
+                case "oz": input = input.divide(Conversions.OZ, BigDecimal.ROUND_HALF_EVEN); break;
+                case "lb": input = input.divide(Conversions.LB, BigDecimal.ROUND_HALF_EVEN); break;
 
                 //Pressure, converts to Pa
-                case "psi": input = input.divide(Conversions.PSI, BigDecimal.ROUND_HALF_UP); break;
-                case "bar": input = input.divide(Conversions.BAR, BigDecimal.ROUND_HALF_UP); break;
-                case "atm": input = input.divide(Conversions.ATM, BigDecimal.ROUND_HALF_UP); break;
+                case "psi": input = input.divide(Conversions.PSI, BigDecimal.ROUND_HALF_EVEN); break;
+                case "bar": input = input.divide(Conversions.BAR, BigDecimal.ROUND_HALF_EVEN); break;
+                case "atm": input = input.divide(Conversions.ATM, BigDecimal.ROUND_HALF_EVEN); break;
 
                 //Temperature, converts to °C
-                case "°F": input = input.subtract(new BigDecimal(32)).divide(new BigDecimal("1.8"), BigDecimal.ROUND_HALF_UP); break;
+                case "°F": input = input.subtract(new BigDecimal(32)).divide(new BigDecimal("1.8"), BigDecimal.ROUND_HALF_EVEN); break;
                 case "K": input = input.subtract(new BigDecimal("273.15")); break;
 
                 //Speed, converts to m/s
-                case "km/h": input = input.divide(Conversions.KMH, BigDecimal.ROUND_HALF_UP); break;
-                case "mi/h": input = input.divide(Conversions.MPH, BigDecimal.ROUND_HALF_UP); break;
-                case "knots": input = input.divide(Conversions.KNOTS, BigDecimal.ROUND_HALF_UP); break;
-                case "ft/s": input = input.divide(Conversions.FTPS, BigDecimal.ROUND_HALF_UP); break;
-                case "Mach": input = input.divide(Conversions.MACH, BigDecimal.ROUND_HALF_UP); break;
+                case "km/h": input = input.divide(Conversions.KMH, BigDecimal.ROUND_HALF_EVEN); break;
+                case "mi/h": input = input.divide(Conversions.MPH, BigDecimal.ROUND_HALF_EVEN); break;
+                case "knots": input = input.divide(Conversions.KNOTS, BigDecimal.ROUND_HALF_EVEN); break;
+                case "ft/s": input = input.divide(Conversions.FTPS, BigDecimal.ROUND_HALF_EVEN); break;
+                case "Mach": input = input.divide(Conversions.MACH, BigDecimal.ROUND_HALF_EVEN); break;
             }
 
             BigDecimal output;
-            switch (mOutputSpinner.getSelectedItem().toString()) {
+            if(outputType.equals(getString(R.string.conversions_knots))) outputType = "knots";
+            switch (outputType) {
 
                 //Length, converts from meters to selected
                 case "mm": output = input.multiply(Conversions.MM); break;
