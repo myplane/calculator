@@ -17,168 +17,168 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_light"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_gravity"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_planck"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_elementaryCharge"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_vacPermittivity"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_vacPermeability"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_gravityEarth"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_avogadro"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_boltzmann"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_faraday"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_rydberg"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_stefanBoltzmann"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massElectron"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massProton"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massNeutron"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massAlpha"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massDeuteron"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massHelion"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massMuon"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massTau"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_massTriton"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_vonKlitzing"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_bohrMagneton"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/buttonBarButtonStyle"
-                android:textSize="15dp"
+                android:textSize="14sp"
                 android:id="@+id/constant_fineStructure"/>
 
         </LinearLayout>

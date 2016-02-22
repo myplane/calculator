@@ -44,7 +44,7 @@ public class ConstantsFragment extends DialogFragment {
 
     private void setButtons(View v) {
         TextView light = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_light);
-        light.setText("c " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_light) + " 299792458");
+        light.setText(Html.fromHtml("c " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_light) + " 299792458m/s"));
         light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +53,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView gravity = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_gravity);
-        gravity.setText("G " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_gravity) + " 6.674E-11");
+        gravity.setText(Html.fromHtml("G " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_gravity) + " 6.674E-11N×m<sup><small>2</small></sup>/kg<sup><small>2</small></sup>"));
         gravity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView planck = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_planck);
-        planck.setText("h " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_planck) + " 6.626E-34");
+        planck.setText(Html.fromHtml("h " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_planck) + " 6.626E-34m<sup><small>2</small></sup>kg/s"));
         planck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +71,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView charge = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_elementaryCharge);
-        charge.setText("e " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_elementaryCharge) + " 1.602E-19");
+        charge.setText("e " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_elementaryCharge) + " 1.602E-19C");
         charge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +80,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView permittivity = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_vacPermittivity);
-        permittivity.setText(Html.fromHtml("ε<sub><small>0</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_permittivity) + " 8.854E-12"));
+        permittivity.setText(Html.fromHtml("ε<sub><small>0</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_permittivity) + " 8.854E-12F/m"));
         permittivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +89,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView permeability = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_vacPermeability);
-        permeability.setText(Html.fromHtml("μ<sub><small>0</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_permeability) + " 1.256E-6"));
+        permeability.setText(Html.fromHtml("μ<sub><small>0</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_permeability) + " 1.256E-6H/m"));
         permeability.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView earth = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_gravityEarth);
-        earth.setText("g " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_gravityEarth) + " 9.80665");
+        earth.setText(Html.fromHtml("g " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_gravityEarth) + " 9.80665m/s<sup><small>2</small></sup>"));
         earth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +107,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView avogadro = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_avogadro);
-        avogadro.setText(Html.fromHtml("N<sub><small>A</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_avogadro) + " 6.022E23"));
+        avogadro.setText(Html.fromHtml("N<sub><small>A</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_avogadro) + " 6.022E23mol<sup><small>-1</small></sup>"));
         avogadro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +116,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView boltzmann = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_boltzmann);
-        boltzmann.setText("k " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_boltzmann) + " 1.380E-23");
+        boltzmann.setText(Html.fromHtml("k " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_boltzmann) + " 1.380E-23m<sup><small>2</small></sup>×kg×s<sup><small>2</small></sup>/K"));
         boltzmann.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +125,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView faraday = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_faraday);
-        faraday.setText("F " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_faraday) + " 96485.332");
+        faraday.setText("F " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_faraday) + " 96485.332C/mol");
         faraday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +134,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView rydberg = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_rydberg);
-        rydberg.setText(Html.fromHtml("R<sub><small>∞</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_rydberg) + " 1.093E7"));
+        rydberg.setText(Html.fromHtml("R<sub><small>∞</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_rydberg) + " 1.093E7m<sup><small>-1</small></sup>"));
         rydberg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,7 +143,7 @@ public class ConstantsFragment extends DialogFragment {
         });
         
         TextView stefanBoltzmann = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_stefanBoltzmann);
-        stefanBoltzmann.setText("σ " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_stefanBoltzmann) + " 5.670E-8");
+        stefanBoltzmann.setText(Html.fromHtml("σ " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_stefanBoltzmann) + " 5.670E-8W×m<sup><small>-2</small></sup>×K<sup><small>-4</small></sup>"));
         stefanBoltzmann.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +152,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView electron = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massElectron);
-        electron.setText(Html.fromHtml("m<sub><small>e</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_electron) + " 9.109E-31"));
+        electron.setText(Html.fromHtml("m<sub><small>e</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_electron) + " 9.109E-31kg"));
         electron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +161,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView proton = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massProton);
-        proton.setText(Html.fromHtml("m<sub><small>p</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_proton) + " 1.672E-27"));
+        proton.setText(Html.fromHtml("m<sub><small>p</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_proton) + " 1.672E-27kg"));
         proton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,7 +170,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView neutron = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massNeutron);
-        neutron.setText(Html.fromHtml("m<sub><small>u</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_neutron) + " 1.674E-27"));
+        neutron.setText(Html.fromHtml("m<sub><small>u</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_neutron) + " 1.674E-27kg"));
         neutron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +179,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView alpha = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massAlpha);
-        alpha.setText(Html.fromHtml("m<sub><small>α</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_alpha) + " 1.664E-27"));
+        alpha.setText(Html.fromHtml("m<sub><small>α</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_alpha) + " 1.664E-27kg"));
         alpha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,7 +188,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView deuteron = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massDeuteron);
-        deuteron.setText(Html.fromHtml("m<sub><small>d</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_deuteron) + " 3.343E-27"));
+        deuteron.setText(Html.fromHtml("m<sub><small>d</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_deuteron) + " 3.343E-27kg"));
         deuteron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,7 +197,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView helion = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massHelion);
-        helion.setText(Html.fromHtml("m<sub><small>h</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_helion) + " 5.006E-27"));
+        helion.setText(Html.fromHtml("m<sub><small>h</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_helion) + " 5.006E-27kg"));
         helion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,7 +206,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView muon = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massMuon);
-        muon.setText(Html.fromHtml("m<sub><small>μ</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_muon) + " 1.883E-28"));
+        muon.setText(Html.fromHtml("m<sub><small>μ</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_muon) + " 1.883E-28kg"));
         muon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,7 +215,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView tau = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massTau);
-        tau.setText(Html.fromHtml("m<sub><small>τ</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_tau) + " 3.167E-27"));
+        tau.setText(Html.fromHtml("m<sub><small>τ</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_tau) + " 3.167E-27kg"));
         tau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,7 +224,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView triton = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_massTriton);
-        triton.setText(Html.fromHtml("m<sub><small>t</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_triton) + " 5.007E-27"));
+        triton.setText(Html.fromHtml("m<sub><small>t</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_triton) + " 5.007E-27kg"));
         triton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -233,7 +233,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView klitzing = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_vonKlitzing);
-        klitzing.setText(Html.fromHtml("R<sub><small>K</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_vonKlitzing) + " 25812.807"));
+        klitzing.setText(Html.fromHtml("R<sub><small>K</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_vonKlitzing) + " 25812.807Ω"));
         klitzing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,7 +242,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView bohr = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_bohrMagneton);
-        bohr.setText(Html.fromHtml("μ<sub><small>B</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_bohrMagneton) + " 9.274E-24"));
+        bohr.setText(Html.fromHtml("μ<sub><small>B</small></sub> " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_bohrMagneton) + " 9.274E-24J×T<sup><small>-1</small></sup>"));
         bohr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
