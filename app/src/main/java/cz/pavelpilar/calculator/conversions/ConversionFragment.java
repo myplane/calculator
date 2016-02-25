@@ -112,6 +112,7 @@ public class ConversionFragment extends DialogFragment {
     private void convert() {
         String s = mInput.getText().toString();
         if(!s.equals("")) {
+            if(s.startsWith(".")) s = "0" + s;
             BigDecimal input = new BigDecimal(s);
             input = input.setScale(20, BigDecimal.ROUND_HALF_EVEN);
 

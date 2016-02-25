@@ -1,7 +1,5 @@
 package cz.pavelpilar.calculator.calculator;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Random;
@@ -114,7 +112,8 @@ public class Calculator {
                 case '6':
                 case '7':
                 case '8':
-                case '9': {
+                case '9':
+                case '.': {
                     StringBuilder sb = new StringBuilder();
                     for (; Character.isDigit(ch) || ch == '.'; ) {
                         sb.append(ch);
