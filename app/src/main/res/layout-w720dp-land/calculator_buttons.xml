@@ -70,13 +70,9 @@
         android:orientation="horizontal"
         android:padding="0dp"
         android:layout_margin="0dp">
-        <Space
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1" />
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="16dp"
             android:id="@+id/textLogx"
             android:textSize="12dp"
@@ -85,29 +81,53 @@
             android:textAlignment="gravity"/>
         <Space
             android:layout_width="0dp"
-            android:layout_weight="8"
+            android:layout_weight="2"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="16dp"
-            android:id="@+id/textNPR"
-            android:text=" nPr"
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor2"
-            android:gravity="start"
-            android:textAlignment="gravity"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="16dp"
-            android:id="@+id/textNCR"
-            android:text="nCr "
+            android:text="π "
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
             android:gravity="end"
             android:textAlignment="gravity"/>
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textPower10"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor2"
+            android:gravity="left"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textPower"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="right"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="16dp"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:text="ans → x/y "
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="16dp"
+            android:id="@+id/textRoot"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="right"
+            android:textAlignment="gravity"/>
     </LinearLayout>
 
     <LinearLayout
@@ -134,41 +154,35 @@
             android:text="ln"
             android:textSize="16dp" />
 
-
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="0dp"
-            android:text="HEX"
-            android:id="@+id/buttonHex"
+            android:id="@+id/buttonExponential"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/buttonPower"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/buttonFraction"
+            android:text="x/y"
             android:textSize="16dp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="0dp"
-            android:text="OCT"
-            android:id="@+id/buttonOct"
-            android:textSize="16dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="0dp"
-            android:text="BIN"
-            android:id="@+id/buttonBin"
-            android:textSize="16dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="0dp"
-            android:id="@+id/buttonE"
-            android:text="E"
+            android:id="@+id/buttonRoot"
+            android:text="√"
             android:textSize="16dp" />
 
     </LinearLayout>
@@ -177,13 +191,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content" />
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="10"
             android:layout_height="16dp"
             android:id="@+id/textSin"
             android:textSize="12dp"
@@ -192,7 +202,14 @@
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
+            android:layout_height="16dp"
+            android:text=" BIN"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="16dp"
             android:id="@+id/textCos"
             android:textSize="12dp"
@@ -201,7 +218,14 @@
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
+            android:layout_height="16dp"
+            android:text=" OCT"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="16dp"
             android:id="@+id/textTan"
             android:textSize="12dp"
@@ -210,33 +234,51 @@
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="4"
             android:layout_height="16dp"
-            android:id="@+id/textMemC"
-            android:text=" MC"
+            android:text=" HEX"
             android:textSize="12dp"
-            android:textColor="@color/shiftColor2"
-            android:gravity="start"
-            android:textAlignment="gravity"/>
+            android:textColor="@color/shiftColor2"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="6"
             android:layout_height="16dp"
-            android:id="@+id/textMem"
-            android:text="M+ "
+            android:id="@+id/textSinh"
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
             android:gravity="end"
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:layout_height="16dp"
-            android:id="@+id/textRAND"
-            android:text="RAND[x,y] "
+            android:text=" nPr"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="16dp"
+            android:id="@+id/textCosh"
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
-            android:gravity="top|end"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="16dp"
+            android:text=" nCr"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="16dp"
+            android:id="@+id/textTanh"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
             android:textAlignment="gravity"/>
     </LinearLayout>
 
@@ -244,14 +286,6 @@
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="44dp">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/buttonHyp"
-            android:text="hyp"
-            android:textSize="16dp" />
 
         <Button
             android:layout_width="0dp"
@@ -278,20 +312,29 @@
             android:text="tan"
             android:textSize="16dp" />
 
-        <Button android:layout_width="0dp"
+        <Button
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/buttonMemory"
-            android:text="M"
+            android:id="@+id/buttonSinh"
+            android:text="sinh"
             android:textSize="16dp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/buttonRandom"
-            android:text="RAND"
-            android:textSize="12dp" />
+            android:id="@+id/buttonCosh"
+            android:text="cosh"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/buttonTanh"
+            android:text="tanh"
+            android:textSize="16dp" />
 
     </LinearLayout>
 
@@ -299,85 +342,74 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="30"
-            android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="10"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textMemC"
+            android:text=" MC"
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor2"
+            android:gravity="start"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="16dp"
+            android:id="@+id/textMem"
+            android:text="M+ "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="16dp"
+            android:text="ans→BIN "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="16dp"
+            android:text="ans→OCT "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="16dp"
+            android:text="ans→HEX "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="16dp"
+            android:id="@+id/textRAND"
+            android:text="RAND[x,y] "
+            android:textSize="12dp"
+            android:textColor="@color/shiftColor"
+            android:gravity="top|end"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="16dp"
             android:id="@+id/textFactorial"
-            android:text="|x| "
+            android:text=" |x|"
             android:textSize="12dp"
-            android:textColor="@color/shiftColor"
-            android:gravity="end"
-            android:textAlignment="gravity"/>
-
+            android:textColor="@color/shiftColor2" />
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="10"
-            android:layout_height="16dp"
-            android:text=" e"
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor2"
-            android:gravity="left"
-            android:textAlignment="gravity"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="10"
-            android:layout_height="16dp"
-            android:text="π "
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor"
-            android:gravity="end"
-            android:textAlignment="gravity"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="10"
-            android:layout_height="16dp"
-            android:id="@+id/textRoot"
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor"
-            android:gravity="right"
-            android:textAlignment="gravity"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="15"
-            android:layout_height="16dp"
-            android:id="@+id/textPower10"
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor2"
-            android:gravity="left"
-            android:textAlignment="gravity"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="16dp"
-            android:id="@+id/textPower"
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor"
-            android:gravity="right"
-            android:textAlignment="gravity"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="10"
+            android:layout_weight="1"
             android:layout_height="16dp"
             android:id="@+id/textPerc"
             android:textSize="12dp"
@@ -396,8 +428,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/buttonFraction"
-            android:text="x/y"
+            android:id="@+id/buttonMemory"
+            android:text="M"
             android:textSize="16dp" />
 
         <Button
@@ -420,16 +452,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/buttonRoot"
-            android:text="√"
+            android:layout_margin="0dp"
+            android:id="@+id/buttonE"
+            android:text="E"
             android:textSize="16dp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/buttonPower"
-            android:textSize="16dp" />
+            android:id="@+id/buttonRandom"
+            android:text="RAND"
+            android:textSize="12dp" />
 
         <Button
             android:layout_width="0dp"

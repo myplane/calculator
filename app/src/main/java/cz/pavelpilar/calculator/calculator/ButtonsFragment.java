@@ -47,19 +47,20 @@ public class ButtonsFragment extends Fragment {
     @Bind(R.id.buttonPower) Button mButtonPower;
     @Bind(R.id.buttonPercent) Button mButtonPercent;
 
-    @Bind(R.id.buttonHyp) Button mButtonHyp;
     @Bind(R.id.buttonSin) Button mButtonSin;
     @Bind(R.id.buttonCos) Button mButtonCos;
     @Bind(R.id.buttonTan) Button mButtonTan;
-    @Bind(R.id.buttonMemory) Button mButtonMemory;
-    @Bind(R.id.buttonRandom) Button mButtonRandom;
+    @Bind(R.id.buttonSinh) Button mButtonSinh;
+    @Bind(R.id.buttonCosh) Button mButtonCosh;
+    @Bind(R.id.buttonTanh) Button mButtonTanh;
+
 
     @Nullable @Bind(R.id.buttonLn) Button mButtonLn;
     @Nullable @Bind(R.id.buttonConstants) Button mButtonConstants;
     @Bind(R.id.buttonLog) Button mButtonLog;
-    @Bind(R.id.buttonHex) Button mButtonHex;
-    @Bind(R.id.buttonOct) Button mButtonOct;
-    @Bind(R.id.buttonBin) Button mButtonBin;
+    @Bind(R.id.buttonExponential) Button mButtonExponential;
+    @Bind(R.id.buttonMemory) Button mButtonMemory;
+    @Bind(R.id.buttonRandom) Button mButtonRandom;
     @Bind(R.id.buttonE) Button mButtonE;
 
     @Bind(R.id.buttonShift) Button mButtonShift;
@@ -71,7 +72,6 @@ public class ButtonsFragment extends Fragment {
 
     private boolean shift;
     private boolean shift2;
-    private boolean hyp;
 
     public int fractions;
     public int powers;
@@ -90,7 +90,6 @@ public class ButtonsFragment extends Fragment {
         powers = MainActivity.mPreferences.getInt("calculator_powers", 0);
         shift = MainActivity.mPreferences.getBoolean("calculator_shift", false);
         shift2 = MainActivity.mPreferences.getBoolean("calculator_shift2", false);
-        hyp = MainActivity.mPreferences.getBoolean("calculator_hyp", false);
     }
 
     @Override
@@ -102,7 +101,6 @@ public class ButtonsFragment extends Fragment {
                                  .putInt("calculator_powers", powers)
                                  .putBoolean("calculator_shift", shift)
                                  .putBoolean("calculator_shift2", shift2)
-                                 .putBoolean("calculator_hyp", hyp)
                                  .putInt("calculator_mode", mode)
                                  .apply();
         InputManager.clear();
@@ -120,15 +118,9 @@ public class ButtonsFragment extends Fragment {
     }
 
     public int getStatus() {
-        if(hyp) {
-            if(shift2) return 13;
-            else if (shift) return 12;
-            else return 11;
-        } else {
-            if(shift2) return 3;
-            else if (shift) return 2;
-            else return 1;
-        }
+        if(shift2) return 3;
+        else if (shift) return 2;
+        else return 1;
     }
 
     @Override
@@ -146,6 +138,12 @@ public class ButtonsFragment extends Fragment {
         tv.setText(Html.fromHtml("&nbsp;x×10<sup><small>y"));
         tv = (TextView) v.findViewById(R.id.textSin);
         tv.setText(Html.fromHtml("sin<small><sup>-1 "));
+        tv = (TextView) v.findViewById(R.id.textSinh);
+        tv.setText(Html.fromHtml("sinh<small><sup>-1 "));
+        tv = (TextView) v.findViewById(R.id.textCosh);
+        tv.setText(Html.fromHtml("cosh<small><sup>-1 "));
+        tv = (TextView) v.findViewById(R.id.textTanh);
+        tv.setText(Html.fromHtml("tanh<small><sup>-1 "));
         tv = (TextView) v.findViewById(R.id.textCos);
         tv.setText(Html.fromHtml("cos<small><sup>-1 "));
         tv = (TextView) v.findViewById(R.id.textTan);
@@ -153,7 +151,9 @@ public class ButtonsFragment extends Fragment {
         tv = (TextView) v.findViewById(R.id.textLogx);
         tv.setText(Html.fromHtml("log<small><small>x</small></small>y"));
 
+
         mButtonPower.setText(Html.fromHtml("x<small><sup>2</sup></small>"));
+        mButtonExponential.setText(Html.fromHtml("e<sup><small>x</small></sup>"));
     }
 
     @OnClick(R.id.buttonEquals) void buttonEquals() { mMainFragment.setResult(Calculator.calculate(InputManager.toCalc()), InputManager.getCurrent().replace("|", "")); }
@@ -218,13 +218,12 @@ public class ButtonsFragment extends Fragment {
         }
     }
     @OnClick(R.id.buttonFactorial) void buttonFactorial() {
-        if(shift) InputManager.add("<abs>|<abn>");
+        if(shift);
         else InputManager.add("!");
         disableModifiers();
     }
     @OnClick(R.id.buttonModulo) void buttonModulo() {
-        if(shift2) InputManager.add("e");
-        else if(shift) InputManager.add("π");
+        if(shift);
         else InputManager.add("<mod>");
         disableModifiers();
     }
@@ -250,44 +249,66 @@ public class ButtonsFragment extends Fragment {
         }
     }
     @OnClick(R.id.buttonPercent) void buttonPercent() {
-        if(shift) InputManager.add("<pcm>|<prc>");
-        else InputManager.add("<pcp>|<prc>");
-        changeMode(Mode.DECIMAL_LOCKED);
+        if(shift2) InputManager.add("<abs>|<abn>");
+        else if(shift) {
+            InputManager.add("<pcm>|<prc>");
+            changeMode(Mode.DECIMAL_LOCKED);
+        }
+        else {
+            InputManager.add("<pcp>|<prc>");
+            changeMode(Mode.DECIMAL_LOCKED);
+        }
         disableModifiers();
     }
 
-    @OnClick(R.id.buttonHyp) void buttonHyp() {
-        hyp = !hyp;
-        mMainFragment.statusChanged();
-    }
     @OnClick(R.id.buttonSin) void buttonSin() {
-        if(hyp){
-            if(shift) InputManager.add("<ash>");
-            else InputManager.add("<snh>");
-        } else {
-            if(shift) InputManager.add("<asn>");
-            else InputManager.add("<sin>");
-        }
+        if(shift) InputManager.add("<asn>");
+        else InputManager.add("<sin>");
         disableModifiers();
     }
     @OnClick(R.id.buttonCos) void buttonCos() {
-        if(hyp){
-            if(shift) InputManager.add("<ach>");
-            else InputManager.add("<csh>");
-        } else {
-            if(shift) InputManager.add("<acs>");
-            else InputManager.add("<cos>");
+        if(shift2) {
+            InputManager.add("<bin>|<bnn>");
+            changeMode(Mode.BINARY);
         }
+        else if(shift) InputManager.add("<acs>");
+        else InputManager.add("<cos>");
         disableModifiers();
     }
     @OnClick(R.id.buttonTan) void buttonTan() {
-        if(hyp){
-            if(shift) InputManager.add("<ath>");
-            else InputManager.add("<tnh>");
-        } else {
-            if(shift) InputManager.add("<atn>");
-            else InputManager.add("<tan>");
+        if(shift2) {
+            InputManager.add("<oct>|<ocn>");
+            changeMode(Mode.OCTAL);
         }
+        else if(shift) InputManager.add("<atn>");
+        else InputManager.add("<tan>");
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonSinh) void buttonSinh() {
+        if(shift2) {
+            InputManager.add("<hex>|<hxn>");
+            changeMode(Mode.HEXADECIMAL);
+        }
+        else if(shift) InputManager.add("<ash>");
+        else InputManager.add("<snh>");
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonCosh) void buttonCosh() {
+        if(shift2) {
+            InputManager.add("<npr>|<npx><npn>");
+            changeMode(Mode.DECIMAL_LOCKED);
+        }
+        else if(shift) InputManager.add("<ach>");
+        else InputManager.add("<csh>");
+        disableModifiers();
+    }
+    @OnClick(R.id.buttonTanh) void buttonTanh() {
+        if(shift2) {
+            InputManager.add("<ncr>|<ncx><ncn>");
+            changeMode(Mode.DECIMAL_LOCKED);
+        }
+        else if(shift) InputManager.add("<ath>");
+        else InputManager.add("<tnh>");
         disableModifiers();
     }
     @OnClick(R.id.buttonMemory) void buttonMemory() {
@@ -310,6 +331,11 @@ public class ButtonsFragment extends Fragment {
         fragment.show(getActivity().getSupportFragmentManager().beginTransaction(), "constants");
     }
 
+    @OnClick(R.id.buttonExponential) void buttonExponential() {
+        if(shift) InputManager.add("π");
+        else InputManager.add("e<pow>|<pwn>");
+    }
+
     @OnClick(R.id.buttonLog) void buttonLog() {
         if(!MainActivity.isTablet) {
             if (shift) {
@@ -330,30 +356,9 @@ public class ButtonsFragment extends Fragment {
         }
     }
     @Nullable @OnClick(R.id.buttonLn) void buttonLn() { InputManager.add("<lon>"); }
-    @OnClick(R.id.buttonHex) void buttonHex() {
-        InputManager.add("<hex>|<hxn>");
-        changeMode(Mode.HEXADECIMAL);
-        disableModifiers();
-    }
-    @OnClick(R.id.buttonOct) void buttonOct() {
-        InputManager.add("<oct>|<ocn>");
-        changeMode(Mode.OCTAL);
-        disableModifiers();
-    }
-    @OnClick(R.id.buttonBin) void buttonBin() {
-        InputManager.add("<bin>|<bnn>");
-        changeMode(Mode.BINARY);
-        disableModifiers();
-    }
+
     @OnClick(R.id.buttonE) void buttonE() {
-        if(shift2) {
-            InputManager.add("<npr>|<npx><npn>");
-            changeMode(Mode.DECIMAL_LOCKED);
-        }
-        else if(shift) {
-            InputManager.add("<ncr>|<ncx><ncn>");
-            changeMode(Mode.DECIMAL_LOCKED);
-        }
+        if(shift);
         else InputManager.add("<exp>");
         disableModifiers();
     }
@@ -397,7 +402,6 @@ public class ButtonsFragment extends Fragment {
     private void disableModifiers() {
         shift = false;
         shift2 = false;
-        hyp = false;
         mMainFragment.statusChanged();
     }
 
@@ -525,18 +529,18 @@ public class ButtonsFragment extends Fragment {
         mButtonRoot.setClickable(!lock);
         mButtonPower.setClickable(!lock);
         mButtonPercent.setClickable(!lock);
-        mButtonHyp.setClickable(!lock);
         mButtonSin.setClickable(!lock);
         mButtonCos.setClickable(!lock);
         mButtonTan.setClickable(!lock);
+        mButtonSinh.setClickable(!lock);
+        mButtonCosh.setClickable(!lock);
+        mButtonTanh.setClickable(!lock);
         mButtonMemory.setClickable(!lock);
         mButtonRandom.setClickable(!lock);
         mButtonLog.setClickable(!lock);
+        mButtonExponential.setClickable(!lock);
         if(mButtonLn != null) mButtonLn.setClickable(!lock);
         if(mButtonConstants != null) mButtonConstants.setClickable(!lock);
-        mButtonHex.setClickable(!lock);
-        mButtonOct.setClickable(!lock);
-        mButtonBin.setClickable(!lock);
         mButtonE.setClickable(!lock);
 
         mButtonShift.setClickable(!lock);
