@@ -60,6 +60,10 @@ public class MainFragment extends android.support.v4.app.Fragment {
         catch (NumberFormatException ignored) {}
     }
 
+    public void setResult(String result) {
+        mDisplayFragment.setResult(result);
+    }
+
     public void setResult(String result, String input) {
         int eNotationDigits = MainActivity.mPreferences.getInt("preferences_scientific_places", 4);
         int decimalPlaces = MainActivity.mPreferences.getInt("preferences_decimal_places", 5);
@@ -99,6 +103,10 @@ public class MainFragment extends android.support.v4.app.Fragment {
                 fragment.addItem(input + " = " + result);
             }
         }
+    }
+
+    public String getResult() {
+        return mDisplayFragment.getResult();
     }
 
     public String formatMemory() {

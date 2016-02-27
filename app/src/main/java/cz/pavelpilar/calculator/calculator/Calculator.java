@@ -426,7 +426,7 @@ public class Calculator {
         return 0;
     }
 
-    private static double bin2dec(String bin)
+    public static double bin2dec(String bin)
     {
         try {
             if (bin.contains(".")) {
@@ -446,7 +446,37 @@ public class Calculator {
         }
     }
 
-    private static double hex2dec(String hex)
+    public static String dec2bin(String dec) {
+        if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
+
+        try{
+            return Integer.toBinaryString(Integer.parseInt(dec))  + "<sub><small><small><small>2";
+        } catch(NumberFormatException e) {
+            return "Conversion not possible";
+        }
+    }
+
+    public static String dec2oct(String dec) {
+        if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
+
+        try{
+            return Integer.toOctalString(Integer.parseInt(dec))  + "<sub><small><small><small>8";
+        } catch(NumberFormatException e) {
+            return "Conversion not possible";
+        }
+    }
+
+    public static String dec2hex(String dec) {
+        if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
+
+        try{
+            return Integer.toHexString(Integer.parseInt(dec)).toUpperCase()  + "<sub><small><small><small>16";
+        } catch(NumberFormatException e) {
+            return "Conversion not possible";
+        }
+    }
+
+    public static double hex2dec(String hex)
     {
         String digits = "0123456789ABCDEF";
         if(hex.contains(".")) {
@@ -470,7 +500,7 @@ public class Calculator {
         }
     }
 
-    private static double oct2dec(String oct)
+    public static double oct2dec(String oct)
     {
         try {
             if (oct.contains(".")) {

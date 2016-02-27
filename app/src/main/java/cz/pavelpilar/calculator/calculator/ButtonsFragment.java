@@ -212,18 +212,22 @@ public class ButtonsFragment extends Fragment {
     }
 
     @OnClick(R.id.buttonFraction) void buttonFraction() {
-        if(fractions < 2){
-            InputManager.add("<fra>|<frx><frn>");
-            fractions++;
+        if(shift) InputManager.toFraction(mMainFragment.getResult());
+        else {
+            if(fractions < 2){
+                InputManager.add("<fra>|<frx><frn>");
+                fractions++;
+            }
         }
+        disableModifiers();
     }
     @OnClick(R.id.buttonFactorial) void buttonFactorial() {
-        if(shift);
+        if(shift) mMainFragment.setResult(Calculator.dec2bin(mMainFragment.getResult()));
         else InputManager.add("!");
         disableModifiers();
     }
     @OnClick(R.id.buttonModulo) void buttonModulo() {
-        if(shift);
+        if(shift) mMainFragment.setResult(Calculator.dec2oct(mMainFragment.getResult()));
         else InputManager.add("<mod>");
         disableModifiers();
     }
@@ -358,7 +362,7 @@ public class ButtonsFragment extends Fragment {
     @Nullable @OnClick(R.id.buttonLn) void buttonLn() { InputManager.add("<lon>"); }
 
     @OnClick(R.id.buttonE) void buttonE() {
-        if(shift);
+        if(shift) mMainFragment.setResult(Calculator.dec2hex(mMainFragment.getResult()) );
         else InputManager.add("<exp>");
         disableModifiers();
     }

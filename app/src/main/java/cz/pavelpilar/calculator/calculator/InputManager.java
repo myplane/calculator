@@ -1,5 +1,9 @@
 package cz.pavelpilar.calculator.calculator;
 
+import android.util.Log;
+
+import org.apache.commons.math3.fraction.Fraction;
+
 import cz.pavelpilar.calculator.R;
 
 public class InputManager {
@@ -339,6 +343,20 @@ public class InputManager {
         inputChanged();
     }
 
+    public static void toFraction(String s) {
+        if(!s.equals("")) {
+            Fraction fr = new Fraction(Double.valueOf(s));
+
+            String numerator = String.valueOf(fr.getNumerator());
+            String denominator = String.valueOf(fr.getDenominator());
+
+            if(!numerator.equals("0") && !denominator.equals("1")) {
+                mInput = new StringBuilder("<fra>" + numerator + "<frx>" + denominator + "<frn>|");
+                inputChanged();
+            }
+        }
+    }
+
     private static void inputChanged() {
         mDisplayFragment.show(mInput.toString());
     }
@@ -354,45 +372,36 @@ public class InputManager {
              .replace("<hex>", "(hex(").replace("<hxn>", "))")
              .replace("<oct>", "(oct(").replace("<ocn>", "))")
              .replace("<bin>", "(bin(").replace("<bnn>", "))")
-
-        .replace("<sin>", "sin")  .replace("<asn>", "asin")
-        .replace("<cos>", "cos")  .replace("<acs>", "acos")
-        .replace("<tan>", "tan")  .replace("<atn>", "atan")
-
-        .replace("<snh>", "snh") .replace("<ash>", "asnh")
-        .replace("<csh>", "csh") .replace("<ach>", "acsh")
-        .replace("<tnh>", "tnh") .replace("<ath>", "atnh")
-
-        .replace("<fra>", "((")
-        .replace("<frx>", ")÷(")
-        .replace("<frn>", "))")
-
-        .replace("<pcp>", "↑")
-        .replace("<pcm>", "↓")
-        .replace("<prc>", "")
-
-        .replace("<rdr>", "rndr(")
-        .replace("<rdx>", ")X(")
-        .replace("<rdn>", ")")
-
-        .replace("<srt>", "sqrt(")
-        .replace("<srn>", ")")
-
-        .replace("<nrt>", "ntrt(")
-        .replace("<rtx>", ")X(")
-        .replace("<rtn>", ")")
-
-        .replace("<ncr>", "nCr")  .replace("<npr>", "nPr")
-        .replace("<ncx>", "X")    .replace("<npx>", "X")
-        .replace("<ncn>", "")     .replace("<npn>", "")
-
-        .replace("<exp>", "E")
-        .replace("<rnd>", "rand")
-        .replace("<ans>", "ans")
-        .replace("|", "")
-        .replace("<mod>", "%")
-        .replace("π", "(pi)")
-        .replace("<mem>", "M");
+             .replace("<sin>", "sin").replace("<asn>", "asin")
+             .replace("<cos>", "cos").replace("<acs>", "acos")
+             .replace("<tan>", "tan").replace("<atn>", "atan")
+             .replace("<snh>", "snh").replace("<ash>", "asnh")
+             .replace("<csh>", "csh").replace("<ach>", "acsh")
+             .replace("<tnh>", "tnh").replace("<ath>", "atnh")
+             .replace("<fra>", "((")
+             .replace("<frx>", ")÷(")
+             .replace("<frn>", "))")
+             .replace("<pcp>", "↑")
+             .replace("<pcm>", "↓")
+             .replace("<prc>", "")
+             .replace("<rdr>", "rndr(")
+             .replace("<rdx>", ")X(")
+             .replace("<rdn>", ")")
+             .replace("<srt>", "sqrt(")
+             .replace("<srn>", ")")
+             .replace("<nrt>", "ntrt(")
+             .replace("<rtx>", ")X(")
+             .replace("<rtn>", ")")
+             .replace("<ncr>", "nCr").replace("<npr>", "nPr")
+             .replace("<ncx>", "X").replace("<npx>", "X")
+             .replace("<ncn>", "").replace("<npn>", "")
+             .replace("<exp>", "E")
+             .replace("<rnd>", "rand")
+             .replace("<ans>", "ans")
+             .replace("|", "")
+             .replace("<mod>", "%")
+             .replace("π", "(pi)")
+             .replace("<mem>", "M");
 
         return s;
     }
