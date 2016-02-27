@@ -68,9 +68,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="0dp"
-        android:layout_margin="0dp">
+        android:orientation="horizontal" >
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -82,7 +80,7 @@
             android:id="@+id/textLogx"
             android:textSize="12dp"
             android:textColor="@color/shiftColor2"
-            android:gravity="end|top"
+            android:gravity="end"
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
@@ -110,7 +108,7 @@
             android:id="@+id/textPower10"
             android:textSize="12dp"
             android:textColor="@color/shiftColor2"
-            android:gravity="left"
+            android:gravity="end"
             android:textAlignment="gravity"/>
 
         <TextView
@@ -120,7 +118,7 @@
             android:id="@+id/textPower"
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
-            android:gravity="right"
+            android:gravity="end"
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
@@ -130,7 +128,7 @@
             android:text="ans → x/y "
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
-            android:gravity="top|end"
+            android:gravity="end"
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
@@ -139,7 +137,7 @@
             android:id="@+id/textRoot"
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
-            android:gravity="right"
+            android:gravity="end"
             android:textAlignment="gravity"/>
 
     </LinearLayout>
@@ -234,10 +232,10 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
+            android:layout_weight="8"
             android:textSize="12dp"
             android:textColor="@color/shiftColor2"
-            android:text="OCT"/>
+            android:text="HEX"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="10"
@@ -249,14 +247,7 @@
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor2"
-            android:text="HEX"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="12"
+            android:layout_weight="20"
             android:layout_height="16dp"
             android:id="@+id/textSinh"
             android:textSize="12dp"
@@ -395,20 +386,15 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="16dp"
-            android:text="ans→OCT "
-            android:textSize="12dp"
-            android:textColor="@color/shiftColor"
-            android:gravity="end"
-            android:textAlignment="gravity"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="16dp"
             android:text="ans→HEX "
             android:textSize="12dp"
             android:textColor="@color/shiftColor"
             android:gravity="end"
             android:textAlignment="gravity"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="2"

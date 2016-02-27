@@ -36,7 +36,6 @@
     <string name="close">Zavřít</string>
     <string name="constant_title">Konstanty</string>
     <string name="error_BinaryTooLong">Číslo v binární soustavé je moc dlouhé</string>
-    <string name="error_OctTooLong">Číslo v osmičkové soustavě je moc dlouhé</string>
     <string name="graph">Graf</string>
     <string name="graphs_show_graph">Ukázat graf</string>
     <string name="menu_calculator">Kalkulačka</string>

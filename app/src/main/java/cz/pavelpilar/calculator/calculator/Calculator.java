@@ -243,19 +243,6 @@ public class Calculator {
                             getToken();
                             return hex2dec(sc.toString());
                         }
-                        case "oct":    //convert from oct to dec
-                        {
-                            getToken();
-                            StringBuilder sc = new StringBuilder();
-                            for (char ch = (char) cin.read(); Character.isDigit(ch) || ch == '.'; ) {
-                                sc.append(ch);
-                                ch = (char) cin.read();
-                            }
-                            getToken();
-                            if(sc.toString().isEmpty()) return 0;
-                            return oct2dec(sc.toString());
-                        }
-
                         case "bin": {
                             getToken();
                             StringBuilder sc = new StringBuilder();
@@ -456,16 +443,6 @@ public class Calculator {
         }
     }
 
-    public static String dec2oct(String dec) {
-        if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
-
-        try{
-            return Integer.toOctalString(Integer.parseInt(dec))  + "<sub><small><small><small>8";
-        } catch(NumberFormatException e) {
-            return "Conversion not possible";
-        }
-    }
-
     public static String dec2hex(String dec) {
         if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
 
@@ -497,23 +474,6 @@ public class Calculator {
                 int d = digits.indexOf(c);
                 val = 16 * val + d;
             } return val;
-        }
-    }
-
-    public static double oct2dec(String oct)
-    {
-        try {
-            if (oct.contains(".")) {
-                String s2 = oct.substring(oct.indexOf(".") + 1, oct.length());
-                double x = Long.parseLong(oct.substring(0, oct.indexOf(".")), 8);
-                for (int i = 0; i < s2.length(); i++)
-                    x += ((int) s2.charAt(i) - 48) * Math.pow(8, -i - 1);
-                return x;
-            } else return Long.parseLong(oct, 8);
-        }
-        catch (NumberFormatException e) {
-            err(R.string.error_OctTooLong);
-            return 0;
         }
     }
 

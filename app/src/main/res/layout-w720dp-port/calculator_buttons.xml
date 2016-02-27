@@ -223,7 +223,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="20dp"
-            android:text=" OCT"
+            android:text=" HEX"
             android:textSize="16dp"
             android:textColor="@color/shiftColor2" />
         <TextView
@@ -237,14 +237,7 @@
             android:textAlignment="gravity"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="20dp"
-            android:text=" HEX"
-            android:textSize="16dp"
-            android:textColor="@color/shiftColor2" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="20dp"
             android:id="@+id/textSinh"
             android:textSize="16dp"
@@ -378,20 +371,15 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="20dp"
-            android:text="ans → OCT "
-            android:textSize="16dp"
-            android:textColor="@color/shiftColor"
-            android:gravity="top|end"
-            android:textAlignment="gravity"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="20dp"
             android:text="ans → HEX "
             android:textSize="16dp"
             android:textColor="@color/shiftColor"
             android:gravity="top|end"
             android:textAlignment="gravity"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="2"

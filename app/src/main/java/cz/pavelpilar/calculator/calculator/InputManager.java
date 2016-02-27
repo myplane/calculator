@@ -226,7 +226,6 @@ public class InputManager {
                 String tag = String.valueOf(s.charAt(index - 4)) + String.valueOf(s.charAt(index-3)) + String.valueOf(s.charAt(index - 2));
                 switch(tag){
                     case "hxn": mButtonsFragment.changeMode(ButtonsFragment.Mode.HEXADECIMAL); break;
-                    case "ocn": mButtonsFragment.changeMode(ButtonsFragment.Mode.OCTAL); break;
                     case "bnn": mButtonsFragment.changeMode(ButtonsFragment.Mode.BINARY); break;
 
                     case "fra": --mButtonsFragment.fractions; break;
@@ -277,7 +276,6 @@ public class InputManager {
                 String tag = String.valueOf(s.charAt(index+2)) + String.valueOf(s.charAt(index+3)) + String.valueOf(s.charAt(index+4));
                 switch(tag){
                     case "hex": mButtonsFragment.changeMode(ButtonsFragment.Mode.HEXADECIMAL); break;
-                    case "oct": mButtonsFragment.changeMode(ButtonsFragment.Mode.OCTAL); break;
                     case "bin": mButtonsFragment.changeMode(ButtonsFragment.Mode.BINARY); break;
 
                     case "fra": mButtonsFragment.fractions++; break;
@@ -370,7 +368,6 @@ public class InputManager {
              .replace("<log>", "log").replace("<lon>", "ln")
              .replace("<lgx>", "lgx(").replace("<lgn>", ")X")
              .replace("<hex>", "(hex(").replace("<hxn>", "))")
-             .replace("<oct>", "(oct(").replace("<ocn>", "))")
              .replace("<bin>", "(bin(").replace("<bnn>", "))")
              .replace("<sin>", "sin").replace("<asn>", "asin")
              .replace("<cos>", "cos").replace("<acs>", "acos")

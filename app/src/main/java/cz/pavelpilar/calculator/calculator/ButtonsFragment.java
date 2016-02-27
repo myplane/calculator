@@ -227,7 +227,7 @@ public class ButtonsFragment extends Fragment {
         disableModifiers();
     }
     @OnClick(R.id.buttonModulo) void buttonModulo() {
-        if(shift) mMainFragment.setResult(Calculator.dec2oct(mMainFragment.getResult()));
+        if(shift) mMainFragment.setResult(Calculator.dec2hex(mMainFragment.getResult()) );
         else InputManager.add("<mod>");
         disableModifiers();
     }
@@ -281,19 +281,15 @@ public class ButtonsFragment extends Fragment {
     }
     @OnClick(R.id.buttonTan) void buttonTan() {
         if(shift2) {
-            InputManager.add("<oct>|<ocn>");
-            changeMode(Mode.OCTAL);
+            InputManager.add("<hex>|<hxn>");
+            changeMode(Mode.HEXADECIMAL);
         }
         else if(shift) InputManager.add("<atn>");
         else InputManager.add("<tan>");
         disableModifiers();
     }
     @OnClick(R.id.buttonSinh) void buttonSinh() {
-        if(shift2) {
-            InputManager.add("<hex>|<hxn>");
-            changeMode(Mode.HEXADECIMAL);
-        }
-        else if(shift) InputManager.add("<ash>");
+        if(shift) InputManager.add("<ash>");
         else InputManager.add("<snh>");
         disableModifiers();
     }
@@ -362,8 +358,7 @@ public class ButtonsFragment extends Fragment {
     @Nullable @OnClick(R.id.buttonLn) void buttonLn() { InputManager.add("<lon>"); }
 
     @OnClick(R.id.buttonE) void buttonE() {
-        if(shift) mMainFragment.setResult(Calculator.dec2hex(mMainFragment.getResult()) );
-        else InputManager.add("<exp>");
+        InputManager.add("<exp>");
         disableModifiers();
     }
 
@@ -419,12 +414,6 @@ public class ButtonsFragment extends Fragment {
             }
             case Mode.BINARY: {
                 setNumbers(Mode.BINARY);
-                lockFunctions(true);
-                this.mode = mode;
-                break;
-            }
-            case Mode.OCTAL: {
-                setNumbers(Mode.OCTAL);
                 lockFunctions(true);
                 this.mode = mode;
                 break;
@@ -496,18 +485,6 @@ public class ButtonsFragment extends Fragment {
                 mButtonEndParentheses.setClickable(false);
                 break;
             }
-            case Mode.OCTAL:
-            {
-                mButton8.setClickable(false);
-                mButton9.setClickable(false);
-                mButtonPlus.setClickable(false);
-                mButtonMinus.setClickable(false);
-                mButtonMultiply.setClickable(false);
-                mButtonDivide.setClickable(false);
-                mButtonStartParentheses.setClickable(false);
-                mButtonEndParentheses.setClickable(false);
-                break;
-            }
             case Mode.HEXADECIMAL:
             {
                 mButtonPlus.setText("4");
@@ -554,7 +531,6 @@ public class ButtonsFragment extends Fragment {
     public class Mode {
         public static final int DECIMAL = 0;
         public static final int BINARY = 1;
-        public static final int OCTAL = 2;
         public static final int HEXADECIMAL = 3;
         public static final int DECIMAL_LOCKED = 4;
     }

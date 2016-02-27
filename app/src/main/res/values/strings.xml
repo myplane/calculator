@@ -50,7 +50,6 @@
     <string name="error_fatal">Fatal error</string>
     <string name="error_negativeEvenRoot">Even root of negative number</string>
     <string name="error_BinaryTooLong">Binary number too long</string>
-    <string name="error_OctTooLong">Octal number too long</string>
     <string name="error_noData">No data to display</string>
 
     <string name="constant_title">Constants</string>
