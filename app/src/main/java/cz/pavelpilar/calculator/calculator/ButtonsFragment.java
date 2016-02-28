@@ -334,6 +334,7 @@ public class ButtonsFragment extends Fragment {
     @OnClick(R.id.buttonExponential) void buttonExponential() {
         if(shift) InputManager.add("π");
         else InputManager.add("e<pow>|<pwn>");
+        disableModifiers();
     }
 
     @OnClick(R.id.buttonLog) void buttonLog() {

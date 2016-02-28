@@ -348,7 +348,7 @@ public class InputManager {
             String numerator = String.valueOf(fr.getNumerator());
             String denominator = String.valueOf(fr.getDenominator());
 
-            if(!numerator.equals("0") && !denominator.equals("1")) {
+            if(!numerator.equals("0") || !denominator.equals("1")) {
                 mInput = new StringBuilder("<fra>" + numerator + "<frx>" + denominator + "<frn>|");
                 inputChanged();
             }

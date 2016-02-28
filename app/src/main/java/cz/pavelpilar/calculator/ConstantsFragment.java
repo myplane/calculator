@@ -62,7 +62,7 @@ public class ConstantsFragment extends DialogFragment {
         });
 
         TextView planck = (TextView)v.findViewById(cz.pavelpilar.calculator.R.id.constant_planck);
-        planck.setText(Html.fromHtml("h " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_planck) + " 6.626E-34m<sup><small>2</small></sup>kg/s"));
+        planck.setText(Html.fromHtml("h " + getResources().getString(cz.pavelpilar.calculator.R.string.constant_planck) + " 6.626E-34m<sup><small>2</small></sup>×kg/s"));
         planck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
