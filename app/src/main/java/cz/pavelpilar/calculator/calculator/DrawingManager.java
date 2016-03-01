@@ -74,7 +74,8 @@ public class DrawingManager {
     }
 
     public static Point drawChar(char c) {
-        Point point = new Point((int) mPositionX, (int) mPositionY);
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
 
         mCanvas.drawText(String.valueOf(c),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),

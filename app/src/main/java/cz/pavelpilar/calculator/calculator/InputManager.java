@@ -326,8 +326,7 @@ public class InputManager {
     }
 
     public static void goToPosition(final Point point) {
-        point.set(point.x/2, point.y/2);
-        Log.d("O-POINT", "" + point.x + " " + point.y);
+        point.set(point.x, point.y);
         Comparator comparator = new Comparator<Point>() {
             @Override
             public int compare(Point point1, Point point2) {
@@ -342,8 +341,6 @@ public class InputManager {
 
         List<Point> positionsCopy = new ArrayList<>(mPositions);
         Collections.sort(positionsCopy, comparator);
-
-        for(Point p : positionsCopy) Log.d("POINT", "" + p.x + " " + p.y);
 
         String s = mInput.toString();
         s = s.replace("|", "");
