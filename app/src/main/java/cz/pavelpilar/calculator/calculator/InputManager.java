@@ -1,9 +1,13 @@
 package cz.pavelpilar.calculator.calculator;
 
 import android.graphics.Point;
+import android.util.Log;
 
 import org.apache.commons.math3.fraction.Fraction;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import cz.pavelpilar.calculator.R;
@@ -13,6 +17,8 @@ public class InputManager {
     private static StringBuilder mInput;
     private static ButtonsFragment mButtonsFragment;
     private static DisplayFragment mDisplayFragment;
+
+    private static List<Point> mPositions;
 
     public static void initialize(ButtonsFragment fragment, String s) {
         mInput = new StringBuilder(s);
@@ -313,6 +319,39 @@ public class InputManager {
             }
             inputChanged();
         }
+    }
+
+    public static void setPositions(List<Point> positions) {
+        mPositions = positions;
+    }
+
+    public static void goToPosition(final Point point) {
+        point.set(point.x/2, point.y/2);
+        Log.d("O-POINT", "" + point.x + " " + point.y);
+        Comparator comparator = new Comparator<Point>() {
+            @Override
+            public int compare(Point point1, Point point2) {
+                Point dist1 = new Point(point1.x - point.x, point1.y - point.y);
+                Point dist2 = new Point(point2.x - point.x, point2.y - point.y);
+
+                if(Math.sqrt(Math.pow(dist1.x, 2) + Math.pow(dist1.y, 2)) < Math.sqrt(Math.pow(dist2.x, 2) + Math.pow(dist2.y, 2))) return -1;
+                else if(Math.sqrt(Math.pow(dist1.x, 2) + Math.pow(dist1.y, 2)) == Math.sqrt(Math.pow(dist2.x, 2) + Math.pow(dist2.y, 2))) return 0;
+                else return 1;
+            }
+        };
+
+        List<Point> positionsCopy = new ArrayList<>(mPositions);
+        Collections.sort(positionsCopy, comparator);
+
+        for(Point p : positionsCopy) Log.d("POINT", "" + p.x + " " + p.y);
+
+        String s = mInput.toString();
+        s = s.replace("|", "");
+
+        s = s.substring(0, mPositions.indexOf(positionsCopy.get(0))) + "|" + s.substring(mPositions.indexOf(positionsCopy.get(0)));
+
+        mInput = new StringBuilder(s);
+        inputChanged();
     }
 
     public static void navHome() {

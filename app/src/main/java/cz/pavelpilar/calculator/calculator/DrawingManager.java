@@ -4,6 +4,7 @@ package cz.pavelpilar.calculator.calculator;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
@@ -72,7 +73,9 @@ public class DrawingManager {
         mParenthesesCount = -1;
     }
 
-    public static void drawChar(char c) {
+    public static Point drawChar(char c) {
+        Point point = new Point((int) mPositionX, (int) mPositionY);
+
         mCanvas.drawText(String.valueOf(c),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics),
@@ -117,6 +120,7 @@ public class DrawingManager {
                                      new Float[] {mRootsAndParentheses.lastElement()[0],
                                                   Math.min(mRootsAndParentheses.lastElement()[1], mPositionY - mTextHeight),
                                                   Math.max(mRootsAndParentheses.lastElement()[2], mPositionY)} );
+        return point;
     }
 
     public static void drawText(String s) {

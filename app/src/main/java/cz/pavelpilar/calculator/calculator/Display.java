@@ -2,9 +2,13 @@ package cz.pavelpilar.calculator.calculator;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Display extends View {
 
@@ -34,9 +38,11 @@ public class Display extends View {
     private void draw() {
         if(mSource != null) {
             int pos = 0;
+            List<Point> positions = new ArrayList<>();
+            while(positions.size() < mSource.length()) positions.add(new Point(-1000, -1000));
             while (pos != mSource.length()) {
                 if(mSource.charAt(pos) != '<'){
-                    DrawingManager.drawChar(mSource.charAt(pos));
+                    positions.set(pos, DrawingManager.drawChar(mSource.charAt(pos)));
                     pos++;
                 } else {
                     String tag = mSource.substring(pos+1, pos+4);
@@ -207,6 +213,7 @@ public class Display extends View {
                     pos = pos + 5;
                 }
             }
+            InputManager.setPositions(positions);
         }
     }
 
