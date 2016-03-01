@@ -1,8 +1,10 @@
 package cz.pavelpilar.calculator.calculator;
 
-import android.util.Log;
+import android.graphics.Point;
 
 import org.apache.commons.math3.fraction.Fraction;
+
+import java.util.List;
 
 import cz.pavelpilar.calculator.R;
 
@@ -343,15 +345,17 @@ public class InputManager {
 
     public static void toFraction(String s) {
         if(!s.equals("")) {
-            Fraction fr = new Fraction(Double.valueOf(s));
+            try {
+                Fraction fr = new Fraction(Double.valueOf(s));
 
-            String numerator = String.valueOf(fr.getNumerator());
-            String denominator = String.valueOf(fr.getDenominator());
+                String numerator = String.valueOf(fr.getNumerator());
+                String denominator = String.valueOf(fr.getDenominator());
 
-            if(!numerator.equals("0") || !denominator.equals("1")) {
-                mInput = new StringBuilder("<fra>" + numerator + "<frx>" + denominator + "<frn>|");
-                inputChanged();
-            }
+                if (!numerator.equals("0") || !denominator.equals("1")) {
+                    mInput = new StringBuilder("<fra>" + numerator + "<frx>" + denominator + "<frn>|");
+                    inputChanged();
+                }
+            }catch (IllegalStateException ignored){}
         }
     }
 
