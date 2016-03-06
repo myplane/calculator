@@ -47,165 +47,165 @@ public class Display extends View {
                 } else {
                     String tag = mSource.substring(pos+1, pos+4);
                     switch(tag){
-                        case "exp": DrawingManager.drawChar('E'); break;
-                        case "log": DrawingManager.drawText("log"); break;
-                        case "lon": DrawingManager.drawText("ln"); break;
-                        case "sin": DrawingManager.drawText("sin"); break;
-                        case "cos": DrawingManager.drawText("cos"); break;
-                        case "tan": DrawingManager.drawText("tan"); break;
-                        case "snh": DrawingManager.drawText("sinh"); break;
-                        case "csh": DrawingManager.drawText("cosh"); break;
-                        case "tnh": DrawingManager.drawText("tanh"); break;
-                        case "mod": DrawingManager.drawText("MOD"); break;
-                        case "rnd": DrawingManager.drawText("RAND"); break;
+                        case "exp": positions.set(pos, DrawingManager.drawChar('E')); break;
+                        case "log": positions.set(pos, DrawingManager.drawText("log")); break;
+                        case "lon": positions.set(pos, DrawingManager.drawText("ln")); break;
+                        case "sin": positions.set(pos, DrawingManager.drawText("sin")); break;
+                        case "cos": positions.set(pos, DrawingManager.drawText("cos")); break;
+                        case "tan": positions.set(pos, DrawingManager.drawText("tan")); break;
+                        case "snh": positions.set(pos, DrawingManager.drawText("sinh")); break;
+                        case "csh": positions.set(pos, DrawingManager.drawText("cosh")); break;
+                        case "tnh": positions.set(pos, DrawingManager.drawText("tanh")); break;
+                        case "mod": positions.set(pos, DrawingManager.drawText("MOD")); break;
+                        case "rnd": positions.set(pos, DrawingManager.drawText("RAND")); break;
                         case "rdr":
-                            DrawingManager.drawText("RAND[");
+                            positions.set(pos, DrawingManager.drawText("RAND["));
                             DrawingManager.functionStart();
                             break;
                         case "rdx":
                             DrawingManager.functionEnd();
-                            DrawingManager.drawChar(',');
+                            positions.set(pos, DrawingManager.drawChar(','));
                             DrawingManager.functionStart();
                             break;
                         case "rdn":
-                            DrawingManager.drawChar(']');
+                            positions.set(pos, DrawingManager.drawChar(']'));
                             DrawingManager.functionEnd();
                             break;
                         case "pcp":
-                            DrawingManager.drawChar('+');
+                            positions.set(pos, DrawingManager.drawChar('+'));
                             DrawingManager.functionStart();
                             break;
                         case "pcm":
-                            DrawingManager.drawChar('-');
+                            positions.set(pos, DrawingManager.drawChar('-'));
                             DrawingManager.functionStart();
                             break;
                         case "prc":
                             DrawingManager.functionEnd();
-                            DrawingManager.drawChar('%');
+                            positions.set(pos, DrawingManager.drawChar('%'));
                             break;
-                        case "mem": DrawingManager.drawChar('M'); break;
+                        case "mem": positions.set(pos, DrawingManager.drawChar('M')); break;
                         case "hex":
                         case "oct":
-                        case "bin": DrawingManager.drawChar('('); break;
+                        case "bin": positions.set(pos, DrawingManager.drawChar('(')); break;
                         case "hxn":
-                            DrawingManager.drawChar(')');
+                            positions.set(pos, DrawingManager.drawChar(')'));
                             DrawingManager.subscriptStart();
                             DrawingManager.drawChar('1');
                             DrawingManager.drawChar('6');
                             DrawingManager.subscriptEnd();
                             break;
                         case "ocn":
-                            DrawingManager.drawChar(')');
+                            positions.set(pos, DrawingManager.drawChar(')'));
                             DrawingManager.subscriptStart();
                             DrawingManager.drawChar('8');
                             DrawingManager.subscriptEnd();
                             break;
                         case "bnn":
-                            DrawingManager.drawChar(')');
+                            positions.set(pos, DrawingManager.drawChar(')'));
                             DrawingManager.subscriptStart();
                             DrawingManager.drawChar('2');
                             DrawingManager.subscriptEnd();
                             break;
                         case "asn":
-                            DrawingManager.drawText("sin");
+                            positions.set(pos, DrawingManager.drawText("sin"));
                             DrawingManager.superscriptStart();
                             DrawingManager.drawText("-1");
                             DrawingManager.superscriptEnd();
                             break;
                         case "acs":
-                            DrawingManager.drawText("cos");
+                            positions.set(pos, DrawingManager.drawText("cos"));
                             DrawingManager.superscriptStart();
                             DrawingManager.drawText("-1");
                             DrawingManager.superscriptEnd();
                             break;
                         case "atn":
-                            DrawingManager.drawText("tan");
+                            positions.set(pos, DrawingManager.drawText("tan"));
                             DrawingManager.superscriptStart();
                             DrawingManager.drawText("-1");
                             DrawingManager.superscriptEnd();
                             break;
                         case "ash":
-                            DrawingManager.drawText("sinh");
+                            positions.set(pos, DrawingManager.drawText("sinh"));
                             DrawingManager.superscriptStart();
                             DrawingManager.drawText("-1");
                             DrawingManager.superscriptEnd();
                             break;
                         case "ach":
-                            DrawingManager.drawText("cosh");
+                            positions.set(pos, DrawingManager.drawText("cosh"));
                             DrawingManager.superscriptStart();
                             DrawingManager.drawText("-1");
                             DrawingManager.superscriptEnd();
                             break;
                         case "ath":
-                            DrawingManager.drawText("tanh");
+                            positions.set(pos, DrawingManager.drawText("tanh"));
                             DrawingManager.superscriptStart();
                             DrawingManager.drawText("-1");
                             DrawingManager.superscriptEnd();
                             break;
                         case "pow":
                             DrawingManager.functionStart();
-                            DrawingManager.superscriptStart();
+                            positions.set(pos, DrawingManager.superscriptStart());
                             break;
                         case "pwn":
-                            DrawingManager.superscriptEnd();
+                            positions.set(pos, DrawingManager.superscriptEnd());
                             DrawingManager.functionEnd();
                             break;
-                        case "par": DrawingManager.parenthesesStart(); break;
-                        case "prn": DrawingManager.parenthesesEnd(); break;
+                        case "par": positions.set(pos, DrawingManager.parenthesesStart()); break;
+                        case "prn": positions.set(pos, DrawingManager.parenthesesEnd()); break;
                         case "fra":
-                            DrawingManager.fractionStart(getFraction(pos));
+                            positions.set(pos, DrawingManager.fractionStart(getFraction(pos)));
                             DrawingManager.functionStart();
                             break;
                         case "frx":
                             DrawingManager.functionEnd();
-                            DrawingManager.fractionLine();
+                            positions.set(pos, DrawingManager.fractionLine());
                             DrawingManager.functionStart();
                             break;
                         case "frn":
                             DrawingManager.functionEnd();
-                            DrawingManager.fractionEnd();
+                            positions.set(pos, DrawingManager.fractionEnd());
                             break;
                         case "nrt":
                             DrawingManager.superscriptStart();
                             DrawingManager.functionStart();
                             break;
                         case "rtx":
-                            DrawingManager.superscriptEnd();
+                            positions.set(pos, DrawingManager.superscriptEnd());
                             DrawingManager.functionEnd();   //Continues, not a bug
                         case "srt":
-                            DrawingManager.rootStart();
+                            positions.set(pos, DrawingManager.rootStart());
                             DrawingManager.functionStart();
                             break;
                         case "rtn":
                             DrawingManager.functionEnd();
-                            DrawingManager.rootEnd();
+                            positions.set(pos, DrawingManager.rootEnd());
                             break;
                         case "lgx":
-                            DrawingManager.drawText("log");
+                            positions.set(pos, DrawingManager.drawText("log"));
                             DrawingManager.subscriptStart();
                             DrawingManager.functionStart();
                             break;
                         case "lgn":
                             DrawingManager.functionEnd();
-                            DrawingManager.subscriptEnd();
+                            positions.set(pos, DrawingManager.subscriptEnd());
                             break;
                         case "abs":
                         case "abn":
-                            DrawingManager.drawChar('|');
+                            positions.set(pos, DrawingManager.drawChar('|'));
                             break;
                         case "npr":
                         case "ncr":
-                            DrawingManager.parenthesesStart();
+                            positions.set(pos, DrawingManager.parenthesesStart());
                             break;
                         case "npx":
-                            DrawingManager.drawChar('P');
+                            positions.set(pos, DrawingManager.drawChar('P'));
                             break;
                         case "ncx":
-                            DrawingManager.drawChar('C');
+                            positions.set(pos, DrawingManager.drawChar('C'));
                             break;
                         case "npn":
                         case "ncn":
-                            DrawingManager.parenthesesEnd();
+                            positions.set(pos, DrawingManager.parenthesesEnd());
                             break;
                         default:
                             Log.d("ERROR", "Unhandled tag " + tag);
@@ -213,6 +213,7 @@ public class Display extends View {
                     pos = pos + 5;
                 }
             }
+            positions.add(DrawingManager.end());
             InputManager.setPositions(positions);
         }
     }

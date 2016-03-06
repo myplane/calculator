@@ -343,12 +343,16 @@ public class InputManager {
         Collections.sort(positionsCopy, comparator);
 
         String s = mInput.toString();
-        s = s.replace("|", "");
 
-        s = s.substring(0, mPositions.indexOf(positionsCopy.get(0))) + "|" + s.substring(mPositions.indexOf(positionsCopy.get(0)));
+        s = s.substring(0, mPositions.indexOf(positionsCopy.get(0))).replace("|", "") + "|" + s.substring(mPositions.indexOf(positionsCopy.get(0))).replace("|", "");
 
         mInput = new StringBuilder(s);
         inputChanged();
+        setMode();
+    }
+
+    private static void setMode() { //TODO
+
     }
 
     public static void navHome() {
