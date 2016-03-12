@@ -351,8 +351,22 @@ public class InputManager {
         setMode();
     }
 
-    private static void setMode() { //TODO
+    private static void setMode() {
+        String s = mInput.toString();
 
+        if(s.matches(".*<hex>.*\\|.*<hxn>.*") &&!s.matches(".*<hxn>.*\\|.*<hex>.*")) mButtonsFragment.changeMode(ButtonsFragment.Mode.HEXADECIMAL);
+        else if(s.matches(".*<bin>.*\\|.*<bnn>.*") && !s.matches(".*<bnn>.*\\|.*<bin>.*")) mButtonsFragment.changeMode(ButtonsFragment.Mode.BINARY);
+        else if((s.matches(".*<lgx>.*\\|.*<lgn>.*") && !s.matches(".*<lgn>.*\\|.*<lgx>.*"))     //Breaks on 3 or more of the same tag in one string
+              ||(s.matches(".*<nrt>.*\\|.*<rtx>.*") && !s.matches(".*<rtx>.*\\|.*<nrt>.*"))
+              ||(s.matches(".*<pcm>.*\\|.*<prc>.*") && !s.matches(".*<prc>.*\\|.*<pcm>.*"))
+              ||(s.matches(".*<pcp>.*\\|.*<prc>.*") && !s.matches(".*<prc>.*\\|.*<pcp>.*"))
+              ||(s.matches(".*<npr>.*\\|.*<npx>.*") && !s.matches(".*<npx>.*\\|.*<npr>.*"))
+              ||(s.matches(".*<npx>.*\\|.*<npn>.*") && !s.matches(".*<npn>.*\\|.*<npx>.*"))
+              ||(s.matches(".*<ncr>.*\\|.*<ncx>.*") && !s.matches(".*<ncx>.*\\|.*<ncr>.*"))
+              ||(s.matches(".*<ncx>.*\\|.*<ncn>.*") && !s.matches(".*<ncn>.*\\|.*<ncx>.*"))
+              ||(s.matches(".*<rdr>.*\\|.*<rdx>.*") && !s.matches(".*<rdx>.*\\|.*<rdr>.*"))
+              ||(s.matches(".*<rdr>.*\\|.*<rdn>.*") && !s.matches(".*<rdn>.*\\|.*<rdx>.*"))) mButtonsFragment.changeMode(ButtonsFragment.Mode.DECIMAL_LOCKED);
+        else mButtonsFragment.changeMode(ButtonsFragment.Mode.DECIMAL);
     }
 
     public static void navHome() {
