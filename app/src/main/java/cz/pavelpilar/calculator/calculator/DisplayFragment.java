@@ -3,6 +3,7 @@ package cz.pavelpilar.calculator.calculator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +40,13 @@ public class DisplayFragment extends Fragment {
         mStatus = (TextView) v.findViewById(R.id.calculator_display_status);
         mResult = (TextView) v.findViewById(R.id.calculator_display_result);
 
-        mResult.setText(MainActivity.mPreferences.getString("calculator_result", ""));
         resultBase = MainActivity.mPreferences.getInt("calculator_result_base", 10);
+
+        switch(resultBase) {
+            case 2: setResult(Integer.toBinaryString(Integer.parseInt(MainActivity.mPreferences.getString("calculator_result", ""))) + "<sub><small><small><small>2"); break;
+            case 16:  setResult(Integer.toHexString(Integer.parseInt(MainActivity.mPreferences.getString("calculator_result", ""))).toUpperCase() + "<sub><small><small><small>16"); break;
+            default: mResult.setText(MainActivity.mPreferences.getString("calculator_result", ""));
+        }
 
         return v;
     }
@@ -49,7 +55,7 @@ public class DisplayFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         MainActivity.mPreferences.edit()
-                                 .putString("calculator_result", mResult.getText().toString())
+                                 .putString("calculator_result", getResult())
                                  .putInt("calculator_result_base", resultBase)
                                  .apply();
     }
@@ -71,7 +77,6 @@ public class DisplayFragment extends Fragment {
         String result = mResult.getText().toString();
         switch (resultBase) {
             case 2: return String.valueOf(Integer.parseInt(result.substring(0, result.length() - 1), 2));
-            case 8: return String.valueOf(Integer.parseInt(result.substring(0, result.length() - 1), 8));
             case 16: return String.valueOf(Integer.parseInt(result.substring(0, result.length() - 2), 16));
             default: return result;
         }

@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.DecimalFormat;
+
 import cz.pavelpilar.calculator.MainActivity;
 import cz.pavelpilar.calculator.R;
 import cz.pavelpilar.calculator.calculator.history.HistoryFragment;
@@ -14,6 +16,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
     private DisplayFragment mDisplayFragment;
     private ButtonsFragment mButtonsFragment;
+
+    private DecimalFormat mScientificFormat;
+    private DecimalFormat mDecimalFormat;
 
     public double mMemory;
 
@@ -45,6 +50,18 @@ public class MainFragment extends android.support.v4.app.Fragment {
         super.onResume();
         statusChanged();
         Calculator.setDegrees(MainActivity.mPreferences.getString("preferences_radDeg", "Radians").equals("Degrees"));
+
+        int places = MainActivity.mPreferences.getInt("preferences_scientific_places", 4);
+        StringBuilder pattern = new StringBuilder("0");
+        if(places > 0) pattern.append('.');
+        for(int i = 0; i < places; i++) pattern.append('#');
+        mScientificFormat = new DecimalFormat(pattern.toString() + "E0");
+
+        places = MainActivity.mPreferences.getInt("preferences_decimal_places", 5);
+        pattern = new StringBuilder("#########");
+        if(places > 0) pattern.append('.');
+        for(int i = 0; i < places; i++) pattern.append('#');
+        mDecimalFormat = new DecimalFormat(pattern.toString());
     }
 
     public void clearResult() {
@@ -65,43 +82,22 @@ public class MainFragment extends android.support.v4.app.Fragment {
     }
 
     public void setResult(String result, String input) {
-        int eNotationDigits = MainActivity.mPreferences.getInt("preferences_scientific_places", 4);
-        int decimalPlaces = MainActivity.mPreferences.getInt("preferences_decimal_places", 5);
-
-        boolean saveToHistory = true;
-        if(result.contains("E")){
-            if(result.indexOf("E") > eNotationDigits +2)
-                if(eNotationDigits != 0)
-                    if(!result.startsWith("-")) result = result.substring(0, eNotationDigits +2) + result.substring(result.indexOf("E"), result.length());
-                    else result = result.substring(0, eNotationDigits +3) + result.substring(result.indexOf("E"), result.length());
-                else {
-                    if(!result.startsWith("-")) result = result.substring(0, 1) + result.substring(result.indexOf("E"), result.length());
-                    else result = result.substring(0,  2) + result.substring(result.indexOf("E"), result.length());
-                }
-
-            String s1 = result.substring(0, result.indexOf("E"));
-            while(s1.endsWith("0")) s1 = s1.substring(0, s1.length()-1);
-            if(s1.endsWith(".")) s1 = s1.substring(0, s1.length()-1);
-            result = s1 + result.substring(result.indexOf("E"), result.length());
+        if(input.equals("")) return;
+        if(result.charAt(0) >= 'A' && result.charAt(0) <= 'z') {
+            mDisplayFragment.setResult(result);
+            return;
         }
-        else if(result.contains(".")){
-            if(result.indexOf(".")+decimalPlaces+1 < result.length()) result = result.substring(0, result.indexOf(".")+decimalPlaces+1);
-            while(result.endsWith("0") && result.contains(".")) result = result.substring(0, result.length()-1);
-            if(result.endsWith(".")) result = result.substring(0, result.length()-1);
-        } else if(result.length() > 2) {
-            char c = result.charAt(0);
-            if(c >= 'A' && c <= 'z') saveToHistory = false;
-        }
-        mDisplayFragment.setResult(result);
 
-        if(input.equals("")) saveToHistory = false;
+        double value = Double.valueOf(result);
+        if((value > 0 && value < 0.000001) || value > 1000000000 || value < -1000000000 || (value < 0 && value > - 0.000001))
+            mDisplayFragment.setResult(mScientificFormat.format(value));
+        else
+            mDisplayFragment.setResult(mDecimalFormat.format(value));
 
-        if(saveToHistory) {
-            new WriteToDBTask().execute(input, result);
-            if(MainActivity.isTablet) {
-                HistoryFragment fragment = (HistoryFragment) getChildFragmentManager().findFragmentById(R.id.calculator_history_fragment);
-                fragment.addItem(input + " = " + result);
-            }
+        new WriteToDBTask().execute(input, result);
+        if(MainActivity.isTablet) {
+            HistoryFragment fragment = (HistoryFragment) getChildFragmentManager().findFragmentById(R.id.calculator_history_fragment);
+            fragment.addItem(input + " = " + result);
         }
     }
 
