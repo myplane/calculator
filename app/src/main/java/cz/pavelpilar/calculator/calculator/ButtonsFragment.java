@@ -408,26 +408,34 @@ public class ButtonsFragment extends Fragment {
     public void changeMode(int mode) {
         switch (mode){
             case Mode.DECIMAL: {
-                setNumbers(Mode.DECIMAL);
-                lockFunctions(false);
-                this.mode = mode;
+                if(this.mode != Mode.DECIMAL) {
+                    setNumbers(Mode.DECIMAL);
+                    lockFunctions(false);
+                    this.mode = mode;
+                }
                 break;
             }
             case Mode.BINARY: {
-                setNumbers(Mode.BINARY);
-                lockFunctions(true);
-                this.mode = mode;
+                if(this.mode != Mode.BINARY) {
+                    setNumbers(Mode.BINARY);
+                    lockFunctions(true);
+                    this.mode = mode;
+                }
                 break;
             }
             case Mode.HEXADECIMAL: {
-                setNumbers(Mode.HEXADECIMAL);
-                lockFunctions(true);
-                this.mode = mode;
+                if(this.mode != Mode.HEXADECIMAL) {
+                    setNumbers(Mode.HEXADECIMAL);
+                    lockFunctions(true);
+                    this.mode = mode;
+                }
                 break;
             }
             case Mode.DECIMAL_LOCKED: {
-                lockFunctions(true);
-                this.mode = mode;
+                if(this.mode != Mode.DECIMAL_LOCKED) {
+                    lockFunctions(true);
+                    this.mode = mode;
+                }
                 break;
             }
         }

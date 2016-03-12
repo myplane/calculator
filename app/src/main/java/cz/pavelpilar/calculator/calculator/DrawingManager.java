@@ -4,6 +4,7 @@ package cz.pavelpilar.calculator.calculator;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
@@ -72,7 +73,10 @@ public class DrawingManager {
         mParenthesesCount = -1;
     }
 
-    public static void drawChar(char c) {
+    public static Point drawChar(char c) {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mCanvas.drawText(String.valueOf(c),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics),
@@ -117,9 +121,13 @@ public class DrawingManager {
                                      new Float[] {mRootsAndParentheses.lastElement()[0],
                                                   Math.min(mRootsAndParentheses.lastElement()[1], mPositionY - mTextHeight),
                                                   Math.max(mRootsAndParentheses.lastElement()[2], mPositionY)} );
+        return point;
     }
 
-    public static void drawText(String s) {
+    public static Point drawText(String s) {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mCanvas.drawText(s,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics),
@@ -143,6 +151,7 @@ public class DrawingManager {
                                      new Float[] {mRootsAndParentheses.lastElement()[0],
                                                   Math.min(mRootsAndParentheses.lastElement()[1], mPositionY - mTextHeight),
                                                   Math.max(mRootsAndParentheses.lastElement()[2], mPositionY)} );
+        return point;
     }
 
     public static void functionStart() {
@@ -208,18 +217,28 @@ public class DrawingManager {
         mPaint.setColor(Color.WHITE);
     }
 
-    public static void superscriptStart() {
+    public static Point superscriptStart() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         multiplier = multiplier - 0.25f;
         mPositionY = mPositionY - 13*multiplier;
         mTextHeight = mTextHeight - 4.5f*multiplier;
         mPaint.setTextSize(mPaint.getTextSize() - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6*multiplier, mDisplayMetrics));
+
+        return point;
     }
 
-    public static void superscriptEnd() {
+    public static Point superscriptEnd() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mPaint.setTextSize(mPaint.getTextSize() + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6*multiplier, mDisplayMetrics));
         mTextHeight = mTextHeight + 4.5f*multiplier;
         mPositionY = mPositionY + 13*multiplier;
         multiplier = multiplier + 0.25f;
+
+        return point;
     }
 
     public static void subscriptStart() {
@@ -228,13 +247,21 @@ public class DrawingManager {
         mPaint.setTextSize(mPaint.getTextSize() - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, mDisplayMetrics));
     }
 
-    public static void subscriptEnd() {
+    public static Point subscriptEnd() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mPositionY = mPositionY - 13*multiplier;
         mPaint.setTextSize(mPaint.getTextSize() + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, mDisplayMetrics));
         multiplier = multiplier + 0.5f;
+
+        return point;
     }
 
-    public static void parenthesesStart() {
+    public static Point parenthesesStart() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mParenthesesCount++;
         mRootsAndParentheses.add(new Float[]{mPositionX + 4, mPositionY - mTextHeight, mPositionY});
         mParentheses.set(mParentheses.size() - 1, mParentheses.lastElement() + 1);
@@ -248,9 +275,14 @@ public class DrawingManager {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.WHITE);
         mPositionX = mPositionX + 8*multiplier;
+
+        return point;
     }
 
-    public static void parenthesesEnd() {
+    public static Point parenthesesEnd() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         if(mRootsAndParentheses.size() > 0 && mParentheses.lastElement() > 0) {
             drawRect(mRootsAndParentheses.lastElement()[0], mRootsAndParentheses.lastElement()[1] - 2 * multiplier, mRootsAndParentheses.lastElement()[2] + 4 * multiplier);
             drawParentheses(mRootsAndParentheses.lastElement()[0],
@@ -279,22 +311,37 @@ public class DrawingManager {
             mPaint.setColor(Color.WHITE);
         }
         mPositionX = mPositionX + 8*multiplier;
+
+        return point;
     }
 
-    public static void fractionStart(String[] fraction) {
+    public static Point fractionStart(String[] fraction) {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mPositionX = mPositionX + 12*multiplier;
         mFractions.add(mockDraw(fraction, mPositionX));
         if(mFractions.lastElement()[1] < mFractions.lastElement()[3]) mPositionX = mPositionX + ((mFractions.lastElement()[3] - mFractions.lastElement()[1]) / 2);
         mPositionY = mPositionY - 14*multiplier - mFractions.lastElement()[2];
+
+        return point;
     }
 
-    public static void fractionLine() {
+    public static Point fractionLine() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mPositionX = mFractions.lastElement()[0];
         if(mFractions.lastElement()[1] > mFractions.lastElement()[3]) mPositionX = mPositionX + ((mFractions.lastElement()[1] - mFractions.lastElement()[3]) / 2);
         mPositionY = mPositionY + 28*multiplier + mFractions.lastElement()[2] + mFractions.lastElement()[4];
+
+        return point;
     }
 
-    public static void fractionEnd() {
+    public static Point fractionEnd() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mPositionY = mPositionY - 14*multiplier - mFractions.lastElement()[4];
         drawLine(mFractions.lastElement()[0] - 6*multiplier,
                  mPositionY - 8.5f*multiplier,
@@ -302,14 +349,24 @@ public class DrawingManager {
                  mPositionY - 8.5f*multiplier);
         mPositionX = Math.max(mFractions.lastElement()[1], mFractions.lastElement()[3]) + 12*multiplier;
         mFractions.removeElementAt(mFractions.size() - 1);
+
+        return point;
     }
 
-    public static void rootStart() {
+    public static Point rootStart() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         mRootsAndParentheses.add(new Float[]{mPositionX, mPositionY - mTextHeight, mPositionY});
         mPositionX = mPositionX + 12;
+
+        return point;
     }
 
-    public static void rootEnd() {
+    public static Point rootEnd() {
+        Point point = new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
+
         drawRoot(mRootsAndParentheses.lastElement()[0], mRootsAndParentheses.lastElement()[1], mRootsAndParentheses.lastElement()[2]);
         if(mRootsAndParentheses.size() > 1)
             mRootsAndParentheses.set(mRootsAndParentheses.size() - 2,
@@ -320,6 +377,13 @@ public class DrawingManager {
                                                            mRootsAndParentheses.elementAt(mRootsAndParentheses.size() - 1)[2]  + 2*multiplier)});
         mRootsAndParentheses.removeElementAt(mRootsAndParentheses.size() - 1);
         mPositionX = mPositionX + 4*multiplier;
+
+        return point;
+    }
+
+    public static Point end(){
+        return new Point((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionX, mDisplayMetrics),
+                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPositionY, mDisplayMetrics));
     }
 
     private static @NonNull Float[] mockDraw(String[] strings, float startPos) {    //Used to get heights and lengths, so they can be offset properly
