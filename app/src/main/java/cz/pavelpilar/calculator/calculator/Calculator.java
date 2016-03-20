@@ -119,7 +119,11 @@ public class Calculator {
                         sb.append(ch);
                         ch = (char) cin.read();
                     }
-                    number = Double.parseDouble(sb.toString());
+                    try {
+                        number = Double.parseDouble(sb.toString());
+                    }catch (NumberFormatException e){
+                        number = 0;
+                    }
                     cin = new StringReader(putBack(ch));
                     return current = token.NUMBER;
                 }
@@ -437,7 +441,7 @@ public class Calculator {
         if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
 
         try{
-            return Integer.toBinaryString(Integer.parseInt(dec))  + "<sub><small><small><small>2";
+            return Long.toBinaryString(Long.parseLong(dec))  + "<sub><small><small><small>2";
         } catch(NumberFormatException e) {
             return "Conversion not possible";
         }
@@ -447,7 +451,7 @@ public class Calculator {
         if(dec.length() == 0 || dec.equals("") || !Character.isDigit(dec.charAt(0))) return "0";
 
         try{
-            return Integer.toHexString(Integer.parseInt(dec)).toUpperCase()  + "<sub><small><small><small>16";
+            return Long.toHexString(Long.parseLong(dec)).toUpperCase()  + "<sub><small><small><small>16";
         } catch(NumberFormatException e) {
             return "Conversion not possible";
         }

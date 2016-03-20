@@ -54,11 +54,18 @@ public class DisplayFragment extends Fragment {
 
         resultBase = MainActivity.mPreferences.getInt("calculator_result_base", 10);
 
-        switch(resultBase) {
-            case 2: setResult(Integer.toBinaryString(Integer.parseInt(MainActivity.mPreferences.getString("calculator_result", ""))) + "<sub><small><small><small>2"); break;
-            case 16:  setResult(Integer.toHexString(Integer.parseInt(MainActivity.mPreferences.getString("calculator_result", ""))).toUpperCase() + "<sub><small><small><small>16"); break;
-            default: mResult.setText(MainActivity.mPreferences.getString("calculator_result", ""));
-        }
+        try {
+            switch (resultBase) {
+                case 2:
+                    setResult(Long.toBinaryString(Long.parseLong(MainActivity.mPreferences.getString("calculator_result", ""))) + "<sub><small><small><small>2");
+                    break;
+                case 16:
+                    setResult(Long.toHexString(Long.parseLong(MainActivity.mPreferences.getString("calculator_result", ""))).toUpperCase() + "<sub><small><small><small>16");
+                    break;
+                default:
+                    mResult.setText(MainActivity.mPreferences.getString("calculator_result", ""));
+            }
+        }catch (NumberFormatException ignored){}
 
         return v;
     }
@@ -87,11 +94,13 @@ public class DisplayFragment extends Fragment {
 
     public String getResult() {
         String result = mResult.getText().toString();
-        switch (resultBase) {
-            case 2: return String.valueOf(Integer.parseInt(result.substring(0, result.length() - 1), 2));
-            case 16: return String.valueOf(Integer.parseInt(result.substring(0, result.length() - 2), 16));
-            default: return result;
-        }
+        try {
+            switch (resultBase) {
+                case 2: return String.valueOf(Long.parseLong(result.substring(0, result.length() - 1), 2));
+                case 16: return String.valueOf(Long.parseLong(result.substring(0, result.length() - 2), 16));
+                default: return result;
+            }
+        }catch (NumberFormatException e){ return result; }
     }
 
     public void clearResult() {

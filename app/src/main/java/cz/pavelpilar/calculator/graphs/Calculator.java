@@ -96,7 +96,11 @@ public class Calculator {
                         sb.append(ch);
                         ch = (char) mExpression.read();
                     }
-                    number = Float.parseFloat(sb.toString());
+                    try {
+                        number = Float.parseFloat(sb.toString());
+                    }catch(NumberFormatException e) {
+                        number = 0;
+                    }
                     mExpression = new StringReader(putBack(ch));
                     return current = token.NUMBER;
                 }
