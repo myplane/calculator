@@ -94,6 +94,7 @@ public class DisplayFragment extends Fragment {
 
     public String getResult() {
         String result = mResult.getText().toString();
+        if(result.length() > 0 && result.charAt(0) >= 'A' && result.charAt(0) <= 'z' && resultBase != 16) return "";
         try {
             switch (resultBase) {
                 case 2: return String.valueOf(Long.parseLong(result.substring(0, result.length() - 1), 2));

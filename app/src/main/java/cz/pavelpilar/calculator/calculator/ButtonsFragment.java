@@ -135,7 +135,7 @@ public class ButtonsFragment extends Fragment {
         tv = (TextView) v.findViewById(R.id.textPower);
         tv.setText(Html.fromHtml("x<small><sup>y "));
         tv = (TextView) v.findViewById(R.id.textPower10);
-        tv.setText(Html.fromHtml("&nbsp;x×10<sup><small>y"));
+        tv.setText(Html.fromHtml("&nbsp;×10<sup><small>y"));
         tv = (TextView) v.findViewById(R.id.textSin);
         tv.setText(Html.fromHtml("sin<small><sup>-1 "));
         tv = (TextView) v.findViewById(R.id.textSinh);
@@ -359,7 +359,11 @@ public class ButtonsFragment extends Fragment {
     @Nullable @OnClick(R.id.buttonLn) void buttonLn() { InputManager.add("<lon>"); }
 
     @OnClick(R.id.buttonE) void buttonE() {
-        InputManager.add("<exp>");
+        if(shift) {
+            InputManager.setCurrent(mMainFragment.getResult() + "|");
+        }else{
+            InputManager.add("<exp>");
+        }
         disableModifiers();
     }
 
