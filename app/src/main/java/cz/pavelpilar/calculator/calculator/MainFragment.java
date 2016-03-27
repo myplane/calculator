@@ -89,15 +89,23 @@ public class MainFragment extends android.support.v4.app.Fragment {
         }
 
         double value = Double.valueOf(result);
-        if((value > 0 && value < 0.000001) || value > 1000000000 || value < -1000000000 || (value < 0 && value > - 0.000001))
-            mDisplayFragment.setResult(mScientificFormat.format(value));
-        else
-            mDisplayFragment.setResult(mDecimalFormat.format(value));
-
-        new WriteToDBTask().execute(input, result);
-        if(MainActivity.isTablet) {
-            HistoryFragment fragment = (HistoryFragment) getChildFragmentManager().findFragmentById(R.id.calculator_history_fragment);
-            fragment.addItem(input + " = " + result);
+        if((value > 0 && value < 0.000001) || value > 1000000000 || value < -1000000000 || (value < 0 && value > - 0.000001)) {
+            String s = mScientificFormat.format(value);
+            mDisplayFragment.setResult(s);
+            new WriteToDBTask().execute(input, s);
+            if(MainActivity.isTablet) {
+                HistoryFragment fragment = (HistoryFragment) getChildFragmentManager().findFragmentById(R.id.calculator_history_fragment);
+                fragment.addItem(input + " = " + s);
+            }
+        }
+        else {
+            String s = mDecimalFormat.format(value);
+            mDisplayFragment.setResult(s);
+            new WriteToDBTask().execute(input, s);
+            if(MainActivity.isTablet) {
+                HistoryFragment fragment = (HistoryFragment) getChildFragmentManager().findFragmentById(R.id.calculator_history_fragment);
+                fragment.addItem(input + " = " + s);
+            }
         }
     }
 
