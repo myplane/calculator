@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
 
         setContentView(R.layout.activity_main);
-
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.toolbarDark));
 
         mButtonCalculator = (Button) findViewById(R.id.drawer_calculator);
         isTablet = getResources().getBoolean(R.bool.tablet);
